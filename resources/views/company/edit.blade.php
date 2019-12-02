@@ -133,6 +133,9 @@
 					</div>
 				</fieldset>
 						{{-- buttons --}}
+						<button type="submit" class="btn btn-primary float-right">
+								<i class="far fa-save"></i> Speichern
+						</button>
 
 
 				</form>

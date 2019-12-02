@@ -1,11 +1,5 @@
 @extends('layouts.app')
 
-@section('head')
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-
-@endsection
-
-
 @section('content')
 
 <div class="container-fluid">
@@ -58,12 +52,9 @@
               </td> 
               <td>{{$company->address}}</td>
               <td>
-                <button class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></button>
-                <button class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></button>
-                  <form action="/company/{{$company->id}}" method="post">
-                    @method('DELETE')
-                    @csrf
-                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                <a href="{{url('company/'.$company->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
+                <a href="{{url('company/'.$company->id.'/edit')}}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                   </form>
               </td>
             </tr>

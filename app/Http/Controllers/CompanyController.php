@@ -57,9 +57,13 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Company $company)
     {
-        //
+        $branches = Branch::all();
+        $statuses = Status::all();
+        $titles = Title::all();
+        $professions = Profession::all();
+        return view('company.show',compact('company','branches','statuses','titles','professions'));
     }
 
     /**
@@ -86,8 +90,7 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = 
-
+        return ('hti');
         $company->update($this->validateRequest());
         return redirect('company/' . $company->id);
     }

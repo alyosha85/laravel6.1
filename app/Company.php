@@ -8,7 +8,7 @@ class Company extends Model
 {
     public function branch() 
     {
-        return $this->belongsTO(Branch::class);
+        return $this->belongsTo(Branch::class);
     }
     public function status()
     {
@@ -21,6 +21,10 @@ class Company extends Model
     public function professions()
     {
         return $this->belongsToMany(Profession::class);
+    }
+    public function title()
+    {
+        return $this->belongsTo(Title::class);
     }
 }
 
