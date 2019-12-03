@@ -12,7 +12,8 @@
 		<div class="col-sm-12">
 			<div class="panel panel-default">
 				<div class="panel-body">
-				<form action="company">
+				<form action="{{url('company/'.$id)}}" method="POST">
+					
 					@csrf
 					<fieldset class="border rounded px-2 mb-2">
 						<legend class="w-auto">Firma</legend>

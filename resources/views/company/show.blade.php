@@ -4,12 +4,12 @@
 
 
 <div class="container-fluid">
-		<div class="row">
-			<div class="col-md-12">
+	<div class="row">
+		<div class="col-md-12">
 				<nav>
 					<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
 						<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Firma</a>
-						<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Anshprechpartner liste</a>
+						<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Ansprechpartner liste</a>
 						<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Eintrag</a>
 					</div>
 				</nav>
@@ -22,13 +22,14 @@
 												<div class="panel-body">
 													<h1 class="mb-0">{{$company->name}}<small><span class="badge pull-right">{{$company->title['name']}}</span></small></h1>
 													<p class="text-muted">created on 12.12.2020 from Müller</p>
-													<div id="accordion" role="tablist" aria-multiselectable="true" class="col-sm-12">
+													<div id="accordion" role="tablist" aria-multiselectable="true">
 															<div class="card">
 																	<h5 class="card-header" role="tab" id="headingOne">
-																			<a data-toggle="collapseOne" data-parent="#accordion" href="#" aria-expanded="true" aria-controls="collapseOne" class="d-block nounderline">
-																					<i class="fa fa-chevron-down float-right"></i> Details &nbsp;<i class="fas fa-industry"></i>
+																			<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="d-block nounderline">
+																					<i class="fa fa-chevron-down float-right"></i>Summary &nbsp;<i class="fas fa-building"></i>
 																			</a>
 																	</h5>
+													
 																	<div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
 																			<div class="card-body">
 																					<form>
@@ -47,7 +48,21 @@
 																																	<ul>
 																																			@foreach($company->professions as $profession)
 																																			<li>
-																																			{{$profession['name']}}, &nbsp;
+																																			{{$profession['name']}}
+																																			@endforeach
+																																		</li>
+																																	</ul>
+																															</div>
+																													</div>
+																											</div>
+																											<div class="col-md-6">
+																													<div class="form-group row">
+																															<label for="inputPassword" class="col-sm-5 col-form-label font-weight-bold">Ansprechpartner:</label>
+																															<div class="col-sm-7">
+																																	<ul>
+																																			@foreach($company->contacts as $contact)
+																																			<li>
+																																			<a href="#">{{$contact['last_name']}}</a>
 																																			@endforeach
 																																		</li>
 																																	</ul>
@@ -180,12 +195,12 @@
 
 													<div id="accordion" role="tablist" aria-multiselectable="true" class="col-sm-12">
 															<div class="card">
-																	<h5 class="card-header" role="tab" id="headingOne">
-																			<a data-toggle="collapseOne" data-parent="#accordion" href="#" aria-expanded="true" aria-controls="collapseOne" class="d-block nounderline">
+																	<h5 class="card-header" role="tab" id="headingFive">
+																			<a data-toggle="collapseFive" data-parent="#accordion"  aria-expanded="true" aria-controls="collapseFive" class="d-block nounderline">
 																				</i> Teilnehmer &nbsp;<i class="fas fa-file-signature"></i>
 																			</a>
 																	</h5>
-																	<div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+																	<div id="collapseFive" class="collapse show" role="tabpanel" aria-labelledby="headingFive">
 																			<div class="card-body">
 																					<form>
 																							<div class="container-fluid ">
@@ -198,7 +213,7 @@
 																															</div>
 																													</div>
 																													<div class="form-group row">
-																															<label for="staticEmail" class="col-sm-6 col-form-label font-weight-bold">Anshprechpartner:</label>
+																															<label for="staticEmail" class="col-sm-6 col-form-label font-weight-bold">Ansprechpartner:</label>
 																															<div class="col-sm-6">
 																																	<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="hardCoded">
 																															</div>
@@ -229,25 +244,83 @@
 																	</div>
 															</div>
 													</div>
-
-
 												</div>
 											</div>
 										</div>
-
 									</div>
 							</div>
 						</div>
+						{{-- Ansprechpartner page 2 --}}
 						<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-					
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-xl-12">
+										<div class="panel panel-default">
+											<div class="panel-body">
+											<h1 class="mb-0">{{$company->name}}<small><span class="badge pull-right">{{$company->title['name']}}</span></small></h1>
+											<a href="{{url('contact/'.$company->id)}}" class="btn btn-primary mb-3">Add Contact</a>
+											<div class="col-md-6">
+												<div class="table-responsive-xl">
+													<table class="table" id="company_table">
+														<thead>
+															<tr>
+																<th>Anrede</th>
+																<th>Vorname</th>
+																<th>Nachname</th>
+																<th>E-mail</th>
+																<th>Telefon</th>
+																<th>Fax</th>
+																<th>Status</th>
+																<th></th>
+															</tr>
+															<tr>
+																<th></th>
+																<th></th>
+																<th></th>
+																<th></th>
+																<th></th>
+																<th></th>
+																<th></th>
+																<th></th>																
+															</tr>
+														</thead>
+														<tbody>
+															@foreach($company->contacts as $contact)
+															<tr>
+																<td>{{$contact->contact_title}}</td>
+																<td>{{$contact->first_name}}</td>
+																<td>{{$contact->last_name}}</td>
+																<td><a href="mailto:{{$contact->email}}">{{$contact->email}}</a></td>
+																<td>{{$contact->phone}}</td>
+																<td>{{$contact->fax}}</td>
+																<td>{{$contact->active}}</td>
+																<td>
+																	<a href="#" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
+
+																		</form>
+																</td>
+															</tr>
+															@endforeach
+														</tbody>
+													</table>
+												</div>										
+											</div>
+   
+
+											</div>
+										</div>
+									</div>	
+								</div>
 						</div>
-						<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-						</div>
-		
-					</div>
+				</div>
+				<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
 				</div>
 			</div>
 		</div>
+	</div>
+</div>
+
+
 
 
 	

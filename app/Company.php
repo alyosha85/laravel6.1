@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
 {
+    protected $guarded = [];
+    
     public function branch() 
     {
         return $this->belongsTo(Branch::class);
@@ -25,6 +27,10 @@ class Company extends Model
     public function title()
     {
         return $this->belongsTo(Title::class);
+    }
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class);
     }
 }
 

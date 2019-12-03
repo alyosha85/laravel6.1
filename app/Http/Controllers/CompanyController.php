@@ -8,6 +8,8 @@ use App\Branch;
 use App\Title;
 use App\Profession;
 use App\Status;
+use App\Contact;
+
 
 class CompanyController extends Controller
 {
@@ -59,11 +61,12 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
+        $contacts = Contact::all();
         $branches = Branch::all();
         $statuses = Status::all();
         $titles = Title::all();
         $professions = Profession::all();
-        return view('company.show',compact('company','branches','statuses','titles','professions'));
+        return view('company.show',compact('company','branches','statuses','titles','professions','contacts'));
     }
 
     /**

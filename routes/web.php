@@ -19,4 +19,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::Resource('/company','CompanyController');
+Route::Resource('/contact','ContactController');
 
