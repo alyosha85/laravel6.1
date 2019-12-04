@@ -14,6 +14,7 @@
 				<div class="panel-body">
 				<form action="{{ url('contact') }}" method="POST">
 					@csrf
+					{{-- <input type="hidden" name="company_id" value="{{$company->id}}"> --}}
 					<fieldset class="border rounded px-2 mb-2">
 						<legend class="w-auto">Ansprechpartner</legend>
 						{{-- <input class="form-control lead pull-right" type="text" placeholder="Datum angelegt:  Today von Matoyan" readonly>    --}}
@@ -49,8 +50,9 @@
 									 <label for="active">Status <i class="fas fa-asterisk" style="color:#993955"></i></label>									
 									 <select name="active" id="active" class="form-control" required>
 										 <option value="" disabled>wählen</option>
-										 <option value="1">Aktiv</option>
-										 <option value="0">Inaktiv</option>
+										 @foreach ($contact->activeOptions() as $activeOptionKey => $activeOptionValue)
+									 		<option value="{{ $activeOptionKey }}"{{ $contact->active == $activeOptionValue ? 'selected' : '' }}>{{ $activeOptionValue }}</option>
+										 @endforeach
 									 </select>
 								 </div>
 							 </div> 

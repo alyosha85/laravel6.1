@@ -16,6 +16,10 @@ class Company extends Model
     {
         return $this->belongsTo(Status::class);
     }
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
     public function cities()
     {
         return $this->belongsToMany(City::class);

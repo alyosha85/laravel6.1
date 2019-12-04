@@ -68,12 +68,28 @@ nav > .nav.nav-tabs{
 
   /* end test */
 
-  /* letter */
-  
- 
+/* badge */
+.badge--Gesperrt {
+  background-color: #FF4242 !important;
+  color: #ddd;
+  padding: 5px 10px;
+}
 
+.badge--Interessent {
+  background-color: #E3D26F !important;
+  padding: 5px 10px;
+  color: #222222;
+}
 
+.badge--Inaktiv {
+  background-color: #383D3B!important;
+  color: #ddd;
+  padding: 5px 10px;
+}
 
-
-  /* end letter */
+.badge--Aktiv {
+  background-color: #7DD181 !important;
+  padding: 5px 10px;
+  color: #222222;
+}
 

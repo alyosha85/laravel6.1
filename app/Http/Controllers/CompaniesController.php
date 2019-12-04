@@ -9,9 +9,10 @@ use App\Title;
 use App\Profession;
 use App\Status;
 use App\Contact;
+use App\State;
 
 
-class CompanyController extends Controller
+class CompaniesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,7 +29,7 @@ class CompanyController extends Controller
     public function index()
     {
         $companies = Company::all();
-        return view('company.index',compact('companies'));
+        return view('companies.index',compact('companies'));
     }
 
     /**
@@ -37,8 +38,14 @@ class CompanyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {   
+        $company = new Company();
+        $branches = Branch::all();
+        $statuses = Status::all();
+        $titles = Title::all();
+        $professions = Profession::all();
+        $states = State::all();
+        return view ('companies.create',compact('company','branches','statuses','titles','professions','states'));
     }
 
     /**
@@ -47,10 +54,10 @@ class CompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        Company::create($this->validatedRequest());
-        return redirect('company.index')->with('message','Erfolgreich hinzugefügt');
+        Company::create($this->validateRequest());
+        return redirect('companies')->with('message','Erfolgreich hinzugefügt');
     }
 
     /**
@@ -61,12 +68,7 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        $contacts = Contact::all();
-        $branches = Branch::all();
-        $statuses = Status::all();
-        $titles = Title::all();
-        $professions = Profession::all();
-        return view('company.show',compact('company','branches','statuses','titles','professions','contacts'));
+        return view('companies.show',compact('company'));
     }
 
     /**
@@ -81,7 +83,8 @@ class CompanyController extends Controller
         $statuses = Status::all();
         $titles = Title::all();
         $professions = Profession::all();
-        return view ('company.edit',compact('company','branches','statuses','titles','professions'))->with('message','Erfolgreich geändert');
+        $states = State::all();
+        return view ('companies.edit',compact('company','branches','statuses','titles','professions','states'));
     }
 
     /**
@@ -91,11 +94,10 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Company $company)
     {
-        return ('hti');
-        $company->update($this->validateRequest());
-        return redirect('company/' . $company->id);
+            $company->update($this->validateRequest());
+            return redirect('companies/'. $company->id)->with('message','Erfolgreich geändert');;
     }
 
     /**
@@ -110,21 +112,22 @@ class CompanyController extends Controller
         return redirect('index');
     }
 
-    private function validatedRequest()
+    private function validateRequest()
     {
         return request()-> validate ([
-            'name' => 'required|min3',
-            'title_id' => 'required',
-            'status_id' => 'required',
-            'branch_id' => 'required',
-            'profession_id' => 'required',
-            'email' => 'email',
-            'address' => '',
-            'address2' => '',
-            'zipcode' => '',
-            'phone' => '',
-            'fax' => '',
-            'website' => '',        
+                'name' => 'required|min:3',
+                'title_id' => 'required',
+                'status_id' => 'required',
+                'branch_id' => 'required',
+                'email' => 'email',
+                'state_id' => 'required',
+                'profession_id' => '',
+                'address' => '',
+                'address2' => '',
+                'zipcode' => '',
+                'phone' => '',
+                'fax' => '',
+                'website' => '', 
         ]);
     }
     

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contact;
+use App\Company;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -53,10 +54,12 @@ class ContactController extends Controller
             'fax' => '',
             'note' => '',
             'active' => 'required',  
+            'company_id' => 'required',
         ]);
 
         $contact = new Contact();
         $contact->contact_title = request('contact_title');
+        $contact->company_id = request('company_id');
         $contact->first_name = request('first_name');
         $contact->last_name = request('last_name');
         $contact->email = request('email');

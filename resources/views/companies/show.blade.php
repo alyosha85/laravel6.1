@@ -6,6 +6,11 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
+				@if(session()->has('message'))
+		<div class="alert alert-success text-center " role="alert" >
+			<strong>{{ session()->get('message')}}</strong>
+		</div>
+	@endif
 				<nav>
 					<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
 						<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Firma</a>
@@ -26,7 +31,8 @@
 															<div class="card">
 																	<h5 class="card-header" role="tab" id="headingOne">
 																			<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="d-block nounderline">
-																					<i class="fa fa-chevron-down float-right"></i>Summary &nbsp;<i class="fas fa-building"></i>
+																				<i class="fa fa-chevron-down float-right"></i>Summary &nbsp;<i class="fas fa-building"></i> &nbsp;&nbsp;&nbsp;
+																				<span class="badge badge--{{$company->status->name}}">{{$company->status->name}}</span>
 																			</a>
 																	</h5>
 													
@@ -258,7 +264,7 @@
 										<div class="panel panel-default">
 											<div class="panel-body">
 											<h1 class="mb-0">{{$company->name}}<small><span class="badge pull-right">{{$company->title['name']}}</span></small></h1>
-											<a href="{{url('contact/'.$company->id)}}" class="btn btn-primary mb-3">Add Contact</a>
+											<a href="/contact/create" class="btn btn-primary mb-3">Add Contact</a>
 											<div class="col-md-6">
 												<div class="table-responsive-xl">
 													<table class="table" id="company_table">
@@ -295,7 +301,7 @@
 																<td>{{$contact->fax}}</td>
 																<td>{{$contact->active}}</td>
 																<td>
-																	<a href="#" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
+																	<a href="#" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-eye"></i></a>
 
 																		</form>
 																</td>
