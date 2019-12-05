@@ -6,7 +6,18 @@
 
 require('./bootstrap');
 
+
 window.Vue = require('vue');
+import $ from 'jquery';
+import 'datatables.net';
+import 'datatables.net-dt/css/jquery.dataTables.css';
+import 'datatables.net-buttons/js/dataTables.buttons';
+import 'datatables.net-buttons/js/buttons.colVis';
+import 'datatables.net-buttons/js/buttons.print';
+import 'datatables.net-buttons/js/buttons.flash';
+
+
+
 
 /**
  * The following block of code may be used to automatically register your

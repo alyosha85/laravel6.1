@@ -71,10 +71,19 @@
   </div>
 </div>
 
-           
 @endsection
 
 @section('foot')
-
+<script>
+$('#myTable').DataTable( {
+    dom: 'Bfrtip',
+    buttons: [ {
+        extend: 'colvis',
+        columnText: function ( dt, idx, title ) {
+            return (idx+2)+': '+title;
+        }
+    } ]
+} );
+</script>   
     
 @endsection
