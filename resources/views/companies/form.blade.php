@@ -50,7 +50,11 @@
   <div class="form-group col-md-6">
     <div class="form-group">
       <label for="profession_id">Tätigkeitsfeld <i class="fas fa-asterisk" style="color:#993955"></i></label>
-      <input type="text" class="form-control">
+      <select id="profession_id" class="selectpicker form-control" multiple name="profession_id[]" required>
+        @foreach($professions as $key => $value)
+        <option value='{{$value->id}}'>{{$value->name}}</option>
+        @endforeach
+      </select>
     </div>
   </div>
 </div>

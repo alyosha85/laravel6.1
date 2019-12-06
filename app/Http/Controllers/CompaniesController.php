@@ -10,6 +10,7 @@ use App\Profession;
 use App\Status;
 use App\Contact;
 use App\State;
+use App\CompanyProfession;
 
 
 class CompaniesController extends Controller
@@ -109,7 +110,7 @@ class CompaniesController extends Controller
     public function destroy(Company $company)
     {
         $company->delete();
-        return redirect('index');
+        return redirect('companies');
     }
 
     private function validateRequest()
@@ -121,7 +122,6 @@ class CompaniesController extends Controller
                 'branch_id' => 'required',
                 'email' => 'email',
                 'state_id' => 'required',
-                'profession_id' => '',
                 'address' => '',
                 'address2' => '',
                 'zipcode' => '',

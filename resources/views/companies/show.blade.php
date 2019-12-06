@@ -267,6 +267,11 @@
 											<a href="/contact/create" class="btn btn-primary mb-3">Add Contact</a>
 											<div class="col-md-6">
 												<div class="table-responsive-xl">
+													@if(count($company->contacts) < 1)
+														<div class="alert alert-primary text-center">
+																<strong>Es sind noch keine Kontakte vorhanden!</strong> 
+														</div>                                      
+													@else
 													<table class="table" id="company_table">
 														<thead>
 															<tr>
@@ -309,6 +314,7 @@
 															@endforeach
 														</tbody>
 													</table>
+														@endif
 												</div>										
 											</div>
    

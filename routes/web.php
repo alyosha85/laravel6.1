@@ -18,13 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-// Route::Resource('/company','CompanyController');
-Route::get('companies','CompaniesController@index');
-Route::get('companies/create','CompaniesController@create');
-Route::post('companies','CompaniesController@store');
-Route::get('companies/{company}','CompaniesController@show');
-Route::get('companies/{company}/edit','CompaniesController@edit'); 
-Route::patch('companies/{company}','CompaniesController@update');
+Route::Resource('/companies','CompaniesController');
+
 
 
 
