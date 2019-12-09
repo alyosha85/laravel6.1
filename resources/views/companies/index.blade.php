@@ -5,7 +5,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
-
+      
       <div>
         <p><a href="/companies/create" class="btn btn-outline-primary border-0" >Add company</a></p>
       </div>
@@ -77,6 +77,7 @@
 @endsection
 
 @section('foot')
+
 <script>
 //datatable   
 $(document).ready(function() {

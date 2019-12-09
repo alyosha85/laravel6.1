@@ -24,9 +24,6 @@
 								<div class="form-group">
 									<label for="contact_title">Anrede<i class="fas fa-asterisk" style="color:#993955"></i></label>									
 									<select name="contact_title" id="contact_title" class="form-control">
-										<option value="" disabled>Anrede wählen</option>
-										<option value="1">Herr</option>
-										<option value="0">Frau</option>
 									</select>
 								</div>
 							</div> 
@@ -49,10 +46,6 @@
 								 <div class="form-group">
 									 <label for="active">Status <i class="fas fa-asterisk" style="color:#993955"></i></label>									
 									 <select name="active" id="active" class="form-control" required>
-										 <option value="" disabled>wählen</option>
-										 @foreach ($contact->activeOptions() as $activeOptionKey => $activeOptionValue)
-									 		<option value="{{ $activeOptionKey }}"{{ $contact->active == $activeOptionValue ? 'selected' : '' }}>{{ $activeOptionValue }}</option>
-										 @endforeach
 									 </select>
 								 </div>
 							 </div> 

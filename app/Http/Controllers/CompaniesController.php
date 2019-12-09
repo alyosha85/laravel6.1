@@ -10,7 +10,7 @@ use App\Profession;
 use App\Status;
 use App\Contact;
 use App\State;
-use App\CompanyProfession;
+use App\City;
 
 
 class CompaniesController extends Controller
@@ -46,7 +46,8 @@ class CompaniesController extends Controller
         $titles = Title::all();
         $professions = Profession::all();
         $states = State::all();
-        return view ('companies.create',compact('company','branches','statuses','titles','professions','states'));
+        $cities = City::all();
+        return view ('companies.create',compact('company','branches','statuses','titles','professions','states','cities'));
     }
 
     /**
@@ -85,7 +86,8 @@ class CompaniesController extends Controller
         $titles = Title::all();
         $professions = Profession::all();
         $states = State::all();
-        return view ('companies.edit',compact('company','branches','statuses','titles','professions','states'));
+        $cities = City::all();
+        return view ('companies.edit',compact('company','branches','statuses','titles','professions','states','cities'));
     }
 
     /**
@@ -98,7 +100,7 @@ class CompaniesController extends Controller
     public function update(Company $company)
     {
             $company->update($this->validateRequest());
-            return redirect('companies/'. $company->id)->with('message','Erfolgreich geändert');;
+            return redirect('companies/'. $company->id)->with('message','Erfolgreich geändert');
     }
 
     /**
@@ -116,7 +118,7 @@ class CompaniesController extends Controller
     private function validateRequest()
     {
         return request()-> validate ([
-                'name' => 'required|min:3',
+                'name' => 'required|min:3|unique',
                 'title_id' => 'required',
                 'status_id' => 'required',
                 'branch_id' => 'required',
@@ -127,7 +129,9 @@ class CompaniesController extends Controller
                 'zipcode' => '',
                 'phone' => '',
                 'fax' => '',
-                'website' => '', 
+                'website' => '',
+                'professions' => '',
+                'cities' => '', 
         ]);
     }
     

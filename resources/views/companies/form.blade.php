@@ -1,3 +1,4 @@
+
 @csrf
 <fieldset class="border rounded px-2 mb-2">
   <legend class="w-auto">Firma</legend>
@@ -55,21 +56,27 @@
         <option value='{{$value->id}}'>{{$value->name}}</option>
         @endforeach
       </select>
-    </div>
+    </div> 
   </div>
 </div>
 </fieldset>
+
+{{-- line 3 --}}
 <fieldset class="border rounded px-2 mb-2">
 <legend class="w-auto">Adresse</legend>
-{{-- line 3 --}}
 <div class="form-row">
-  <div class="form-group col-md-6">
-    <div class="form-group">
-      <label for="">City</label>
-      <input type="text" class="form-control">
-    </div>
-    <div>{{$errors->first('city')}}</div>
-  </div>
+<div class="form-group col-md-6">
+  <div class="form-group">
+    <label for="city_id">Tätigkeitsfeld <i class="fas fa-asterisk" style="color:#993955"></i></label>
+    <select id="city_id" class="form-control selectpicker" multiple name="city_id[]" required>
+      @foreach($cities as $key => $value)
+      <option value='{{$value->id}}'>{{$value->name}}</option>
+      @endforeach
+    </select>
+  </div> 
+</div>
+<div>{{$errors->first('city_id')}}</div>
+
   <div class="form-group col-md-6">
     <div class="form-group">
       <label for="state_id">State <i class="fas fa-asterisk" style="color:#993955"></i></label>

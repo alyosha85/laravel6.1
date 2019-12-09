@@ -8,35 +8,15 @@ class Contact extends Model
 {
     protected $guarded = [];
 
-    protected $attribute = [
-        'active' => 1
-    ];
+    public function contact_title()
+    {
+        return $this->belongsTo(ContactTitle::class);
+    }
+    public function contact_status()
+    {
+        return $this->belongsTo(ContactStatus::class);
+    }
 
 
-    public function getActiveAttribute($attribute)
-    {
-        return $this->activeOptions()[$attribute];
-    }
-    public function scopeActive($query)
-    {
-        return $query->where('active',1);
-    }
-    public function scopeInactive($query)
-    {
-        return $query->where('active',0);
-    }
-   
-
-    public function company()
-    {
-        return $this->belongsTo(Company::class);
-    }
-    public function activeOptions()
-    {
-        return [
-            1 => 'Active',
-            0 => 'Inactive',
-        ];
-    }
 
 }

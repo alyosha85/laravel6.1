@@ -93,3 +93,11 @@ nav > .nav.nav-tabs{
   color: #222222;
 }
 
+.bootstrap-select>.dropdown-toggle.bs-placeholder, .bootstrap-select>.dropdown-toggle.bs-placeholder:active, .bootstrap-select>.dropdown-toggle.bs-placeholder:focus, .bootstrap-select>.dropdown-toggle.bs-placeholder:hover {
+  color: #222222 !important;
+}
+.btn-light {
+  color: #212529;
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da !important;
+}
