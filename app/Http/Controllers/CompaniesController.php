@@ -11,7 +11,7 @@ use App\Status;
 use App\Contact;
 use App\State;
 use App\City;
-
+use App\Communication;
 
 class CompaniesController extends Controller
 {
@@ -29,7 +29,7 @@ class CompaniesController extends Controller
     
     public function index()
     {
-        $companies = Company::all();
+        $companies = Company::all();    
         return view('companies.index',compact('companies'));
     }
 
@@ -56,9 +56,15 @@ class CompaniesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        Company::create($this->validateRequest());
+
+        $company = Company::create($this->validateRequest());
+        $city = City::find($request->city_id);
+        $company->cities()->attach($city);
+        $profession = Profession::find($request->profession_id);
+        $company->professions()->attach($profession);
+
         return redirect('companies')->with('message','Erfolgreich hinzugefügt');
     }
 
@@ -70,6 +76,7 @@ class CompaniesController extends Controller
      */
     public function show(Company $company)
     {
+        
         return view('companies.show',compact('company'));
     }
 
@@ -118,7 +125,7 @@ class CompaniesController extends Controller
     private function validateRequest()
     {
         return request()-> validate ([
-                'name' => 'required|min:3|unique',
+                'name' => 'required|min:3',
                 'title_id' => 'required',
                 'status_id' => 'required',
                 'branch_id' => 'required',

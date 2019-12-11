@@ -185,7 +185,7 @@
 																	</h5>
 																	<div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour">
 																			<div class="card-body">
-																							{{-- {{ $company->description ?? '' }} --}}
+																							{{ $company->description ?? '' }}
 																			</div>
 																	</div>
 															</div>
@@ -193,9 +193,15 @@
 												</div>
 											</div>
 										</div>
+										@if(count($company->communications) < 1)
+											<div class="alert alert-primary text-center col-lg-6">
+													<strong>Es gibt noch keine Kommunikation mit dieser Firma</strong>  
+										</div>                                    
+										@else
 										<div class="col-xl-6" id="letter">
 											<div class="panel panel-default">
 												<div class="panel-body">
+													@foreach($company->communications as $communication)
 													<h1 class="mb-0">Letzter Eintrag<small>&nbsp;<i class="fas fa-file-signature"></i></small></h1>
 													<p class="text-muted">created on 12.12.2020 from Müller</p>
 
@@ -215,19 +221,19 @@
 																													<div class="form-group row">
 																															<label for="staticEmail" class="col-sm-6 col-form-label font-weight-bold">Datum:</label>
 																															<div class="col-sm-6">
-																																	<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="hardCoded">
+																																	<input type="text" readonly class="form-control-plaintext" id="staticEmail" value= "{{$communication->date}}">
 																															</div>
 																													</div>
 																													<div class="form-group row">
 																															<label for="staticEmail" class="col-sm-6 col-form-label font-weight-bold">Ansprechpartner:</label>
 																															<div class="col-sm-6">
-																																	<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="hardCoded">
+																																<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{$communication->contact['name']}}">
 																															</div>
 																													</div>
 																													<div class="form-group row">
 																															<label for="staticEmail" class="col-sm-6 col-form-label font-weight-bold">Teilnehmer:</label>
 																															<div class="col-sm-6">
-																																	<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="hardCoded">
+																																	<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{$communication->participant}}">
 																															</div>
 																													</div>
 																													<div class="form-group row">
@@ -240,7 +246,7 @@
 																											<div class="col-md-6">
 																												<div class="form-group row">
 																													<label for="staticEmail" class="col-sm-4 col-form-label font-weight-bold">Gesprächnotiz:</label>
-																													<textarea name="" id="" cols="30" rows="10" class="form-control" readonly>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident obcaecati nobis neque deserunt pariatur dicta, corporis cupiditate. Rem corrupti magnam officia id perspiciatis a praesentium eligendi mollitia beatae. Laboriosam voluptatum impedit alias mollitia consectetur voluptatibus magni dolorum. Vel, aliquam velit.</textarea>
+																													<textarea name="" id="" cols="30" rows="10" class="form-control" readonly>{{$communication->memo}}</textarea>
 																												</div>
 																											</div>
 																									</div>
@@ -250,9 +256,11 @@
 																	</div>
 															</div>
 													</div>
+													@endforeach
 												</div>
 											</div>
 										</div>
+										@endif
 									</div>
 							</div>
 						</div>
@@ -272,7 +280,7 @@
 																<strong>Es sind noch keine Kontakte vorhanden!</strong> 
 														</div>                                      
 													@else
-													<table class="table" id="company_table">
+													<table class="table" id="contact_table">
 														<thead>
 															<tr>
 																<th>Anrede</th>
@@ -298,15 +306,15 @@
 														<tbody>
 															@foreach($company->contacts as $contact)
 															<tr>
-																<td>{{$contact->contact_title}}</td>
+																<td>{{$contact->contact_title->name}}</td>
 																<td>{{$contact->first_name}}</td>
 																<td>{{$contact->last_name}}</td>
 																<td><a href="mailto:{{$contact->email}}">{{$contact->email}}</a></td>
 																<td>{{$contact->phone}}</td>
 																<td>{{$contact->fax}}</td>
-																<td>{{$contact->active}}</td>
+																<td><span class="badge badge--{{$contact->contact_status->name}}">{{$contact->contact_status->name}}</span></td>
 																<td>
-																	<a href="#" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-eye"></i></a>
+																	<a href="/contact/{{ $contact->id }}" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-eye"></i></a>
 
 																		</form>
 																</td>
@@ -333,13 +341,11 @@
 </div>
 
 
+@endsection
 
+@section('foot')
 
-	
+    
 
-	
-
-
-
-
+		
 @endsection

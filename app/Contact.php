@@ -16,6 +16,14 @@ class Contact extends Model
     {
         return $this->belongsTo(ContactStatus::class);
     }
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+    public function communications()
+    {
+        return $this->hasMany(Communication::class);
+    }
 
 
 

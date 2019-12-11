@@ -67,7 +67,7 @@
 <div class="form-row">
 <div class="form-group col-md-6">
   <div class="form-group">
-    <label for="city_id">Tätigkeitsfeld <i class="fas fa-asterisk" style="color:#993955"></i></label>
+    <label for="city_id">City <i class="fas fa-asterisk" style="color:#993955"></i></label>
     <select id="city_id" class="form-control selectpicker" multiple name="city_id[]" required>
       @foreach($cities as $key => $value)
       <option value='{{$value->id}}'>{{$value->name}}</option>
