@@ -27,7 +27,7 @@ class CreateCompaniesTable extends Migration
             $table->string('fax')->nullable();
             $table->string('email')->nullable();
             $table->string('website')->nullable();
-            $table->integer('created_by')->nullable();
+            $table->integer('user_id')->nullable();
             $table->integer('updated_by')->nullable();
             $table->longText('description')->nullable();
             $table->timestamps();

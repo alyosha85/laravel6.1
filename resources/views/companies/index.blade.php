@@ -136,26 +136,40 @@ colReorder: true,
             "url": "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/German.json"
             }, 	
 //drop down select
-initComplete: function () {
-        this.api().columns([1,2,3]).every( function () {
-            var column = this;
-            var select = $('<select><option value=""></option></select>')
-                .appendTo( $("#myTable thead tr:eq(1) th").eq(column.index()).empty() )
-                .on( 'change', function () {
-                    var val = $.fn.dataTable.util.escapeRegex(
-                        $(this).val()
-                    );
+// initComplete: function () {
+//         this.api().columns([1,3]).every( function () {
+//             var column = this;
+//             var select = $('<select><option value=""></option></select>')
+//                 .appendTo( $("#myTable thead tr:eq(1) th").eq(column.index()).empty() )
+//                 .on( 'change', function () {
+//                     var val = $.fn.dataTable.util.escapeRegex(
+//                         $(this).val()
+//                     );
 
-                    column
-                        .search( val ? '^'+val+'$' : '', true, false )
-                        .draw();
-                } );
+//                     column
+//                         .search( val ? '^'+val+'$' : '', true, false )
+//                         .draw();
+//                 } );
 
-            column.data().unique().sort().each( function ( d, j ) {
-                select.append( '<option value="'+d+'">'+d+'</option>' );
-            } );
-        } );
-    } //initComplete function  
+//             column.data().unique().sort().each( function ( d, j ) {
+//                 select.append( '<option value="'+d+'">'+d+'</option>' );
+//             } );
+//         } );
+//   }, //initComplete function  
+  initComplete: function () {                
+    this.api().columns(2).every( function () {                    
+      var column = this;                    
+      var select = $('<select><option value=""></option></select>')                        
+      .appendTo( $("#myTable thead tr:eq(1) th").eq(column.index()).empty() )                        
+      .on( 'change', function () {                            
+        var val = $.fn.dataTable.util.escapeRegex($(this).val());                            
+        column.search( val ? val : '', true, false ).draw();                        
+        } );                        
+        @foreach($values as $value)                            
+        select.append( '<option value="{{$value}}">{{$value->name}}</option>' );                        
+        @endforeach                
+        } );            
+        }       
 
 
     });
@@ -164,3 +178,8 @@ initComplete: function () {
 </script>   
     
 @endsection
+
+<script>          
+ 
+
+</script>

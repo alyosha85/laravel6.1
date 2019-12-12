@@ -26,7 +26,7 @@
 											<div class="panel panel-default">
 												<div class="panel-body">
 													<h1 class="mb-0">{{$company->name}}<small><span class="badge pull-right">{{$company->title['name']}}</span></small></h1>
-													<p class="text-muted">created on 12.12.2020 from Müller</p>
+													<p class="text-muted">created on 12.12.2020 from {{ $company->user['name']}}</p>
 													<div id="accordion" role="tablist" aria-multiselectable="true">
 															<div class="card">
 																	<h5 class="card-header" role="tab" id="headingOne">
@@ -203,7 +203,7 @@
 												<div class="panel-body">
 													@foreach($company->communications as $communication)
 													<h1 class="mb-0">Letzter Eintrag<small>&nbsp;<i class="fas fa-file-signature"></i></small></h1>
-													<p class="text-muted">created on 12.12.2020 from Müller</p>
+													<p class="text-muted">created on 12.12.2020 from {{ $company->user['name'] }}</p>
 
 													<div id="accordion" role="tablist" aria-multiselectable="true" class="col-sm-12">
 															<div class="card">
