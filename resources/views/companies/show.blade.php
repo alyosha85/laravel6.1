@@ -272,7 +272,7 @@
 										<div class="panel panel-default">
 											<div class="panel-body">
 											<h1 class="mb-0">{{$company->name}}<small><span class="badge pull-right">{{$company->title['name']}}</span></small></h1>
-											<a href="/contact/create" class="btn btn-primary mb-3">Add Contact</a>
+											<a href="/contact/company/create/{{ $company->id }}" class="btn btn-primary mb-3">Add Contact</a>
 											<div class="col-md-6">
 												<div class="table-responsive-xl">
 													@if(count($company->contacts) < 1)
@@ -294,15 +294,10 @@
 															</tr>
 															<tr>
 																<th></th>
+																<tith></th>
 																<th></th>
 																<th></th>
-																<th></th>
-																<th></th>
-																<th></th>
-																<th></th>
-																<th></th>																
-															</tr>
-														</thead>
+																i
 														<tbody>
 															@foreach($company->contacts as $contact)
 															<tr>
@@ -312,10 +307,10 @@
 																<td><a href="mailto:{{$contact->email}}">{{$contact->email}}</a></td>
 																<td>{{$contact->phone}}</td>
 																<td>{{$contact->fax}}</td>
-																<td><span class="badge badge--{{$contact->contact_status->name}}">{{$contact->contact_status->name}}</span></td>
+																i<td><span class="badge badge--{{$contact->contact_status->name}}">{{$contact->contact_status->name}}</span></td>
 																<td>
 																	<a href="/contact/{{ $contact->id }}" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-eye"></i></a>
-
+																	
 																		</form>
 																</td>
 															</tr>

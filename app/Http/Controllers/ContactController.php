@@ -30,10 +30,18 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {   
        $contact = new Contact(); 
-       return view('contact.create',compact('contact'));
+       $company_id = $request->company_id;
+       
+       return view('contact.create',compact('contact','company_id'));
+
+
+    //    $contact = Contact::find(1);
+    //    $company_id = $conatact->company_id; 
+
+
     }
 
     /**

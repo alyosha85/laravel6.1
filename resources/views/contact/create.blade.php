@@ -14,10 +14,10 @@
 				<div class="panel-body">
 				<form action="{{ url('contact') }}" method="POST">
 					@csrf
-					{{-- <input type="hidden" name="company_id" value="{{$company->id}}"> --}}
+					<input type="hidden" name="company_id" value="{{$company_id}}">
 					<fieldset class="border rounded px-2 mb-2">
 						<legend class="w-auto">Ansprechpartner</legend>
-						{{-- <input class="form-control lead pull-right" type="text" placeholder="Datum angelegt:  Today von Matoyan" readonly>    --}}
+						<input class="form-control lead pull-right" type="text" placeholder="Datum angelegt:  Today von Matoyan" readonly>    
 
 						<div class="form-row ">
 							 <div class="form-group col-md-2">

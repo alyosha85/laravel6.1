@@ -78,6 +78,7 @@
 
 @section('foot')
 
+
 <script>
 //datatable   
 $(document).ready(function() {
@@ -100,14 +101,11 @@ var table = $('#myTable').DataTable({
                         var last = null;
                         var current = null;
                         var bod = [];
-
                         var css = '@page { size: landscape; }',
                             head = win.document.head || win.document.getElementsByTagName('head')[0],
                             style = win.document.createElement('style');
-
                         style.type = 'text/css';
                         style.media = 'print';
-
                         if (style.styleSheet)
                         {
                             style.styleSheet.cssText = css;
@@ -116,19 +114,16 @@ var table = $('#myTable').DataTable({
                         {
                             style.appendChild(win.document.createTextNode(css));
                         }
-
                         head.appendChild(style);
                     }
             
                 },
-
                 //select col visibility
                 {
                     extend: 'colvis',text:'Spalten Anzeigen'  
                 }
             ],
 //end buttons ......................................................end buttons
-
 //drag and drop columns
 colReorder: true,
 //German language 
@@ -136,50 +131,45 @@ colReorder: true,
             "url": "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/German.json"
             }, 	
 //drop down select
-// initComplete: function () {
-//         this.api().columns([1,3]).every( function () {
-//             var column = this;
-//             var select = $('<select><option value=""></option></select>')
-//                 .appendTo( $("#myTable thead tr:eq(1) th").eq(column.index()).empty() )
-//                 .on( 'change', function () {
-//                     var val = $.fn.dataTable.util.escapeRegex(
-//                         $(this).val()
-//                     );
+initComplete: function () {
 
-//                     column
-//                         .search( val ? '^'+val+'$' : '', true, false )
-//                         .draw();
-//                 } );
-
-//             column.data().unique().sort().each( function ( d, j ) {
-//                 select.append( '<option value="'+d+'">'+d+'</option>' );
-//             } );
-//         } );
-//   }, //initComplete function  
-  initComplete: function () {                
-    this.api().columns(2).every( function () {                    
-      var column = this;                    
-      var select = $('<select><option value=""></option></select>')                        
-      .appendTo( $("#myTable thead tr:eq(1) th").eq(column.index()).empty() )                        
-      .on( 'change', function () {                            
-        var val = $.fn.dataTable.util.escapeRegex($(this).val());                            
-        column.search( val ? val : '', true, false ).draw();                        
-        } );                        
-        @foreach($values as $value)                            
-        select.append( '<option value="{{$value}}">{{$value->name}}</option>' );                        
-        @endforeach                
-        } );            
-        }       
+  this.api().columns(2).every( function () {                    
+      var column = this;                    
+      var select = $('<select><option value=""></option></select>')                        
+      .appendTo( $("#myTable thead tr:eq(1) th").eq(column.index()).empty() )                        
+      .on( 'change', function () {                            
+        var val = $.fn.dataTable.util.escapeRegex($(this).val());                            
+        column.search( val ? val : '', true, false ).draw();                        
+        } );                        
+        @foreach($values as $value)                            
+        select.append( '<option value="{{$value->name}}">{{$value->name}}</option>' );                        
+        @endforeach                
+        } ); 
 
 
+        this.api().columns([1,3]).every( function () {
+            var column = this;
+            var select = $('<select><option value=""></option></select>')
+                .appendTo( $("#myTable thead tr:eq(1) th").eq(column.index()).empty() )
+                .on( 'change', function () {
+                    var val = $.fn.dataTable.util.escapeRegex(
+                        $(this).val()
+                    );
+                    column
+                        .search( val ? '^'+val+'$' : '', true, false )
+                        .draw();
+                } );
+            column.data().unique().sort().each( function ( d, j ) {
+                select.append( '<option value="'+d+'">'+d+'</option>' );
+            } );
+        } );
+  } //initComplete function  
+    
     });
 });
-
 </script>   
     
 @endsection
+     
 
-<script>          
- 
 
-</script>
