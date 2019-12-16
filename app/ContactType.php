@@ -10,6 +10,6 @@ class ContactType extends Model
     
     public function communications()
     {
-        return $this->belongsToMany(Company::class);
+        return $this->belongsToMany(Communication::class);
     }
 }

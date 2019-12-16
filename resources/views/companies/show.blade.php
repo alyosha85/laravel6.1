@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+
 @section('content')
 
 
@@ -21,7 +22,7 @@
 				<div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
 					<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 							<div class="container-fluid">
-									<div class="row">
+								<div class="row">
 										<div class="col-xl-6">
 											<div class="panel panel-default">
 												<div class="panel-body">
@@ -68,9 +69,9 @@
 																																	<ul>
 																																			@foreach($company->contacts as $contact)
 																																			<li>
-																																			<a href="#">{{$contact['last_name']}}</a>
+																																				<a href="" data-toggle="modal" data-target="#myModal">{{$contact['first_name']}}</a>
+																																			</li>
 																																			@endforeach
-																																		</li>
 																																	</ul>
 																															</div>
 																													</div>
@@ -196,12 +197,13 @@
 										@if(count($company->communications) < 1)
 											<div class="alert alert-primary text-center col-lg-6">
 													<strong>Es gibt noch keine Kommunikation mit dieser Firma</strong>  
-										</div>                                    
+									</div>                                    
 										@else
 										<div class="col-xl-6" id="letter">
 											<div class="panel panel-default">
 												<div class="panel-body">
 													@foreach($company->communications as $communication)
+													@if ($loop->last)
 													<h1 class="mb-0">Letzter Eintrag<small>&nbsp;<i class="fas fa-file-signature"></i></small></h1>
 													<p class="text-muted">created on 12.12.2020 from {{ $company->user['name'] }}</p>
 
@@ -256,14 +258,15 @@
 																	</div>
 															</div>
 													</div>
+													@endif
 													@endforeach
 												</div>
 											</div>
 										</div>
 										@endif
-									</div>
 							</div>
 						</div>
+				</div>
 						{{-- Ansprechpartner page 2 --}}
 						<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 							<div class="container-fluid">
@@ -294,10 +297,9 @@
 															</tr>
 															<tr>
 																<th></th>
-																<tith></th>
 																<th></th>
 																<th></th>
-																i
+																<th></th>
 														<tbody>
 															@foreach($company->contacts as $contact)
 															<tr>
@@ -307,10 +309,9 @@
 																<td><a href="mailto:{{$contact->email}}">{{$contact->email}}</a></td>
 																<td>{{$contact->phone}}</td>
 																<td>{{$contact->fax}}</td>
-																i<td><span class="badge badge--{{$contact->contact_status->name}}">{{$contact->contact_status->name}}</span></td>
+																<td><span class="badge badge--{{$contact->contact_status->name}}">{{$contact->contact_status->name}}</span></td>
 																<td>
-																	<a href="/contact/{{ $contact->id }}" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-eye"></i></a>
-																	
+																	<button href="" data-toggle="modal" data-target="#myModal" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-eye"></i></button>	
 																		</form>
 																</td>
 															</tr>
@@ -320,27 +321,91 @@
 														@endif
 												</div>										
 											</div>
-   
-
-											</div>
 										</div>
-									</div>	
-								</div>
+									</div>
+								</div>	
+							</div>
 						</div>
-				</div>
-				<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+						@include('/modal')
+					</div>
+					<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-xl-12">
+									<div class="panel panel-default">
+										<div class="panel-body">
+										<h1 class="mb-0">{{$company->name}}<small><span class="badge pull-right">{{$company->title['name']}}</span></small></h1>
+										<a href="/communication/company/create/{{ $company->id }}" class="btn btn-primary mb-3">Add Communication</a>
+										<div class="col-md-6">
+											<div class="table-responsive-xl">
+												@if(count($company->communications) < 1)
+													<div class="alert alert-primary text-center">
+															<strong>Es sind noch keine Kontakte vorhanden!</strong> 
+													</div>                                      
+												@else
+												<table class="display responsive nowrap" id="example" style="width:100%">
+													<thead>
+														<tr>
+															<th>Datum</th>
+															<th>Kontaktart</th>
+															<th>Kontaktgrund</th>
+															<th>Teilnehmer</th>
+															<th></th>
+														</tr>
+														<tr>
+															<th></th>
+															<th></th>
+															<th></th>
+															<th></th>
+															<th></th>
+													<tbody>
+														@foreach($company->communications as $communication)
+														<tr>
+															<td>{{$communication->date}}</td>
+															<td>
+																@foreach($communication->contact_types as $contacttype)
+																{{$contacttype->name}}, &nbsp;
+																@endforeach
+															</td>
+															<td>{{$communication->contact_reasons['name']}}</td>
+															<td>{{$communication->participant}}</td>
+															<td></td>
+															<td>
+																<a href="#" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-eye"></i></button>	
+																	</form>
+															</td>
+														</tr>
+														@endforeach
+													</tbody>
+												</table>
+													@endif
+											</div>										
+										</div>
+									</div>
+								</div>
+							</div>	
+						</div>
+					</div>
+
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
+
 
 
 @endsection
 
 @section('foot')
 
-    
+
+
+<script>
+
+$(document).ready(function() {
+    $('#example').DataTable();
+} );
+
+</script>
 
 		
 @endsection

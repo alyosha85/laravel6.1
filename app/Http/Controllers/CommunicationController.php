@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Communication;
 use Illuminate\Http\Request;
+use App\ContactType;
+use App\ContactReason;
+use App\Contact;
 
 class CommunicationController extends Controller
 {
@@ -22,9 +25,14 @@ class CommunicationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $communication = New Communication();
+        $contact_types = ContactType::all();
+        $contact_reasons = ContactReason::all();
+        $contacts = Contact::all();
+
+        return view('communication.create',compact('communication','contact_types','contact_reasons','contacts'));
     }
 
     /**

@@ -19,7 +19,11 @@ class Communication extends Model
 
     public function contact_types()
     {
-        return $this->belongsTo(ContactType::class);
+        return $this->belongsToMany(ContactType::class);
+    }
+    public function contact_reasons()
+    {
+        return $this->belongsTo(ContactReason::class);
     }
 
 }

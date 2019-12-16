@@ -68,9 +68,6 @@ class CompaniesController extends Controller
         $profession = Profession::find($request->profession_id);
         $company->professions()->attach($profession);
 
-
-        return $request;
-
         return redirect('companies')->with('message','Erfolgreich hinzugefügt');
     }
 
@@ -81,7 +78,9 @@ class CompaniesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Company $company)
-    {
+    {   
+        // $last_communication = Communication::where('company_id',$company)->get()->count();
+        // return $last_communication;
         return view('companies.show',compact('company'));
     }
 

@@ -39,6 +39,7 @@ class ContactController extends Controller
        $contact_titles = ContactTitle::all();
        $contact_statuses = ContactStatus::all();
        return view('contact.create',compact('contact','contact_titles','contact_statuses','company_id'));
+       //return redirect('companies/'. $company_id,compact('contact','contact_titles','contact_statuses','company_id'));
     }
 
     /**
@@ -115,3 +116,6 @@ class ContactController extends Controller
         //
     }
 }
+
+
+

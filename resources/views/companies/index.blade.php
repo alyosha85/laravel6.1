@@ -8,6 +8,11 @@
       
       <div>
         <p><a href="/companies/create" class="btn btn-outline-primary border-0" >Add company</a></p>
+        <select name="" id="">
+          <option value="">Standort</option>
+          <option value="">Land</option>
+          <option value="">Bundesweit</option>
+        </select>
       </div>
    
       <div class="table-responsive-xl">

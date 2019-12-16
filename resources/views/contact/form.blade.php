@@ -1,8 +1,8 @@
 @csrf
-<input type="hidden" name="company_id" value="{{ $contact->company['id']}} "> 
+<input type="hidden" name="company_id" value="{{ $company_id }} "> 
 <fieldset class="border rounded px-2 mb-2">
   <legend class="w-auto">Ansprechpartner</legend>
-  {{-- <input class="form-control lead pull-right" type="text" placeholder="Datum angelegt:  Today von Matoyan" readonly>    --}}
+ <input class="form-control lead pull-right" type="text" placeholder="Datum angelegt:  Today von Matoyan" readonly> 
 
   <div class="form-row ">
      <div class="form-group col-md-2">
@@ -64,8 +64,8 @@
      </div>
      <div class="form-group col-md-10">
        <div class="form-group">
-         <label for="note">Anmerkungen</label>
-         <textarea type="text" cols="60" rows="10" name="note" class="form-control" value="" autocomplete="nope">{{ old('note') ?? $contact->note }}</textarea>
+         <label for="memo">Anmerkungen</label>
+         <textarea type="text" cols="60" rows="10" name="memo" class="form-control" value="" autocomplete="nope">{{ old('memo') ?? $communication->memo }}</textarea>
        </div>
      </div>
    </div>
