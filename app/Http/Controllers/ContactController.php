@@ -32,12 +32,13 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {   
        $contact = new Contact(); 
+       $company_id = $request->company_id;
        $contact_titles = ContactTitle::all();
        $contact_statuses = ContactStatus::all();
-       return view('contact.create',compact('contact','contact_titles','contact_statuses'));
+       return view('contact.create',compact('contact','contact_titles','contact_statuses','company_id'));
     }
 
     /**
