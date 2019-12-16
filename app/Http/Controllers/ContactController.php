@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Contact;
 use App\Company;
+use App\ContactTitle;
+use App\ContactStatus;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -33,7 +35,9 @@ class ContactController extends Controller
     public function create()
     {   
        $contact = new Contact(); 
-       return view('contact.create',compact('contact'));
+       $contact_titles = ContactTitle::all();
+       $contact_statuses = ContactStatus::all();
+       return view('contact.create',compact('contact','contact_titles','contact_statuses'));
     }
 
     /**
@@ -42,31 +46,23 @@ class ContactController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
 
         $data = request()->validate([
-            'contact_title' => 'required',
-            'first_name' => 'required|min:3',
-            'last_name' => 'required|min:3',
-            'email' => 'email',
-            'phone' => '',
-            'fax' => '',
-            'note' => '',
-            'active' => 'required',  
-            'company_id' => 'required',
+        
         ]);
 
         $contact = new Contact();
-        $contact->contact_title = request('contact_title');
-        $contact->company_id = request('company_id');
+        $contact->contact_title_id = request('contact_title_id');
+        $contact->contact_status_id = request('contact_status_id');
         $contact->first_name = request('first_name');
         $contact->last_name = request('last_name');
         $contact->email = request('email');
         $contact->phone = request('phone');
         $contact->fax = request('fax');
-        $contact->active = request('active');
         $contact->note = request('note');
+        $contact->company_id = request('company_id');
         $contact->save();
 
 
