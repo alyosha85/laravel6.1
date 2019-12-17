@@ -61,7 +61,7 @@
       <div class="form-group col-md-12">
         <div class="form-group">
           <label for="memo">Gesprächsnotiz <i class="fas fa-asterisk" style="color:#993955"></i></label>
-          <textarea type="text" cols="120" rows="30" name="note" class="form-control" value="" autocomplete="nope">{{ old('note') ?? $communication->note }}</textarea>
+          <textarea id="mytextarea" type="text" cols="120" rows="30" name="note" class="form-control" value="" autocomplete="nope">{{ old('note') ?? $communication->note }}</textarea>
         </div>
         <div>{{$errors->first('participant')}}</div>
       </div>

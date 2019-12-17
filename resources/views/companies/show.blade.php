@@ -33,7 +33,7 @@
 																	<h5 class="card-header" role="tab" id="headingOne">
 																			<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="d-block nounderline">
 																				<i class="fa fa-chevron-down float-right"></i>Summary &nbsp;<i class="fas fa-building"></i> &nbsp;&nbsp;&nbsp;
-																				<span class="badge badge--{{$company->status->name}}">{{$company->status->name}}</span>
+																				<span class="badge badge--{{$company->status['name']}}">{{$company->status['name']}}</span>
 																			</a>
 																	</h5>
 													
@@ -55,7 +55,7 @@
 																																	<ul>
 																																			@foreach($company->professions as $profession)
 																																			<li>
-																																			{{$profession['name']}}
+																																			{{$profession->name}}
 																																			@endforeach
 																																		</li>
 																																	</ul>
@@ -186,7 +186,8 @@
 																	</h5>
 																	<div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour">
 																			<div class="card-body">
-																							{{ $company->description ?? '' }}
+																				<textarea name="description" id="" cols="30" rows="6f" class="form-control" readonly>	{{ $company->description ?? '' }}</textarea>
+																						
 																			</div>
 																	</div>
 															</div>
@@ -275,7 +276,7 @@
 										<div class="panel panel-default">
 											<div class="panel-body">
 											<h1 class="mb-0">{{$company->name}}<small><span class="badge pull-right">{{$company->title['name']}}</span></small></h1>
-											<a href="/contact/company/create/{{ $company->id }}" class="btn btn-primary mb-3">Add Contact</a>
+											<a href="/contact/company/create/{{ $company->id }}" class="btn btn-primary mb-3">Neuer Ansprechpartner</a>
 											<div class="col-md-6">
 												<div class="table-responsive-xl">
 													@if(count($company->contacts) < 1)
@@ -300,6 +301,11 @@
 																<th></th>
 																<th></th>
 																<th></th>
+																<th></th>
+																<th></th>
+																<th></th>
+																<th></th>
+															</tr>
 														<tbody>
 															@foreach($company->contacts as $contact)
 															<tr>
@@ -311,8 +317,13 @@
 																<td>{{$contact->fax}}</td>
 																<td><span class="badge badge--{{$contact->contact_status->name}}">{{$contact->contact_status->name}}</span></td>
 																<td>
-																	<button href="" data-toggle="modal" data-target="#myModal" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-eye"></i></button>	
-																		</form>
+																	<a href="/contact/{{ $contact->id }}" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-eye"></i></a>
+																	<a href="/contact/{{ $contact->id }}/edit" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-edit"></i></a>
+																	<form action="/companies/{{$company->id}}" method="POST">
+																		@method('DELETE')
+																		@csrf
+																		<button type="submit" class="btn btn-outline-danger btn-sm border-0"><i class="fas fa-trash"></i></button>
+																	</form>
 																</td>
 															</tr>
 															@endforeach
@@ -340,7 +351,7 @@
 											<div class="table-responsive-xl">
 												@if(count($company->communications) < 1)
 													<div class="alert alert-primary text-center">
-															<strong>Es sind noch keine Kontakte vorhanden!</strong> 
+															<strong>Es sind noch keine Kommunikation vorhanden!</strong> 
 													</div>                                      
 												@else
 												<table class="display responsive nowrap" id="example" style="width:100%">
@@ -399,7 +410,7 @@
 
 @section('foot')
 
-
+@include('modalscript')
 
 <script>
 

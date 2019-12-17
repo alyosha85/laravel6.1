@@ -7,7 +7,7 @@
   <div class="form-row ">
     <div class="form-group col-md-6">
       <div class="form-group">
-        <label for="name">Name <i class="fas fa-asterisk" style="color:#993955"></i></label>
+        <label for="name">Name des Unternehmens <i class="fas fa-asterisk" style="color:#993955"></i></label>
         <input type="text" name="name" class="form-control" value="{{ old('name') ?? $company->name }}" autocomplete="off" required>
       </div>
       <div>{{$errors->first('name')}}</div>
@@ -16,6 +16,7 @@
       <div class="form-group">
         <label for="title_id">Namenszusatz <i class="fas fa-asterisk" style="color:#993955"></i></label>
         <select name="title_id" class="form-control">
+          <option  selected="true" disabled="disabled" value=''>Bitte wählen...</option>
           @foreach($titles as $title)
           <option value="{{ $title->id }}" {{ $title->id == $company->title_id ? 'selected' : '' }} >{{ $title->name }}</option>
           @endforeach
@@ -27,6 +28,7 @@
       <div class="form-group">
         <label for="status_id">Status <i class="fas fa-asterisk" style="color:#993955"></i></label>
         <select name="status_id" class="form-control">
+          <option  selected="true" disabled="disabled" value=''>Bitte wählen...</option>
           @foreach($statuses as $status)
           <option value="{{ $status->id }}" {{$status->id == $company->status_id ? 'selected' : '' }}>{{ $status->name }}</option>
           @endforeach
@@ -41,6 +43,7 @@
     <div class="form-group">
       <label for="branch_id">Branche <i class="fas fa-asterisk" style="color:#993955"></i></label>
       <select name="branch_id" class="form-control">
+        <option  selected="true" disabled="disabled" value=''>Bitte wählen...</option>
         @foreach($branches as $branch)
         <option value="{{ $branch->id }}" {{$branch->id == $company->branch_id ? 'selected' : '' }}>{{ $branch->name }}</option>
         @endforeach
@@ -53,7 +56,12 @@
       <label for="profession_id">Tätigkeitsfeld <i class="fas fa-asterisk" style="color:#993955"></i></label>
       <select id="profession_id" class="selectpicker form-control" multiple name="profession_id[]" required>
         @foreach($professions as $key => $value)
-        <option {{ $company->professions }} value='{{$value->id}}'>{{$value->name}}</option>
+        <option @if(isset($company->id))    
+        @foreach ($company->professions as $professionobject) 
+         @if ($professionobject->id == $value->id) {{'selected'}}  @endif
+        @endforeach
+        @endif
+        value='{{$value->id}}'>{{$value->name}}</option>
         @endforeach
       </select>
     </div> 
@@ -67,10 +75,16 @@
 <div class="form-row">
 <div class="form-group col-md-6">
   <div class="form-group">
-    <label for="city_id">City <i class="fas fa-asterisk" style="color:#993955"></i></label>
+    <label for="city_id">Standort <i class="fas fa-asterisk" style="color:#993955"></i></label>
     <select id="city_id" class="form-control selectpicker" multiple name="city_id[]" required>
+      <option disabled="disabled" value=''>Wählen</option>
       @foreach($cities as $key => $value)
-      <option value='{{$value->id}}'>{{$value->name}}</option>
+      <option @if(isset($company->id))    
+      @foreach ($company->cities as $cityobject) 
+       @if ($cityobject->id == $value->id) {{'selected'}}  @endif
+      @endforeach
+      @endif
+      value='{{$value->id}}'>{{$value->name}}</option>
       @endforeach
     </select>
   </div> 
@@ -79,8 +93,9 @@
 
   <div class="form-group col-md-6">
     <div class="form-group">
-      <label for="state_id">State <i class="fas fa-asterisk" style="color:#993955"></i></label>
+      <label for="state_id">Bundesland  <i class="fas fa-asterisk" style="color:#993955"></i></label>
       <select name="state_id" class="form-control">
+        <option  selected="true" disabled="disabled" value=''>Bitte wählen...</option>
         @foreach($states as $state)
         <option value="{{ $state->id }}" {{$state->id == $company->state_id ? 'selected' : '' }}>{{ $state->name }}</option>
         @endforeach
@@ -150,4 +165,17 @@
     <div>{{$errors->first('website')}}</div>
   </div>
 </div>
+</fieldset>
+
+<fieldset class="border rounded px-2 mb-2">
+  <legend class="w-auto">Anmerkungen </legend>
+  {{-- line 5 --}}
+  <div class="form-row">
+    <div class="form-group col-md-12">
+      <div class="form-group">
+        <textarea rows="4"  type="text" name="description" class="form-control" value="{{ old('description') ?? $company->description }}" autocomplete="off"></textarea> 
+      </div>
+      <div>{{$errors->first('description')}}</div>
+    </div>
+  </div>
 </fieldset>

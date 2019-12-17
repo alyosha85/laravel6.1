@@ -1,5 +1,5 @@
 @csrf
-<input type="hidden" name="company_id" value="{{ $company_id }} "> 
+<input type="hidden" name="company_id" value="{{ $company_id ?? '' }} "> 
 <fieldset class="border rounded px-2 mb-2">
   <legend class="w-auto">Ansprechpartner</legend>
  <input class="form-control lead pull-right" type="text" placeholder="Datum angelegt:  Today von Matoyan" readonly> 
@@ -7,8 +7,9 @@
   <div class="form-row ">
      <div class="form-group col-md-2">
       <div class="form-group">
-        <label for="contact_title_id">Anrede<i class="fas fa-asterisk" style="color:#993955"></i></label>									
+        <label for="contact_title_id">Anrede <i class="fas fa-asterisk" style="color:#993955"></i></label>									
         <select name="contact_title_id" class="form-control">
+          <option  selected="true" disabled="disabled" value=''>Bitte wählen...</option>
           @foreach($contact_titles as $title)
           <option value="{{ $title->id }}" {{ $title->id == $contact->title_id ? 'selected' : '' }} >{{ $title->name }}</option>
           @endforeach
@@ -35,6 +36,7 @@
        <div class="form-group">
          <label for="contact_status">Status <i class="fas fa-asterisk" style="color:#993955"></i></label>									
          <select name="contact_status_id" class="form-control" required>
+          <option  selected="true" disabled="disabled" value=''>Bitte wählen...</option>
            @foreach($contact_statuses as $status)
            <option value="{{$status->id}}"{{ $status->id == $contact->status_id ? 'selected' : '' }}>{{ $status->name }}</option>
            @endforeach
@@ -64,8 +66,8 @@
      </div>
      <div class="form-group col-md-10">
        <div class="form-group">
-         <label for="memo">Anmerkungen</label>
-         <textarea type="text" cols="60" rows="10" name="memo" class="form-control" value="" autocomplete="nope">{{ old('memo') ?? $contact->memo }}</textarea>
+         <label for="note">Anmerkungen</label>
+         <textarea type="text" cols="60" rows="10" name="note" class="form-control" value="" autocomplete="nope">{{ old('note') ?? $contact->note }}</textarea>
        </div>
      </div>
    </div>

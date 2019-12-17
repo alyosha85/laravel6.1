@@ -14,7 +14,13 @@
 				<div class="panel-body">
 				<form action="{{ url('contact') }}" method="POST">
 						@include('contact.form')
-					<button type="submit" class="btn btn-primary float-right">Add Contact</button>
+					<button type="submit" class="btn btn-primary float-right mx-2">Kontakt hinzufügen</button>
+					<div class="btn-group float-right">
+						<a href="/save/1" class="btn btn-primary float-right mx-2">
+								<i class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></i> Save
+						</a>
+						<a href="/cancel/1" class="btn btn-danger">Cancel</a>
+				</div>
 				</form>
 			</div>
 		</div>

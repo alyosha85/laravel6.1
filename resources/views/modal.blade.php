@@ -1,4 +1,4 @@
-<div class="modal right fade" tabindex="-1" id="myModal" role="dialog">
+<div class="modal right fade" tabindex="-1" id="edit" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -7,7 +7,11 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <form action="{{route('contact.update','test')}}" method="POST">
+        {{method_field('PATCH')}}
       <div class="modal-body">
+        <input type="hidden" name="company_id" value="{{$company->id}}">
+        <input type="hidden" name="id" id="id" value="">
       @include('contact.show')
     </div>
     <div class="modal-footer">

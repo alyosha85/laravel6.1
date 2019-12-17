@@ -17,15 +17,27 @@
 				<form action="/companies" method="POST">
 			  	@include('companies.form')
           {{-- buttons --}}
-          <button type="submit" class="btn btn-primary float-right">
-          <i class="far fa-save"></i> Speichern
-          </button>
+          <button type="submit" class="btn btn-success float-right">
+						<i class="far fa-save"></i> Speichern
+						</button>
+						<button onclick="goBack()" class="btn btn-danger float-right mx-2">
+							<i class="fas fa-ban"></i> Stornieren
+						</button>
+
+					</div>
 				</form>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+
+<script>
+	function goBack() {
+		window.history.back();
+	}
+</script>
 
 @endsection
 

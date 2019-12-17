@@ -7,12 +7,13 @@
     <div class="col-md-12">
       
       <div>
-        <p><a href="/companies/create" class="btn btn-outline-primary border-0" >Add company</a></p>
+        <p><a href="/companies/create" class="btn btn-outline-primary border-0" >Neue Firma</a>
         <select name="" id="">
           <option value="">Standort</option>
           <option value="">Land</option>
           <option value="">Bundesweit</option>
         </select>
+      </p>
       </div>
    
       <div class="table-responsive-xl">

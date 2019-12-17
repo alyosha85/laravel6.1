@@ -12,6 +12,8 @@ use App\Contact;
 use App\State;
 use App\City;
 use Auth;
+use App\CityCompany;
+use App\CompanyProfession;
 use App\Communication;
 
 class CompaniesController extends Controller
@@ -68,7 +70,7 @@ class CompaniesController extends Controller
         $profession = Profession::find($request->profession_id);
         $company->professions()->attach($profession);
 
-        return redirect('companies')->with('message','Erfolgreich hinzugefügt');
+        return redirect('companies/'. $company->id)->with('message','Erfolgreich hinzugefügt');
     }
 
     /**
@@ -79,8 +81,6 @@ class CompaniesController extends Controller
      */
     public function show(Company $company)
     {   
-        // $last_communication = Communication::where('company_id',$company)->get()->count();
-        // return $last_communication;
         return view('companies.show',compact('company'));
     }
 
@@ -108,10 +108,27 @@ class CompaniesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Company $company)
+    public function update(Request $request,Company $company)
     {
-            $company->update($this->validateRequest());
-            return redirect('companies/'. $company->id)->with('message','Erfolgreich geändert');
+        $company->update($this->validateRequest());
+
+        CityCompany::where('company_id',$company->id)->delete();
+        foreach($request->city_id as $item) {
+            $bridge = new CityCompany();
+            $bridge->company_id = $company->id;
+            $bridge->city_id = $item;
+            $bridge->save();
+        }
+
+        CompanyProfession::where('company_id',$company->id)->delete();
+        foreach($request->profession_id as $item) {
+            $bridge = new CompanyProfession();
+            $bridge->company_id = $company->id;
+            $bridge->profession_id = $item;
+            $bridge->save();
+        }
+
+        return redirect('companies/'. $company->id)->with('message','Erfolgreich geändert');
     }
 
     /**
@@ -133,18 +150,21 @@ class CompaniesController extends Controller
                 'title_id' => 'required',
                 'status_id' => 'required',
                 'branch_id' => 'required',
-                'email' => 'email',
+                'email' => '',
                 'state_id' => 'required',
                 'address' => '',
                 'address2' => '',
                 'zipcode' => '',
-                'phone' => '',
                 'fax' => '',
+                'phone' => '',
                 'website' => '',
                 'professions' => '',
+                'description' => '',
                 'cities' => '', 
                 'created_by' => '',
         ]);
     }
     
 }
+
+

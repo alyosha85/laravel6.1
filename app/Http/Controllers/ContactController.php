@@ -67,11 +67,8 @@ class ContactController extends Controller
         $contact->note = request('note');
         $contact->company_id = request('company_id');
         $contact->save();
-
-
         return redirect('/companies/'.request('company_id').'/#nav-profile');
     }
-
     /**
      * Display the specified resource.
      *
@@ -91,7 +88,9 @@ class ContactController extends Controller
      */
     public function edit(Contact $contact)
     {
-        
+        $contact_titles = ContactTitle::all();
+        $contact_statuses = ContactStatus::all();
+        return view ('contact.edit',compact('contact','contact_titles','contact_statuses'));
     }
 
     /**
@@ -103,7 +102,8 @@ class ContactController extends Controller
      */
     public function update(Request $request, Contact $contact)
     {
-        //
+        $contact->update($this->validateRequest());
+        return back()->with('message','Erfolgreich hinzugefügt');
     }
 
     /**
@@ -114,7 +114,24 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
-        //
+        $contact->delete();
+        return redirect('/companies/'.request('$company->id'));
+    }
+
+
+    private function validateRequest()
+    {
+        return request()-> validate ([
+                'contact_title_id' => 'required',
+                'contact_status_id' => 'required',
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'email' => '',
+                'phone' => '',
+                'fax' => '',
+                'note' => '',
+ 
+        ]);
     }
 }
 
