@@ -53,7 +53,7 @@
       <label for="profession_id">Tätigkeitsfeld <i class="fas fa-asterisk" style="color:#993955"></i></label>
       <select id="profession_id" class="selectpicker form-control" multiple name="profession_id[]" required>
         @foreach($professions as $key => $value)
-        <option value='{{$value->id}}'>{{$value->name}}</option>
+        <option {{ $company->professions }} value='{{$value->id}}'>{{$value->name}}</option>
         @endforeach
       </select>
     </div> 

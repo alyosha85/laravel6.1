@@ -8,7 +8,7 @@
               <div class="form-group row">
                 <label for="name" class="col-sm-3 control-label font-weight-bold">Firma:</label>
                 <div class="col-sm-9">
-                  <input type="Text" class="form-control" value="{{$contact->company->name}}" readonly>
+                  <input type="Text" class="form-control" value="{{$contact->company->name ?? ''}}" readonly>
                 </div>
               </div>
               <div class="row">
@@ -16,7 +16,7 @@
                     <div class="form-group row">
                         <label for="Email" class="col-sm-3 col-form-label font-weight-bold">Email:</label>
                         <div class="col-sm-9">
-                          <a class="form-control-plaintext" href="mailto:{{$contact->email}}">{{ $contact->email ?? '' }}</a>
+                          <a class="form-control-plaintext" href="mailto:{{$contact->email ?? ''}}">{{ $contact->email ?? '' }}</a>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -49,7 +49,7 @@
               <div class="form-group col-md-12">
                 <div class="form-group">
                   <label for="memo"> </label>
-                  <textarea rows="4" id="memo" type="text" class="form-control" name="memo" value="" readonly>{{$contact->note}}</textarea>                     
+                  <textarea rows="4" id="memo" type="text" class="form-control" name="memo" value="" readonly>{{$contact->note ?? ''}}</textarea>                     
                 </div>
               </div>
             </div>

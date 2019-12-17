@@ -65,9 +65,8 @@
      <div class="form-group col-md-10">
        <div class="form-group">
          <label for="memo">Anmerkungen</label>
-         <textarea type="text" cols="60" rows="10" name="memo" class="form-control" value="" autocomplete="nope">{{ old('memo') ?? $communication->memo }}</textarea>
+         <textarea type="text" cols="60" rows="10" name="memo" class="form-control" value="" autocomplete="nope">{{ old('memo') ?? $contact->memo }}</textarea>
        </div>
      </div>
    </div>
 </fieldset>
-

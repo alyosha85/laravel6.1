@@ -40,6 +40,7 @@ class ContactController extends Controller
        $contact_statuses = ContactStatus::all();
        return view('contact.create',compact('contact','contact_titles','contact_statuses','company_id'));
        //return redirect('companies/'. $company_id,compact('contact','contact_titles','contact_statuses','company_id'));
+        
     }
 
     /**
@@ -68,7 +69,7 @@ class ContactController extends Controller
         $contact->save();
 
 
-        return back();
+        return redirect('/companies/'.request('company_id').'/#nav-profile');
     }
 
     /**

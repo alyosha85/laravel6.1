@@ -358,6 +358,8 @@
 															<th></th>
 															<th></th>
 															<th></th>
+														</tr>
+													</head>
 													<tbody>
 														@foreach($company->communications as $communication)
 														<tr>
@@ -369,7 +371,7 @@
 															</td>
 															<td>{{$communication->contact_reasons['name']}}</td>
 															<td>{{$communication->participant}}</td>
-															<td></td>
+			
 															<td>
 																<a href="#" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-eye"></i></button>	
 																	</form>
