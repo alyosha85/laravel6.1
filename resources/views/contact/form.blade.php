@@ -11,7 +11,7 @@
         <select name="contact_title_id" class="form-control">
           <option  selected="true" disabled="disabled" value=''>Bitte wählen...</option>
           @foreach($contact_titles as $title)
-          <option value="{{ $title->id }}" {{ $title->id == $contact->title_id ? 'selected' : '' }} >{{ $title->name }}</option>
+          <option value="{{ $title->id }}" {{ $title->id == $contact->contact_title_id ? 'selected' : '' }} >{{ $title->name }}</option>
           @endforeach
         </select>
       </div>
@@ -38,7 +38,7 @@
          <select name="contact_status_id" class="form-control" required>
           <option  selected="true" disabled="disabled" value=''>Bitte wählen...</option>
            @foreach($contact_statuses as $status)
-           <option value="{{$status->id}}"{{ $status->id == $contact->status_id ? 'selected' : '' }}>{{ $status->name }}</option>
+           <option value="{{$status->id}}"{{ $status->id == $contact->contact_status_id ? 'selected' : '' }}>{{ $status->name }}</option>
            @endforeach
          </select>
        </div>

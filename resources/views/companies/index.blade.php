@@ -62,12 +62,12 @@
               </td> 
               <td>{{$company->address}}</td>
               <td>
+                <form action="/companies/{{$company->id}}" method="POST">
                 <a href="/companies/{{ $company->id }}" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-eye"></i></a>
                 <a href="/companies/{{ $company->id }}/edit" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-edit"></i></a>
-                <form action="/companies/{{$company->id}}" method="POST">
                   @method('DELETE')
                   @csrf
-                  <button type="submit" class="btn btn-outline-danger btn-sm border-0"><i class="fas fa-trash"></i></button>
+                <button type="submit" class="btn btn-outline-danger btn-sm border-0"><i class="fas fa-trash"></i></button>
                 </form>
               </td>
             </tr>
@@ -126,7 +126,8 @@ var table = $('#myTable').DataTable({
                 },
                 //select col visibility
                 {
-                    extend: 'colvis',text:'Spalten Anzeigen'  
+                    extend: 'colvis',
+                    text:'Spalten Anzeigen'  
                 }
             ],
 //end buttons ......................................................end buttons

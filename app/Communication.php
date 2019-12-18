@@ -21,7 +21,7 @@ class Communication extends Model
     {
         return $this->belongsToMany(ContactType::class);
     }
-    public function contact_reasons()
+    public function contact_reason()
     {
         return $this->belongsTo(ContactReason::class);
     }

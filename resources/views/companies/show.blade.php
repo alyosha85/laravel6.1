@@ -14,7 +14,7 @@
 	@endif
 				<nav>
 					<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-						<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Firma</a>
+						<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="false">Firma</a>
 						<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Ansprechpartner liste</a>
 						<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Kommunikationsgeschichte</a>
 					</div>
@@ -26,7 +26,9 @@
 										<div class="col-xl-6">
 											<div class="panel panel-default">
 												<div class="panel-body">
-													<h1 class="mb-0">{{$company->name}}<small><span class="badge pull-right">{{$company->title['name']}}</span></small></h1>
+													<h1 class="mb-0">{{$company->name}}<small><span class="badge pull-right">{{$company->title['name']}}</span></small>
+														<a href="/companies/{{ $company->id }}/edit" class="btn btn-outline-primary border-0"><i class="fas fa-edit"></i></a>
+													</h1>
 													<p class="text-muted">created on 12.12.2020 from {{ $company->user['name']}}</p>
 													<div id="accordion" role="tablist" aria-multiselectable="true">
 															<div class="card">
@@ -69,7 +71,7 @@
 																																	<ul>
 																																			@foreach($company->contacts as $contact)
 																																			<li>
-																																				<a href="" data-toggle="modal" data-target="#myModal">{{$contact['first_name']}}</a>
+																																				<a href="/contact/{{ $contact->id }}">{{$contact['first_name']}}</a>
 																																			</li>
 																																			@endforeach
 																																	</ul>
@@ -115,7 +117,7 @@
 																															</div>
 																													</div>
 																													<div class="form-group row">
-																															<label for="inputPassword" class="col-sm-3 col-form-label font-weight-bold">City:</label>
+																															<label for="inputPassword" class="col-sm-3 col-form-label font-weight-bold">Standort:</label>
 																															<div class="col-sm-9">
 																																	<ul>
 																																			@foreach($company->cities as $key => $item)
@@ -230,7 +232,7 @@
 																													<div class="form-group row">
 																															<label for="staticEmail" class="col-sm-6 col-form-label font-weight-bold">Ansprechpartner:</label>
 																															<div class="col-sm-6">
-																																<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{$communication->contact['name']}}">
+																																<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{$communication->contact->last_name}}">
 																															</div>
 																													</div>
 																													<div class="form-group row">
@@ -317,12 +319,12 @@
 																<td>{{$contact->fax}}</td>
 																<td><span class="badge badge--{{$contact->contact_status->name}}">{{$contact->contact_status->name}}</span></td>
 																<td>
+																	<form action="/contact/{{$contact->id}}" method="POST">
 																	<a href="/contact/{{ $contact->id }}" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-eye"></i></a>
 																	<a href="/contact/{{ $contact->id }}/edit" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-edit"></i></a>
-																	<form action="/companies/{{$company->id}}" method="POST">
 																		@method('DELETE')
 																		@csrf
-																		<button type="submit" class="btn btn-outline-danger btn-sm border-0"><i class="fas fa-trash"></i></button>
+																	<button type="submit" class="btn btn-outline-danger btn-sm border-0"><i class="fas fa-trash"></i></button>
 																	</form>
 																</td>
 															</tr>
@@ -337,7 +339,6 @@
 								</div>	
 							</div>
 						</div>
-						@include('/modal')
 					</div>
 					<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
 						<div class="container-fluid">
@@ -358,6 +359,7 @@
 													<thead>
 														<tr>
 															<th>Datum</th>
+															<th>Ansprechpartner</th>
 															<th>Kontaktart</th>
 															<th>Kontaktgrund</th>
 															<th>Teilnehmer</th>
@@ -369,23 +371,29 @@
 															<th></th>
 															<th></th>
 															<th></th>
+															<th></th>
 														</tr>
 													</head>
 													<tbody>
 														@foreach($company->communications as $communication)
 														<tr>
 															<td>{{$communication->date}}</td>
+															<td>{{$communication->contact->last_name}}</td>
 															<td>
 																@foreach($communication->contact_types as $contacttype)
 																{{$contacttype->name}}, &nbsp;
 																@endforeach
 															</td>
-															<td>{{$communication->contact_reasons['name']}}</td>
+															<td>{{$communication->contact_reason->name}}</td>
 															<td>{{$communication->participant}}</td>
-			
 															<td>
-																<a href="#" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-eye"></i></button>	
-																	</form>
+																<form action="/communication/{{$communication->id}}" method="POST">
+																<a href="/communication/{{ $communication->id }}" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-eye"></i></a>
+																<a href="/communication/{{ $communication->id }}/edit" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-edit"></i></a>
+																	@method('DELETE')
+																	@csrf
+																<button type="submit" class="btn btn-outline-danger btn-sm border-0"><i class="fas fa-trash"></i></button>
+																</form>
 															</td>
 														</tr>
 														@endforeach

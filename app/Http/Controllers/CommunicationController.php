@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\ContactType;
 use App\ContactReason;
 use App\Contact;
+use App\Company;
+
 
 class CommunicationController extends Controller
 {
@@ -15,6 +17,13 @@ class CommunicationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     public function index()
     {
         //
@@ -25,14 +34,14 @@ class CommunicationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(Request $request,$id)
     {
         $communication = New Communication();
+        $company_id = $request->company_id;
         $contact_types = ContactType::all();
         $contact_reasons = ContactReason::all();
-        $contacts = Contact::all();
-
-        return view('communication.create',compact('communication','contact_types','contact_reasons','contacts'));
+        $contacts = Contact::where('company_id',$id)->get();
+        return view('communication.create',compact('communication','contact_types','contact_reasons','contacts','company_id'));
     }
 
     /**
@@ -43,7 +52,15 @@ class CommunicationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $communication = Communication::create($this->validateRequest());
+        $contacttype = ContactType::find($request->contact_type_id);
+        $communication->contact_types()->attach($contacttype);
+
+
+        return redirect('/companies/'.request('company_id').'/#nav-profile');
+      
+        
     }
 
     /**
@@ -64,8 +81,12 @@ class CommunicationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Communication $communication)
-    {
-        //
+    {   
+        $contact_types = ContactType::all();
+        $contact_reasons = ContactReason::all();
+        $contacts = Contact::where('company_id',$communication)->get();
+        return view ('communication.edit',compact('communication','contact_types','contact_reasons','contacts'));
+    
     }
 
     /**
@@ -90,4 +111,20 @@ class CommunicationController extends Controller
     {
         //
     }
+    private function validateRequest()
+    {
+    return request()-> validate ([
+        'date' => 'required',
+        'contact_reason_id' => '',
+        'company_id' => 'required',
+        'contact_id' => 'required',
+        'participant' => '',
+        'memo' => '',
+
+
+
+]);
 }
+}
+
+
