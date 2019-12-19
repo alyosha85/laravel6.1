@@ -286,7 +286,7 @@
 																<strong>Es sind noch keine Kontakte vorhanden!</strong> 
 														</div>                                      
 													@else
-													<table class="table" id="contact_table">
+													<table class="display responsive nowrap" id="contact_table" style="width:100%">
 														<thead>
 															<tr>
 																<th>Anrede</th>
@@ -423,10 +423,27 @@
 <script>
 
 $(document).ready(function() {
-    $('#example').DataTable();
+    $('#example').DataTable({
+			"language": {
+            "url": "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/German.json"
+            }
+		});
+		
 } );
 
 </script>
+
+<script>
+
+	$(document).ready(function() {
+			$('#contact_table').DataTable({
+				"language": {
+            "url": "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/German.json"
+            }, 	
+			});
+	} );
+	
+	</script>
 
 		
 @endsection

@@ -94,6 +94,7 @@ $('#type').on('change',function(){
 $('#type').val("{{$type ?? 'city'}}");
 
 var table = $('#myTable').DataTable({
+  "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
     orderCellsTop: true,
     dom: 'Bfrtip',
     columnDefs : [
@@ -105,6 +106,7 @@ var table = $('#myTable').DataTable({
 ],
     buttons: [
                 {
+
                 // print in landscape script
                 extend: "print", text:'Drucken',
                 customize: function(win)
@@ -133,6 +135,13 @@ var table = $('#myTable').DataTable({
                 {
                     extend: 'colvis',
                     text:'Spalten Anzeigen'  
+                },
+                {
+                  extend: 'copy',
+                  text: 'Kopieren'
+                },
+                {
+                  extend: 'excel',
                 }
             ],
 //end buttons ......................................................end buttons
