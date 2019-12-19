@@ -46,9 +46,9 @@
 																									<div class="row">
 																											<div class="col-md-6">
 																													<div class="form-group row">
-																															<label for="staticEmail" class="col-sm-4 col-form-label font-weight-bold">Branche:</label>
+																															<label for="branch" class="col-sm-4 col-form-label font-weight-bold">Branche:</label>
 																															<div class="col-sm-8">
-																																	<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{$company->branch['name']}}">
+																																	<input type="text" readonly class="form-control-plaintext" name="branch" value="{{$company->branch['name']}}">
 																															</div>
 																													</div>
 																													<div class="form-group row">
@@ -97,23 +97,23 @@
 																									<div class="row">
 																											<div class="col-md-6">
 																													<div class="form-group row">
-																															<label for="staticEmail" class="col-sm-3 col-form-label font-weight-bold">Straße:</label>
+																															<label for="address" class="col-sm-3 col-form-label font-weight-bold">Straße:</label>
 																															<div class="col-sm-9">
-																																	<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ $company->address ?? '' }}">
+																																	<input type="text" readonly class="form-control-plaintext" name="address" value="{{ $company->address ?? '' }}">
 																															</div>
 																													</div>
 																													<div class="form-group row">
-																															<label for="inputPassword" class="col-sm-3 col-form-label font-weight-bold">Ort:</label>
+																															<label for="address2" class="col-sm-3 col-form-label font-weight-bold">Ort:</label>
 																															<div class="col-sm-9">
-																																	<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ $company->address2 ?? '' }}">
+																																	<input type="text" readonly class="form-control-plaintext" name="address2" value="{{ $company->address2 ?? '' }}">
 																															</div>
 																													</div>
 																											</div>
 																											<div class="col-md-6">
 																													<div class="form-group row">
-																															<label for="staticEmail" class="col-sm-4 col-form-label font-weight-bold">Postleitzahl:</label>
+																															<label for="zipcode" class="col-sm-4 col-form-label font-weight-bold">Postleitzahl:</label>
 																															<div class="col-sm-8">
-																																	<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ $company->zipcode ?? '' }}">
+																																	<input type="text" readonly class="form-control-plaintext" name="zipcode" value="{{ $company->zipcode ?? '' }}">
 																															</div>
 																													</div>
 																													<div class="form-group row">
@@ -146,30 +146,30 @@
 																									<div class="row">
 																											<div class="col-md-6">
 																													<div class="form-group row">
-																															<label for="staticEmail" class="col-sm-3 col-form-label font-weight-bold">Telefon:</label>
+																															<label for="phone" class="col-sm-3 col-form-label font-weight-bold">Telefon:</label>
 																															<div class="col-sm-9">
-																																	<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ $company->phone ?? '' }}">
+																																	<input type="text" readonly class="form-control-plaintext" name="phone" value="{{ $company->phone ?? '' }}">
 																															</div>
 																													</div>
 																													<div class="form-group row">
-																															<label for="inputPassword" class="col-sm-3 col-form-label font-weight-bold">Fax:</label>
+																															<label for="fax" class="col-sm-3 col-form-label font-weight-bold">Fax:</label>
 																															<div class="col-sm-9">
-																																	<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ $company->fax ?? '' }}">
+																																	<input type="text" readonly class="form-control-plaintext" name="fax" value="{{ $company->fax ?? '' }}">
 																															</div>
 																													</div>
 																											</div>
 																											<div class="col-md-6">
 																													<div class="form-group row">
-																															<label for="staticEmail" class="col-sm-3 col-form-label font-weight-bold">Email:</label>
+																															<label for="email" class="col-sm-3 col-form-label font-weight-bold">Email:</label>
 																															<div class="col-sm-9">
-																																	<a class="form-control-plaintext" id="staticEmail" href="mailto:{{$company->email}}">{{ $company->email ?? '' }}</a>
+																																	<a class="form-control-plaintext" name="email" href="mailto:{{$company->email}}">{{ $company->email ?? '' }}</a>
 																															</div>
 																													</div>
 																												 
 																													<div class="form-group row">
-																															<label for="staticEmail" class="col-sm-3 col-form-label font-weight-bold">Website:</label>
+																															<label for="website" class="col-sm-3 col-form-label font-weight-bold">Website:</label>
 																															<div class="col-sm-9">
-																																	<a target="_blank" class="form-control-plaintext" id="staticEmail" href="http://{{$company->website}}">{{ $company->website ?? '' }}</a>
+																																	<a target="_blank" class="form-control-plaintext" id="website" href="http://{{$company->website}}">{{ $company->website ?? '' }}</a>
 																															</div>
 																													</div>
 																												 
@@ -224,27 +224,27 @@
 																									<div class="row">
 																											<div class="col-md-6">
 																													<div class="form-group row">
-																															<label for="staticEmail" class="col-sm-6 col-form-label font-weight-bold">Datum:</label>
+																															<label for="date" class="col-sm-6 col-form-label font-weight-bold">Datum:</label>
 																															<div class="col-sm-6">
-																																	<input type="text" readonly class="form-control-plaintext" id="staticEmail" value= "{{$communication->date}}">
+																																	<input type="text" readonly class="form-control-plaintext" name="date" value= "{{$communication->date}}">
 																															</div>
 																													</div>
 																													<div class="form-group row">
-																															<label for="staticEmail" class="col-sm-6 col-form-label font-weight-bold">Ansprechpartner:</label>
+																															<label for="contact" class="col-sm-6 col-form-label font-weight-bold">Ansprechpartner:</label>
 																															<div class="col-sm-6">
-																																<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{$communication->contact->last_name}}">
+																																<input type="text" readonly class="form-control-plaintext" name="contact" value="{{$communication->contact->last_name}}">
 																															</div>
 																													</div>
 																													<div class="form-group row">
-																															<label for="staticEmail" class="col-sm-6 col-form-label font-weight-bold">Teilnehmer:</label>
+																															<label for="participant" class="col-sm-6 col-form-label font-weight-bold">Teilnehmer:</label>
 																															<div class="col-sm-6">
-																																	<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{$communication->participant}}">
+																																	<input type="text" readonly class="form-control-plaintext" id="participant" value="{{$communication->participant}}">
 																															</div>
 																													</div>
 																													<div class="form-group row">
-																															<label for="staticEmail" class="col-sm-6 col-form-label font-weight-bold">Branche:</label>
+																															<label for="branch" class="col-sm-6 col-form-label font-weight-bold">Branche:</label>
 																															<div class="col-sm-6">
-																																	<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="hardCoded">
+																																	<input type="text" readonly class="form-control-plaintext" id="branch" value="hardCoded">
 																															</div>
 																													</div>
 																											</div>
@@ -272,14 +272,14 @@
 				</div>
 						{{-- Ansprechpartner page 2 --}}
 						<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-							<div class="container-fluid">
+							<div class="container">
 								<div class="row">
 									<div class="col-xl-12">
 										<div class="panel panel-default">
 											<div class="panel-body">
 											<h1 class="mb-0">{{$company->name}}<small><span class="badge pull-right">{{$company->title['name']}}</span></small></h1>
 											<a href="/contact/company/create/{{ $company->id }}" class="btn btn-primary mb-3">Neuer Ansprechpartner</a>
-											<div class="col-md-6">
+											<div class="col-md-12">
 												<div class="table-responsive-xl">
 													@if(count($company->contacts) < 1)
 														<div class="alert alert-primary text-center">
@@ -341,14 +341,14 @@
 						</div>
 					</div>
 					<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-						<div class="container-fluid">
+						<div class="container">
 							<div class="row">
 								<div class="col-xl-12">
 									<div class="panel panel-default">
-										<div class="panel-body">
-										<h1 class="mb-0">{{$company->name}}<small><span class="badge pull-right">{{$company->title['name']}}</span></small></h1>
+										<div class="panel-body col-md-12">
+										<h1 class="mb-2">{{$company->name}}<small><span class="badge pull-right">{{$company->title['name']}}</span></small></h1>
 										<a href="/communication/company/create/{{ $company->id }}" class="btn btn-primary mb-3">Add Communication</a>
-										<div class="col-md-6">
+										<div class="col-md-12">
 											<div class="table-responsive-xl">
 												@if(count($company->communications) < 1)
 													<div class="alert alert-primary text-center">
@@ -380,8 +380,8 @@
 															<td>{{$communication->date}}</td>
 															<td>{{$communication->contact->last_name}}</td>
 															<td>
-																@foreach($communication->contact_types as $contacttype)
-																{{$contacttype->name}}, &nbsp;
+																@foreach ($communication->contact_types as $contacttype)
+																 {{$contacttype->name}}, &nbsp;
 																@endforeach
 															</td>
 															<td>{{$communication->contact_reason->name}}</td>

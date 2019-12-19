@@ -22,6 +22,7 @@ class CreateCommunicationsTable extends Migration
             $table->string('participant')->nullable();
             $table->text('memo')->nullable();
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('contact_reason_id')->references('id')->on('contact_reasons')->onDelete('set null');
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('set null');
             $table->foreign('contact_id')->references('id')->on('contacts')->onDelete('set null');

@@ -22,7 +22,7 @@
              @if ($contactobject->id == $value->id) {{'selected'}}  @endif
             @endforeach
             @endif
-            value='{{$value->id}}'>{{$value->name}}</option>
+            value="{{$value->id}}">{{$value->name}}</option>
             @endforeach
           </select>
         </div>
@@ -34,7 +34,7 @@
           <select name="contact_reason_id" class="form-control" required>
             <option  selected="true" disabled="disabled" value=''>Bitte wählen...</option>
             @foreach($contact_reasons as $reason)
-            <option value="{{ $reason->id }}" {{$reason->id == $communication->reason_id ? 'selected' : '' }}>{{ $reason->name }}</option>
+            <option value="{{ $reason->id }}" {{$reason->id == $communication->contact_reason_id ? 'selected' : '' }}>{{ $reason->name }}</option>
             @endforeach
           </select>
         </div>

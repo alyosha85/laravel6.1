@@ -46,7 +46,11 @@
             <tr>
               <td>{{$company->name}}</td>
               <td>{{$company->branch->name}}</td>
-              <td></td>
+              <td>
+                @foreach ($company->professions as $profession)
+                {{$profession->name}}, &nbsp;
+                @endforeach
+              </td>
               <td class="text-center">{{$company->status->name}}</td>
               <td>{{$company->phone}}</td>
               <td>{{$company->email}}</td>

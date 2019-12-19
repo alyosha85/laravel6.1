@@ -18,6 +18,7 @@ class CreateCommunicationContactTypesTable extends Migration
             $table->unsignedBigInteger('communication_id');
             $table->unsignedBigInteger('contact_type_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

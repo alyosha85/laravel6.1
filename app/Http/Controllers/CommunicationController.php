@@ -41,6 +41,7 @@ class CommunicationController extends Controller
         $contact_types = ContactType::all();
         $contact_reasons = ContactReason::all();
         $contacts = Contact::where('company_id',$id)->get();
+
         return view('communication.create',compact('communication','contact_types','contact_reasons','contacts','company_id'));
     }
 
