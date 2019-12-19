@@ -15,9 +15,9 @@ class CreateContactsTable extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('company_id')->index();
-            $table->unsignedBigInteger('contact_title_id')->index();
-            $table->unsignedBigInteger('contact_status_id')->index();
+            $table->unsignedBigInteger('company_id')->nullable()->index();
+            $table->unsignedBigInteger('contact_title_id')->nullable()->index();
+            $table->unsignedBigInteger('contact_status_id')->nullable()->index();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->nullable();
@@ -26,9 +26,9 @@ class CreateContactsTable extends Migration
             $table->text('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('company_id')->references('id')->on('companies');
-            $table->foreign('contact_title_id')->references('id')->on('contact_titles');
-            $table->foreign('contact_status_id')->references('id')->on('contact_statuses');
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('set null');
+            $table->foreign('contact_title_id')->references('id')->on('contact_titles')->onDelete('set null');
+            $table->foreign('contact_status_id')->references('id')->on('contact_statuses')->onDelete('set null');
         });
     }
 

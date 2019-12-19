@@ -8,10 +8,10 @@
       
       <div>
         <p><a href="/companies/create" class="btn btn-outline-primary border-0" >Neue Firma</a>
-        <select name="" id="">
-          <option value="">Standort</option>
-          <option value="">Land</option>
-          <option value="">Bundesweit</option>
+        <select name="type" id="type">
+          <option value="city">Standort</option>
+          <option value="state">Land</option>
+          <option value="all">Bundesweit</option>
         </select>
       </p>
       </div>
@@ -40,18 +40,13 @@
               <th></th>
               <th></th>
               <th></th>
-            </tr>
           </thead>
           <tbody>
             @foreach($companies as $company)
             <tr>
               <td>{{$company->name}}</td>
               <td>{{$company->branch->name}}</td>
-              <td>
-                @foreach($company->professions as $profession)
-                {{$profession->name}}, &nbsp;
-                @endforeach
-              </td>
+              <td></td>
               <td class="text-center">{{$company->status->name}}</td>
               <td>{{$company->phone}}</td>
               <td>{{$company->email}}</td>
@@ -62,12 +57,12 @@
               </td> 
               <td>{{$company->address}}</td>
               <td>
-                <form action="/companies/{{$company->id}}" method="POST">
+                <form action="/companies/{{$company->id}}" method="POST" id="companydelete"> 
                 <a href="/companies/{{ $company->id }}" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-eye"></i></a>
                 <a href="/companies/{{ $company->id }}/edit" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-edit"></i></a>
                   @method('DELETE')
                   @csrf
-                <button type="submit" class="btn btn-outline-danger btn-sm border-0"><i class="fas fa-trash"></i></button>
+                <button type="button" onClick="company_delete()" class="btn btn-outline-danger btn-sm border-0"><i class="fas fa-trash"></i></button>
                 </form>
               </td>
             </tr>
@@ -88,6 +83,12 @@
 <script>
 //datatable   
 $(document).ready(function() {
+
+$('#type').on('change',function(){
+  location.href='/companies?type='+$(this).val();
+});
+$('#type').val("{{$type ?? 'city'}}");
+
 var table = $('#myTable').DataTable({
     orderCellsTop: true,
     dom: 'Bfrtip',
@@ -175,6 +176,16 @@ initComplete: function () {
     });
 });
 </script>   
+
+<script>
+    
+		function company_delete(){ 
+			var company = confirm('Sind Sie sicher, dass Sie löschen möchten?');			
+			if(company){			
+                $( "#companydelete" ).submit();
+			}			
+		}		
+	</script>
     
 @endsection
      

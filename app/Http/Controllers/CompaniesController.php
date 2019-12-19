@@ -30,11 +30,30 @@ class CompaniesController extends Controller
     }
     
     
-    public function index()
+    public function index(Request $request)
     {
-        $companies = Company::all(); 
+        
         $values = Profession::all('name');  
-        return view('companies.index',compact('companies','values'));
+
+        $standort = City::find(Auth::user()->city_id);
+        $bundesland = State::find($standort->state_id);
+        
+        $type = $request->input('type');
+        if($type === 'state') {
+            $state = City::find(Auth::user()->city_id);
+            $companies = Company::where('state_id',$state->state_id)->get();
+        }
+        elseif ($type === 'all') {
+            $companies = Company::all();
+        }
+        else {
+            $comp = CityCompany::where('city_id',Auth::user()->city_id)->pluck('company_id')->toArray();
+            $companies = Company::wherein('id',$comp)->get();
+        }
+
+
+
+        return view('companies.index',compact('companies','values','standort','bundesland','type'));
     }
 
     /**

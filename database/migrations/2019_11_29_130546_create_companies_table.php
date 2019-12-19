@@ -16,10 +16,10 @@ class CreateCompaniesTable extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->unsignedBigInteger('title_id')->index();
-            $table->unsignedBigInteger('branch_id')->index();
-            $table->unsignedBigInteger('status_id')->index();
-            $table->unsignedBigInteger('state_id')->index();
+            $table->unsignedBigInteger('title_id')->nullable()->index();
+            $table->unsignedBigInteger('branch_id')->nullable()->index();
+            $table->unsignedBigInteger('status_id')->nullable()->index();
+            $table->unsignedBigInteger('state_id')->nullable()->index();
             $table->string('address')->nullable();
             $table->string('address2')->nullable();
             $table->string('zipcode')->nullable();
@@ -32,10 +32,10 @@ class CreateCompaniesTable extends Migration
             $table->longText('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('title_id')->references('id')->on('titles');
-            $table->foreign('branch_id')->references('id')->on('branches');
-            $table->foreign('status_id')->references('id')->on('statuses');
-            $table->foreign('state_id')->references('id')->on('states');
+            $table->foreign('title_id')->references('id')->on('titles')->onDelete('set null');
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('set null');
+            $table->foreign('status_id')->references('id')->on('statuses')->onDelete('set null');
+            $table->foreign('state_id')->references('id')->on('states')->onDelete('set null');
         });
     }
 

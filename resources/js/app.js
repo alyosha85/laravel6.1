@@ -20,6 +20,7 @@ require( 'datatables.net-fixedheader-dt' )();
 
 window.Vue = require('vue');
 import $ from 'jquery';
+var $  = require( 'jquery' );
 import 'datatables.net';
 import 'datatables.net/js/jquery.dataTables';
 import 'datatables.net-dt/css/jquery.dataTables.css';
