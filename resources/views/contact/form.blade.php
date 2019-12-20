@@ -7,7 +7,7 @@
   <div class="form-row ">
      <div class="form-group col-md-2">
       <div class="form-group">
-        <label for="contact_title_id">Anrede <i class="fas fa-asterisk" style="color:#993955"></i></label>									
+        <label for="contact_title_id">Anrede <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i></label>									
         <select name="contact_title_id" class="form-control">
           <option  selected="true" disabled="disabled" value=''>Bitte wählen...</option>
           @foreach($contact_titles as $title)
@@ -19,14 +19,14 @@
     </div>
     <div class="form-group col-md-5">
       <div class="form-group">
-        <label for="first_name">Vorname <i class="fas fa-asterisk" style="color:#993955"></i></label>
+        <label for="first_name">Vorname <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i></label>
         <input type="text" name="first_name" class="form-control" value="{{ old('first_name') ?? $contact->first_name }}" autocomplete="off" required>
       </div>
       <div>{{$errors->first('first_name')}}</div>
     </div>
     <div class="form-group col-md-5">
       <div class="form-group">
-        <label for="last_name">Nachname <i class="fas fa-asterisk" style="color:#993955"></i></label>
+        <label for="last_name">Nachname <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i></label>
         <input type="text" name="last_name" class="form-control" value="{{ old('last_name') ?? $contact->last_name }}" autocomplete="off" required>
       </div>
     </div>
@@ -34,7 +34,7 @@
   <div class="form-row ">
       <div class="form-group col-md-2">
        <div class="form-group">
-         <label for="contact_status">Status <i class="fas fa-asterisk" style="color:#993955"></i></label>									
+         <label for="contact_status">Status <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i></label>									
          <select name="contact_status_id" class="form-control" required>
           <option  selected="true" disabled="disabled" value=''>Bitte wählen...</option>
            @foreach($contact_statuses as $status)

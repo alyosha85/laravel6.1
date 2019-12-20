@@ -15,17 +15,21 @@
 				<form action="{{ url('contact') }}" method="POST">
 						@include('contact.form')
 					<button type="submit" class="btn btn-primary float-right mx-2">Kontakt hinzufügen</button>
-					<div class="btn-group float-right">
-						<a href="/save/1" class="btn btn-primary float-right mx-2">
-								<i class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></i> Save
-						</a>
-						<a href="/cancel/1" class="btn btn-danger">Cancel</a>
+					<button onclick="goBack()" class="btn btn-danger float-right mx-2">
+						<i class="fas fa-ban"></i> Stornieren
+					</button>
 				</div>
 				</form>
 			</div>
 		</div>
 	</div>
 </div>
+
+<script>
+	function goBack() {
+		window.history.back();
+	}
+</script>
 
 @endsection
 

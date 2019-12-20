@@ -19,7 +19,10 @@
           {{-- buttons --}}
           <button type="submit" class="btn btn-primary float-right">
           <i class="far fa-save"></i> Speichern
-          </button>
+					</button>
+					<button onclick="goBack()" class="btn btn-danger float-right mx-2">
+						<i class="fas fa-ban"></i> Stornieren
+					</button>
 				</form>
 				</div>
 			</div>
@@ -40,6 +43,11 @@ flatpickr("#flatpickr");
  $("#flatpickr").prop('readonly', false);
  
  </script>
+ <script>
+	function goBack() {
+		window.history.back();
+	}
+</script>
 
 
 

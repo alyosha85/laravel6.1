@@ -7,14 +7,14 @@
     <div class="form-row ">
       <div class="form-group col-md-6">
         <div class="form-group">
-          <label for="date">Datum <i class="fas fa-asterisk" style="color:#993955"></i></label>
+          <label for="date">Datum <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i></label>
           <input name="date" class="form-control {{ $errors->has('date') ? ' has-error' : '' }}" type="text" placeholder="Wählen Sie ein Datum" id="flatpickr" required='required' value="{{ old('date') ?? $communication->date }}">
         </div>
         <div>{{$errors->first('date')}}</div>
       </div>
       <div class="form-group col-md-3">
         <div class="form-group">
-          <label for="contact_type_id">Kontaktart <i class="fas fa-asterisk" style="color:#993955"></i></label>
+          <label for="contact_type_id">Kontaktart <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i></label>
           <select id="contact_type_id" class="form-control selectpicker" multiple name="contact_type_id[]" required>
             @foreach($contact_types as $key => $value)
             <option @if(isset($communication->id))    
@@ -30,7 +30,7 @@
       </div>
       <div class="form-group col-md-3">
         <div class="form-group">
-          <label for="contact_reason_id">Kontakgrund <i class="fas fa-asterisk" style="color:#993955"></i></label>
+          <label for="contact_reason_id">Kontakgrund <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i></label>
           <select name="contact_reason_id" class="form-control" required>
             <option  selected="true" disabled="disabled" value=''>Bitte wählen...</option>
             @foreach($contact_reasons as $reason)
@@ -45,7 +45,7 @@
     <div class="form-row ">
       <div class="form-group col-md-6">
         <div class="form-group">
-          <label for="contact_id">Ansprechpartner <i class="fas fa-asterisk" style="color:#993955"></i></label>
+          <label for="contact_id">Ansprechpartner <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i></label>
           <select name="contact_id" class="form-control" required>
             <option  selected="true" disabled="disabled" value=''>Bitte wählen...</option>
             @foreach($contacts as $contact)

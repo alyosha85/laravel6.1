@@ -34,11 +34,13 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.12/dist/js/bootstrap-select.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/i18n/defaults-de_DE.min.js"></script>
+    {{-- datepicker --}}
     <script
     src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
-    {{-- datepicker --}}
+
+    {{-- others --}}
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
     <script src="https://npmcdn.com/flatpickr/dist/l10n/de.js"></script>
@@ -111,7 +113,6 @@
         </main>
     </div>
 
-    @yield('foot')
-
+@yield('foot')
 </body>
 </html>

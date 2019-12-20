@@ -67,7 +67,7 @@ class ContactController extends Controller
         $contact->note = request('note');
         $contact->company_id = request('company_id');
         $contact->save();
-        return redirect('/companies/'.request('company_id').'/#nav-profile');
+        return redirect('companies/'. $contact->company->id)->with('message','Erfolgreich hinzugefügt');
     }
     /**
      * Display the specified resource.
@@ -103,7 +103,7 @@ class ContactController extends Controller
     public function update(Request $request, Contact $contact)
     {
         $contact->update($this->validateRequest());
-        return back()->with('message','Erfolgreich hinzugefügt');
+        return redirect('companies/'. $contact->company_id)->with('message','Erfolgreich geändert');
     }
 
     /**

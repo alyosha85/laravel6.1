@@ -7,11 +7,11 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-				@if(session()->has('message'))
+				{{-- @if(session()->has('message'))
 		<div class="alert alert-success text-center " role="alert" >
 			<strong>{{ session()->get('message')}}</strong>
 		</div>
-	@endif
+	@endif --}}
 				<nav>
 					<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
 						<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="false">Firma</a>
@@ -232,7 +232,7 @@
 																													<div class="form-group row">
 																															<label for="contact" class="col-sm-6 col-form-label font-weight-bold">Ansprechpartner:</label>
 																															<div class="col-sm-6">
-																																<input type="text" readonly class="form-control-plaintext" name="contact" value="{{$communication->contact->last_name}}">
+																																<input type="text" readonly class="form-control-plaintext" name="contact" value="{{$communication->contact['last_name']}}">
 																															</div>
 																													</div>
 																													<div class="form-group row">
@@ -378,7 +378,7 @@
 														@foreach($company->communications as $communication)
 														<tr>
 															<td>{{$communication->date}}</td>
-															<td>{{$communication->contact->last_name}}</td>
+															<td>{{$communication->contact['last_name']}}</td>
 															<td>
 																@foreach ($communication->contact_types as $contacttype)
 																 {{$contacttype->name}}, &nbsp;
@@ -418,7 +418,6 @@
 
 @section('foot')
 
-@include('modalscript')
 
 <script>
 

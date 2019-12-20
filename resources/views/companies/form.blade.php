@@ -7,14 +7,14 @@
   <div class="form-row ">
     <div class="form-group col-md-6">
       <div class="form-group">
-        <label for="name">Name des Unternehmens <i class="fas fa-asterisk" style="color:#993955"></i></label>
+        <label for="name" >Name des Unternehmens <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i></label>
         <input type="text" name="name" class="form-control" value="{{ old('name') ?? $company->name }}" autocomplete="off" required>
       </div>
       <div>{{$errors->first('name')}}</div>
     </div>
     <div class="form-group col-md-3">
       <div class="form-group">
-        <label for="title_id">Namenszusatz <i class="fas fa-asterisk" style="color:#993955"></i></label>
+        <label for="title_id" >Namenszusatz <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i></label>
         <select name="title_id" class="form-control">
           <option  selected="true" disabled="disabled" value=''>Bitte wählen...</option>
           @foreach($titles as $title)
@@ -26,7 +26,7 @@
     </div>
     <div class="form-group col-md-3">
       <div class="form-group">
-        <label for="status_id">Status <i class="fas fa-asterisk" style="color:#993955"></i></label>
+        <label for="status_id">Status <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i></label>
         <select name="status_id" class="form-control">
           <option  selected="true" disabled="disabled" value=''>Bitte wählen...</option>
           @foreach($statuses as $status)
@@ -41,7 +41,7 @@
 <div class="form-row">
   <div class="form-group col-md-6">
     <div class="form-group">
-      <label for="branch_id">Branche <i class="fas fa-asterisk" style="color:#993955"></i></label>
+      <label for="branch_id">Branche <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i></label>
       <select name="branch_id" class="form-control">
         <option  selected="true" disabled="disabled" value=''>Bitte wählen...</option>
         @foreach($branches as $branch)
@@ -53,7 +53,7 @@
   </div>
   <div class="form-group col-md-6">
     <div class="form-group">
-      <label for="profession_id">Tätigkeitsfeld <i class="fas fa-asterisk" style="color:#993955"></i></label>
+      <label for="profession_id">Tätigkeitsfeld <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i></label>
       <select id="profession_id" class="selectpicker form-control" multiple name="profession_id[]" required>
         @foreach($professions as $key => $value)
         <option @if(isset($company->id))    
@@ -75,7 +75,7 @@
 <div class="form-row">
 <div class="form-group col-md-6">
   <div class="form-group">
-    <label for="city_id">Standort <i class="fas fa-asterisk" style="color:#993955"></i></label>
+    <label for="city_id">Standort <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i></label>
     <select id="city_id" class="form-control selectpicker" multiple name="city_id[]" required>
       <option disabled="disabled" value=''>Wählen</option>
       @foreach($cities as $key => $value)
@@ -93,7 +93,7 @@
 
   <div class="form-group col-md-6">
     <div class="form-group">
-      <label for="state_id">Bundesland  <i class="fas fa-asterisk" style="color:#993955"></i></label>
+      <label for="state_id">Bundesland  <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i></label>
       <select name="state_id" class="form-control">
         <option  selected="true" disabled="disabled" value=''>Bitte wählen...</option>
         @foreach($states as $state)
