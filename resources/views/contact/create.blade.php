@@ -15,9 +15,9 @@
 				<form action="{{ url('contact') }}" method="POST">
 						@include('contact.form')
 					<button type="submit" class="btn btn-primary float-right mx-2">Kontakt hinzufügen</button>
-					<button onclick="goBack()" class="btn btn-danger float-right mx-2">
+					<a href="{{url('/companies/'.$company_id.'?path=2')}}" class="btn btn-danger float-right mx-2">
 						<i class="fas fa-ban"></i> Stornieren
-					</button>
+					</a>
 				</div>
 				</form>
 			</div>
@@ -25,11 +25,7 @@
 	</div>
 </div>
 
-<script>
-	function goBack() {
-		window.history.back();
-	}
-</script>
+
 
 @endsection
 

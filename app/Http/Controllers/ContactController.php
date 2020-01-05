@@ -36,7 +36,7 @@ class ContactController extends Controller
     {   
        $contact = new Contact(); 
        $company_id = $request->company_id;
-       $contact_titles = ContactTitle::all();
+       $contact_titles = ContactTitle::whereNull('hide')->get();
        $contact_statuses = ContactStatus::all();
        return view('contact.create',compact('contact','contact_titles','contact_statuses','company_id'));
        //return redirect('companies/'. $company_id,compact('contact','contact_titles','contact_statuses','company_id'));

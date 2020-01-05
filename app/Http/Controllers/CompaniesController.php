@@ -12,6 +12,7 @@ use App\Contact;
 use App\State;
 use App\City;
 use Auth;
+use App\Section;
 use App\CityCompany;
 use App\CompanyProfession;
 use App\Communication;
@@ -98,9 +99,11 @@ class CompaniesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Company $company)
+    public function show(Company $company, Request $request)
     {   
-        return view('companies.show',compact('company'));
+        $request = $request->path ? $request->path : 1;
+        return view('companies.show',compact('company','request'));
+
     }
 
     /**

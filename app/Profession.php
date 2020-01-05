@@ -12,4 +12,8 @@ class Profession extends Model
     {
         return $this->belongsToMany(Company::class);
     }
+    public function section ()
+    {
+        return $this->belongsTo(Section::class);
+    }
 }

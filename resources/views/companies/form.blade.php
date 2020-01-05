@@ -39,10 +39,10 @@
   </div>
 {{-- line 2 --}}
 <div class="form-row">
-  <div class="form-group col-md-6">
+  <div class="form-group col-md-4">
     <div class="form-group">
       <label for="branch_id">Branche <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i></label>
-      <select name="branch_id" class="form-control">
+      <select name="branch_id" class="form-control" id="branch_id" required>
         <option  selected="true" disabled="disabled" value=''>Bitte wählen...</option>
         @foreach($branches as $branch)
         <option value="{{ $branch->id }}" {{$branch->id == $company->branch_id ? 'selected' : '' }}>{{ $branch->name }}</option>
@@ -51,18 +51,22 @@
     </div>
     <div>{{$errors->first('branch_id')}}</div>
   </div>
-  <div class="form-group col-md-6">
+
+  <div class="form-group col-md-4">
+    <div class="form-group">
+      <label for="section_id">Section <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i></label>
+      <select name="section_id" id="section_id" class="form-control" required>
+        <option   disabled="disabled" value=''>Bitte wählen...</option>
+      </select>
+    </div>
+    <div>{{$errors->first('section_id')}}</div>
+  </div>
+  
+  <div class="form-group col-md-4">
     <div class="form-group">
       <label for="profession_id">Tätigkeitsfeld <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i></label>
-      <select id="profession_id" class="selectpicker form-control" multiple name="profession_id[]" required>
-        @foreach($professions as $key => $value)
-        <option @if(isset($company->id))    
-        @foreach ($company->professions as $professionobject) 
-         @if ($professionobject->id == $value->id) {{'selected'}}  @endif
-        @endforeach
-        @endif
-        value='{{$value->id}}'>{{$value->name}}</option>
-        @endforeach
+      <select id="profession_id" class="form-control selectpicker" multiple name="profession_id[]" required>
+        <option  disabled="disabled" value=''>Bitte wählen...</option>
       </select>
     </div> 
   </div>
@@ -73,28 +77,11 @@
 <fieldset class="border rounded px-2 mb-2">
 <legend class="w-auto">Adresse</legend>
 <div class="form-row">
-<div class="form-group col-md-6">
-  <div class="form-group">
-    <label for="city_id">Standort <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i></label>
-    <select id="city_id" class="form-control selectpicker" multiple name="city_id[]" required>
-      <option disabled="disabled" value=''>Wählen</option>
-      @foreach($cities as $key => $value)
-      <option @if(isset($company->id))    
-      @foreach ($company->cities as $cityobject) 
-       @if ($cityobject->id == $value->id) {{'selected'}}  @endif
-      @endforeach
-      @endif
-      value='{{$value->id}}'>{{$value->name}}</option>
-      @endforeach
-    </select>
-  </div> 
-</div>
-<div>{{$errors->first('city_id')}}</div>
 
   <div class="form-group col-md-6">
     <div class="form-group">
       <label for="state_id">Bundesland  <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i></label>
-      <select name="state_id" class="form-control">
+      <select name="state_id" class="form-control" id="state_id">
         <option  selected="true" disabled="disabled" value=''>Bitte wählen...</option>
         @foreach($states as $state)
         <option value="{{ $state->id }}" {{$state->id == $company->state_id ? 'selected' : '' }}>{{ $state->name }}</option>
@@ -103,6 +90,16 @@
     </div>
     <div>{{$errors->first('state_id')}}</div>
   </div>
+
+<div class="form-group col-md-6">
+  <div class="form-group">
+    <label for="city_id">Standort <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i></label>
+    <select id="city_id" class="form-control selectpicker" multiple name="city_id[]" required>
+      <option disabled="disabled" value=''>Wählen</option>
+    </select>
+  </div> 
+</div>
+<div>{{$errors->first('city_id')}}</div>
 </div>
 {{-- line 4 --}}
 <div class="form-row">

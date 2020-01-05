@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\State;
-use App\City;
+use App\Section;
+use App\Profession;
 use Illuminate\Http\Request;
 
-class StateController extends Controller
+class SectionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -42,22 +42,22 @@ class StateController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\State  $state
+     * @param  \App\Section  $section
      * @return \Illuminate\Http\Response
      */
-    public function show(State $state)
+    public function show(Section $section)
     {
-        $cities = City::where('state_id',$state->id)->get();
-        return $cities;
+        $professons = Profession::where('section_id',$section->id)->get();
+        return $professons;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\State  $state
+     * @param  \App\Section  $section
      * @return \Illuminate\Http\Response
      */
-    public function edit(State $state)
+    public function edit(Section $section)
     {
         //
     }
@@ -66,10 +66,10 @@ class StateController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\State  $state
+     * @param  \App\Section  $section
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, State $state)
+    public function update(Request $request, Section $section)
     {
         //
     }
@@ -77,10 +77,10 @@ class StateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\State  $state
+     * @param  \App\Section  $section
      * @return \Illuminate\Http\Response
      */
-    public function destroy(State $state)
+    public function destroy(Section $section)
     {
         //
     }

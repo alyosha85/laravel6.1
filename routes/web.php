@@ -27,6 +27,9 @@ Route::Resource('/contact','ContactController');
 Route::get('/communication/company/create/{company_id}','CommunicationController@create');
 Route::Resource('/communication','CommunicationController');
 
+Route::Resource('/branches','BranchController');
+Route::Resource('/sections','SectionController');
+Route::Resource('/state','StateController');
 
 
 

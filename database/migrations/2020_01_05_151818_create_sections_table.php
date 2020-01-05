@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProfessionsTable extends Migration
+class CreateSectionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateProfessionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('professions', function (Blueprint $table) {
+        Schema::create('sections', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->unsignedBigInteger('section_id')->nullable()->index();           
+            $table->unsignedBigInteger('branch_id')->nullable()->index();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('section_id')->references('id')->on('sections')->onDelete('set null');
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('set null');
 
         });
     }
@@ -31,6 +31,6 @@ class CreateProfessionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('professions');
+        Schema::dropIfExists('sections');
     }
 }

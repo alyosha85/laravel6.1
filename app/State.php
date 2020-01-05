@@ -12,4 +12,9 @@ class State extends Model
     {
         return $this->hasOne(Company::class);
     }
+    
+    public function cities()
+    {
+        return $this->hasMany(City::class);
+    }
 }

@@ -12,4 +12,8 @@ class Branch extends Model
     {
         return $this->hasOne(Company::class);
     }
+    public function section ()
+    {
+        return $this->hasOne(Section::class);
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Branch;
+use App\Section;
 use Illuminate\Http\Request;
 
 class BranchController extends Controller
@@ -46,7 +47,8 @@ class BranchController extends Controller
      */
     public function show(Branch $branch)
     {
-        //
+        $sections = Section::where('branch_id', $branch->id)->get();
+        return $sections;
     }
 
     /**
