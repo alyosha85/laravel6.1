@@ -27,7 +27,7 @@
 										<div class="col-xl-6">
 											<div class="panel panel-default">
 												<div class="panel-body">
-													<h1 class="mb-0">{{$company->name}}<small><span class="badge pull-right">{{$company->title['name']}}</span></small>
+													<h1 class="mb-0">{{$company->name}}<small><span class="badge pull-right">{{$company->title->name}}</span></small>
 														<a href="/companies/{{ $company->id }}/edit" class="btn btn-outline-primary border-0"><i class="fas fa-edit"></i></a>
 													</h1>
 													<p class="text-muted">created on 12.12.2020 from {{ $company->user['name']}}</p>
@@ -72,7 +72,7 @@
 																																	<ul>
 																																			@foreach($company->contacts as $contact)
 																																			<li>
-																																				<a href="/contact/{{ $contact->id }}">{{$contact['first_name']}}</a>
+																																				<a href="/contact/{{ $contact->id }}">{{$contact['last_name']}}</a>
 																																			</li>
 																																			@endforeach
 																																	</ul>
@@ -349,7 +349,7 @@
 								<div class="panel panel-default">
 									<div class="panel-body col-md-12">
 									<h1 class="mb-2">{{$company->name}}<small><span class="badge pull-right">{{$company->title['name']}}</span></small></h1>
-									<a href="/communication/company/create/{{ $company->id }}" class="btn btn-primary mb-3">Add Communication</a>
+									<a href="/communication/company/create/{{ $company->id }}" class="btn btn-primary mb-3">Neue Kommunikation</a>
 									<div class="col-md-12">
 										<div class="table-responsive-xl">
 											@if(count($company->communications) < 1)
@@ -431,6 +431,17 @@ $(document).ready(function() {
 		});
 		
 } );
+
+
+$(document).ready(function() {
+    $('#contact_table').DataTable({
+			"language": {
+            "url": "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/German.json"
+            }
+		});
+		
+} );
+
 
 </script>
 

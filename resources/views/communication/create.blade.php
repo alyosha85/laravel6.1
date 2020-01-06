@@ -32,18 +32,19 @@
 
 
 
+@endsection
 
-
+@section('foot')
+		
 <script>
 
 flatpickr.localize(flatpickr.l10ns.de);
-flatpickr("#flatpickr");
+flatpickr('#flatpickr');
  
  $('#flatpickr').on('focus', ({ currentTarget }) => $(currentTarget).blur());
  $("#flatpickr").prop('readonly', false);
+
  
- </script>
- <script>
 	function goBack() {
 		window.history.back();
 	}

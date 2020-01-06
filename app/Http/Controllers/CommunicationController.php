@@ -99,7 +99,12 @@ class CommunicationController extends Controller
      */
     public function update(Request $request, Communication $communication)
     {
-        //
+
+        $communication = Communication::create($this->validateRequest());
+        $contacttype = ContactType::find($request->contact_type_id);
+        $communication->contact_types()->attach($contacttype);
+
+        return redirect('/companies/'.request('company_id').'/#nav-profile')->with('message','Erfolgreich geändert');
     }
 
     /**

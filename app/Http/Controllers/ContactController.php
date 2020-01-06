@@ -36,10 +36,11 @@ class ContactController extends Controller
     {   
        $contact = new Contact(); 
        $company_id = $request->company_id;
-       $contact_titles = ContactTitle::whereNull('hide')->get();
+       $contact_titles = ContactTitle::all();
        $contact_statuses = ContactStatus::all();
        return view('contact.create',compact('contact','contact_titles','contact_statuses','company_id'));
-       //return redirect('companies/'. $company_id,compact('contact','contact_titles','contact_statuses','company_id'));
+       //return redirect('companies/'. $company_id .'?path=2',compact('contact','contact_titles','contact_statuses','company_id'));
+       //'companies/'. $contact->company->id .'?path=2'
         
     }
 
@@ -124,7 +125,7 @@ class ContactController extends Controller
         return request()-> validate ([
                 'contact_title_id' => 'required',
                 'contact_status_id' => 'required',
-                'first_name' => 'required',
+                'first_name' => '',
                 'last_name' => 'required',
                 'email' => '',
                 'phone' => '',

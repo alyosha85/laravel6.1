@@ -18,7 +18,7 @@ class CreateContactsTable extends Migration
             $table->unsignedBigInteger('company_id')->nullable()->index();
             $table->unsignedBigInteger('contact_title_id')->nullable()->index();
             $table->unsignedBigInteger('contact_status_id')->nullable()->index();
-            $table->string('first_name');
+            $table->string('first_name')->nullable();
             $table->string('last_name');
             $table->string('email')->nullable();
             $table->string('phone')->nullable();

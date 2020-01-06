@@ -54,7 +54,7 @@
 
   <div class="form-group col-md-4">
     <div class="form-group">
-      <label for="section_id">Section <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i></label>
+      <label for="section_id">Berufe <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i></label>
       <select name="section_id" id="section_id" class="form-control" required>
         <option   disabled="disabled" value=''>Bitte wählen...</option>
       </select>

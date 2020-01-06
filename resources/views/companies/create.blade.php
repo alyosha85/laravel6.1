@@ -62,7 +62,7 @@
 			var parent = jQuery(this).val();
 			jQuery.ajax({url: "/sections/"+parent, success: function(child){
 				jQuery('#profession_id').children().remove();
-				jQuery('#profession_id').append('<option  disabled="disabled" value="">Bitte wählen...</option>');
+				jQuery('#profession_id').append('<option  disabled="disabled" value="">Berufe...</option>');
 
 				child.forEach(function(item){
 					jQuery('#profession_id').append('<option value="'+item.id+'">'+item.name+'</option>');

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Company;
 use App\Branch;
@@ -16,7 +15,6 @@ use App\Section;
 use App\CityCompany;
 use App\CompanyProfession;
 use App\Communication;
-
 class CompaniesController extends Controller
 {
     /**
@@ -24,7 +22,6 @@ class CompaniesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -35,7 +32,6 @@ class CompaniesController extends Controller
     {
         
         $values = Profession::all('name');  
-
         $standort = City::find(Auth::user()->city_id);
         $bundesland = State::find($standort->state_id);
         
@@ -52,11 +48,9 @@ class CompaniesController extends Controller
             $companies = Company::wherein('id',$comp)->get();
         }
 
-
-
+        return $companies;
         return view('companies.index',compact('companies','values','standort','bundesland','type'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -73,7 +67,6 @@ class CompaniesController extends Controller
         $cities = City::all();
         return view ('companies.create',compact('company','branches','statuses','titles','professions','states','cities'));
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -82,17 +75,14 @@ class CompaniesController extends Controller
      */
     public function store(Request $request)
     {
-
         $company = Company::create($this->validateRequest());
         $company->user_id = Auth::user()->id;
         $city = City::find($request->city_id);
         $company->cities()->attach($city);
         $profession = Profession::find($request->profession_id);
         $company->professions()->attach($profession);
-
         return redirect('companies/'. $company->id)->with('message','Erfolgreich hinzugefügt');
     }
-
     /**
      * Display the specified resource.
      *
@@ -103,9 +93,7 @@ class CompaniesController extends Controller
     {   
         $request = $request->path ? $request->path : 1;
         return view('companies.show',compact('company','request'));
-
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -122,7 +110,6 @@ class CompaniesController extends Controller
         $cities = City::all();
         return view ('companies.edit',compact('company','branches','statuses','titles','professions','states','cities'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -133,7 +120,6 @@ class CompaniesController extends Controller
     public function update(Request $request,Company $company)
     {
         $company->update($this->validateRequest());
-
         CityCompany::where('company_id',$company->id)->delete();
         foreach($request->city_id as $item) {
             $bridge = new CityCompany();
@@ -141,7 +127,6 @@ class CompaniesController extends Controller
             $bridge->city_id = $item;
             $bridge->save();
         }
-
         CompanyProfession::where('company_id',$company->id)->delete();
         foreach($request->profession_id as $item) {
             $bridge = new CompanyProfession();
@@ -149,10 +134,8 @@ class CompaniesController extends Controller
             $bridge->profession_id = $item;
             $bridge->save();
         }
-
         return redirect('companies/'. $company->id)->with('message','Erfolgreich geändert');
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -164,7 +147,6 @@ class CompaniesController extends Controller
         $company->delete();
         return redirect('companies');
     }
-
     private function validateRequest()
     {
         return request()-> validate ([
@@ -188,5 +170,3 @@ class CompaniesController extends Controller
     }
     
 }
-
-

@@ -8,7 +8,7 @@
       <div class="form-group col-md-6">
         <div class="form-group">
           <label for="date">Datum <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i></label>
-          <input name="date" class="form-control {{ $errors->has('date') ? ' has-error' : '' }}" type="text" placeholder="Wählen Sie ein Datum" id="flatpickr" required='required' value="{{ old('date') ?? $communication->date }}">
+          <input name="date" class="form-control {{ $errors->has('date') ? ' has-error' : '' }}" type="text" placeholder="Wählen Sie ein Datum" id="flatpickr"  required='required' value="{{ old('date') ?? $communication->date }}">
         </div>
         <div>{{$errors->first('date')}}</div>
       </div>
