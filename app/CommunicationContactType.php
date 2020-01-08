@@ -6,6 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class CommunicationContactType extends Model
 {
-  protected $guarded = [];
-  protected $table = 'communication_contact_types';
+  protected $table = 'communication_contact_type';
 }

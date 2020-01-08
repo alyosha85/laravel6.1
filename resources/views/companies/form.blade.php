@@ -2,7 +2,7 @@
 @csrf
 <fieldset class="border rounded px-2 mb-2">
   <legend class="w-auto">Firma</legend>
-  <input class="form-control lead pull-right" type="text" placeholder="Datum angelegt:  Today von Matoyan" readonly>   
+  <input class="form-control lead pull-right" type="text" placeholder="Datum angelegt:  Heute von Erfurt" readonly>   
 
   <div class="form-row ">
     <div class="form-group col-md-6">
@@ -170,7 +170,8 @@
   <div class="form-row">
     <div class="form-group col-md-12">
       <div class="form-group">
-        <textarea rows="4"  type="text" name="description" class="form-control" value="{{ old('description') ?? $company->description }}" autocomplete="off"></textarea> 
+        <textarea rows="4"  type="text" name="description" class="form-control" value="" autocomplete="off" 
+        >{{ old('description') ?? $company->description }}</textarea> 
       </div>
       <div>{{$errors->first('description')}}</div>
     </div>

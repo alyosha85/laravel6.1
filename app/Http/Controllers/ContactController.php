@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Contact;
 use App\Company;
 use App\ContactTitle;
+use App\ContactReason;
 use App\ContactStatus;
 use Illuminate\Http\Request;
+use App\Communication;
 
 class ContactController extends Controller
 {
@@ -78,7 +80,8 @@ class ContactController extends Controller
      */
     public function show(Contact $contact)
     {
-        return view('contact.show',compact('contact'));
+        $communications = Communication::where('contact_id',$contact->id)->orderBy('created_at','desc')->get();
+        return view('contact.show',compact('contact','communications'));
     }
 
     /**

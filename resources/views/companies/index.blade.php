@@ -7,8 +7,8 @@
     <div class="col-md-12">
       
       <div>
-        <p><a href="/companies/create" class="btn btn-outline-primary border-0" >Neue Firma</a>
-        <select name="type" id="type">
+        <p><a href="/companies/create" class="btn btn-outline-primary" >Neue Firma</a>
+        <select  class ="selectpicker" data-style="btn btn-outline-primary" name="type" id="type">
           <option value="city">Standort</option>
           <option value="state">Land</option>
           <option value="all">Bundesweit</option>

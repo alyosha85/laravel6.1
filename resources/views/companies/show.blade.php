@@ -189,7 +189,7 @@
 																	</h5>
 																	<div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour">
 																			<div class="card-body">
-																				<textarea name="description" id="" cols="30" rows="6f" class="form-control" readonly>	{{ $company->description ?? '' }}</textarea>
+																				<textarea name="description" id="description" cols="30" rows="6" class="form-control" readonly>	{{ $company->description ?? '' }}</textarea>
 																						
 																			</div>
 																	</div>
@@ -209,7 +209,7 @@
 													@foreach($company->communications as $communication)
 													@if ($loop->last)
 													<h1 class="mb-0">Letzter Eintrag<small>&nbsp;<i class="fas fa-file-signature"></i></small></h1>
-													<p class="text-muted">created on 12.12.2020 from {{ $company->user['name'] }}</p>
+													<p class="text-muted">Hard conded on 12.12.2020 from {{ $company->user['name'] }}</p>
 
 													<div id="accordion" role="tablist" aria-multiselectable="true" class="col-sm-12">
 															<div class="card">
@@ -227,7 +227,7 @@
 																													<div class="form-group row">
 																															<label for="date" class="col-sm-6 col-form-label font-weight-bold">Datum:</label>
 																															<div class="col-sm-6">
-																																	<input type="text" readonly class="form-control-plaintext" name="date" value= "{{$communication->date}}">
+																																	<input type="text" readonly class="form-control-plaintext" name="date" value= "{{ \Carbon\Carbon::parse($communication->date)->format('d.m.Y')}}">
 																															</div>
 																													</div>
 																													<div class="form-group row">
@@ -379,7 +379,7 @@
 												<tbody>
 													@foreach($company->communications as $communication)
 													<tr>
-														<td>{{$communication->date}}</td>
+														<td>{{ \Carbon\Carbon::parse($communication->date)->format('d.m.Y')}}</td>
 														<td>{{$communication->contact['last_name']}}</td>
 														<td>
 															@foreach ($communication->contact_types as $contacttype)

@@ -15,6 +15,9 @@ use App\Section;
 use App\CityCompany;
 use App\CompanyProfession;
 use App\Communication;
+
+
+
 class CompaniesController extends Controller
 {
     /**
@@ -48,7 +51,6 @@ class CompaniesController extends Controller
             $companies = Company::wherein('id',$comp)->get();
         }
 
-        return $companies;
         return view('companies.index',compact('companies','values','standort','bundesland','type'));
     }
     /**

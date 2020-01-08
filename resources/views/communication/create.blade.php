@@ -20,9 +20,9 @@
           <button type="submit" class="btn btn-primary float-right">
           <i class="far fa-save"></i> Speichern
 					</button>
-					<button onclick="goBack()" class="btn btn-danger float-right mx-2">
+					<a href="{{url('/companies/'.$company_id.'?path=3')}}" class="btn btn-danger float-right mx-2">
 						<i class="fas fa-ban"></i> Stornieren
-					</button>
+					</a>
 				</form>
 				</div>
 			</div>
@@ -53,3 +53,5 @@ flatpickr('#flatpickr');
 
 
 @endsection
+
+

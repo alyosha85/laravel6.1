@@ -49,7 +49,7 @@
           <select name="contact_id" class="form-control" required>
             <option  selected="true" disabled="disabled" value=''>Bitte wählen...</option>
             @foreach($contacts as $contact)
-            <option value="{{ $contact->id }}" {{$contact->id == $communication->contact_id ? 'selected' : '' }}>{{ $contact->first_name }}</option>
+            <option value="{{ $contact->id }}" {{$contact->id == $communication->contact_id ? 'selected' : '' }}>{{ $contact->last_name }}</option>
             @endforeach
           </select>
         </div>
@@ -68,7 +68,8 @@
       <div class="form-group col-md-12">
         <div class="form-group">
           <label for="memo">Gesprächsnotiz <i class="fas fa-asterisk" style="color:#993955"></i></label>
-          <textarea id="mytextarea" type="text" cols="120" rows="30" name="memo" class="form-control" value="" autocomplete="nope" required>{{ old('memo') ?? $communication->memo }}</textarea>
+          <textarea type="text" cols="120" rows="30" name="memo" class="form-control" value="" autocomplete="nope" required>{{ old('memo') ?? $communication->memo }}
+          </textarea>
         </div>
         <div>{{$errors->first('memo')}}</div>
       </div>

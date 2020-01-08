@@ -21,9 +21,9 @@
           <button type="submit" class="btn btn-primary float-right">
           <i class="far fa-save"></i> Änderungen speichern
 					</button>
-					<button onclick="goBack()" class="btn btn-danger float-right mx-2">
-						<i class="fas fa-ban"></i> Stornieren
-					</button>
+					<a href="{{url('/companies/'.$contact->company_id.'?path=2')}}" class="btn btn-danger float-right mx-2">
+						<i class="fas fa-long-arrow-alt-left"></i> Zurück
+					</a>
 				</form>
 				</div>
 			</div>

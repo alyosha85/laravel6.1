@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Communication;
 use Illuminate\Http\Request;
+use App\Communication;
 use App\ContactType;
 use App\ContactReason;
 use App\Contact;
 use App\Company;
+use App\CommunicationContactType;
 
 
 class CommunicationController extends Controller
@@ -72,7 +73,7 @@ class CommunicationController extends Controller
      */
     public function show(Communication $communication)
     {
-        //
+        return view('communication.show',compact('communication'));
     }
 
     /**
@@ -99,12 +100,24 @@ class CommunicationController extends Controller
      */
     public function update(Request $request, Communication $communication)
     {
+        
+        $communication = Communication::find($communication->id);
+        $communication->memo = $request->memo;
+        $communication->date = $request->date;
+        $communication->participant = $request->participant;
+        $communication->contact_reason_id = $request->contact_reason_id;
 
-        $communication = Communication::create($this->validateRequest());
-        $contacttype = ContactType::find($request->contact_type_id);
-        $communication->contact_types()->attach($contacttype);
-
-        return redirect('/companies/'.request('company_id').'/#nav-profile')->with('message','Erfolgreich geändert');
+        
+        
+        CommunicationContactType::where('communication_id',$communication->id)->delete();
+        foreach($request->contact_type_id as $item) {
+            $bridge = new CommunicationContactType();
+            $bridge->communication_id = $communication->id;
+            $bridge->contact_type_id = $item;
+            $bridge->save();
+        }
+        
+        return redirect('companies/'. $communication->company_id)->with('message','Erfolgreich geändert');
     }
 
     /**
@@ -119,18 +132,16 @@ class CommunicationController extends Controller
     }
     private function validateRequest()
     {
-    return request()-> validate ([
-        'date' => 'required',
-        'contact_reason_id' => '',
-        'company_id' => 'required',
-        'contact_id' => 'required',
-        'participant' => '',
-        'memo' => '',
-
-
-
-]);
-}
+        return request()-> validate ([
+            'date' => 'required',
+            'memo' => 'required',
+            'company_id' => 'required',
+            'contact_id' => 'required',
+            'contact_types'=> '',
+            'contact_reasons' => '',
+            'participant' => '',
+            ]);
+    }
 }
 
 

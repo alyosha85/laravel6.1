@@ -13,7 +13,7 @@ class CreateCommunicationContactTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('communication_contact_type', function (Blueprint $table) {
+        Schema::create('communication_contact_types', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('communication_id');
             $table->unsignedBigInteger('contact_type_id');
