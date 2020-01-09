@@ -139,6 +139,7 @@ var table = $('#myTable').DataTable({
                 {
                   extend: 'copy',
                   text: 'Kopieren'
+                  
                 },
                 {
                   extend: 'excel',
@@ -151,6 +152,7 @@ colReorder: true,
  "language": {
             "url": "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/German.json"
             }, 	
+            
 //drop down select
 initComplete: function () {
 

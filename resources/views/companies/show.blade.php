@@ -53,6 +53,18 @@
 																															</div>
 																													</div>
 																													<div class="form-group row">
+																															<label for="inputPassword" class="col-sm-4 col-form-label font-weight-bold">Berufe:</label>
+																															<div class="col-sm-8">
+																																	<ul>
+																																			@foreach($company->sections as $section)
+																																			<li>
+																																			{{$section->name}}
+																																			@endforeach
+																																		</li>
+																																	</ul>
+																															</div>
+																													</div>
+																													<div class="form-group row">
 																															<label for="inputPassword" class="col-sm-4 col-form-label font-weight-bold">Tätigkeitsfeld:</label>
 																															<div class="col-sm-8">
 																																	<ul>
@@ -243,9 +255,15 @@
 																															</div>
 																													</div>
 																													<div class="form-group row">
-																															<label for="branch" class="col-sm-6 col-form-label font-weight-bold">Branche:</label>
+																															<label for="profession_id" class="col-sm-6 col-form-label font-weight-bold">Tätigkeitsfeld:</label>
 																															<div class="col-sm-6">
-																																	<input type="text" readonly class="form-control-plaintext" id="branch" value="hardCoded">
+																																	<ul>
+																																			@foreach($communication->company->professions as $profession)
+																																			<li>
+																																			{{$profession->name}}
+																																			@endforeach
+																																		</li>
+																																	</ul>
 																															</div>
 																													</div>
 																											</div>

@@ -8,12 +8,8 @@ class Section extends Model
 {
     protected $guarded = [];
     
-    public function branch ()
+    public function companies()
     {
-        return $this->hasOne(Branch::class);
-    }
-    public function professions ()
-    {
-        return $this->hasMany(Profession::class);
+        return $this->belongsToMany(Company::class);
     }
 }

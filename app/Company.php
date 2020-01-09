@@ -26,6 +26,10 @@ class Company extends Model
     {
         return $this->belongsToMany(City::class);
     }
+    public function sections()
+    {
+        return $this->belongsToMany(Section::class);
+    }
     public function professions()
     {
         return $this->belongsToMany(Profession::class);

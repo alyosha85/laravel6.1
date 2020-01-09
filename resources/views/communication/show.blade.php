@@ -18,23 +18,23 @@
           <div class="row col-md-6">
             <div class="col-md-6">
                 <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-6 col-form-label font-weight-bold">Teilnehmer :</label>
+                    <label for="participant" class="col-sm-6 col-form-label font-weight-bold">Teilnehmer :</label>
                     <div class="col-sm-6">
-                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ $communication->participant ?? '' }}">
+                    <input type="text" readonly class="form-control-plaintext" value="{{ $communication->participant ?? '' }}">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputPassword" class="col-sm-6 col-form-label font-weight-bold">Branche:</label>
+                    <label for="name" class="col-sm-6 col-form-label font-weight-bold">Branche:</label>
                     <div class="col-sm-6">
-                      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ $communication->name ?? '' }}">
+                      <input type="text" readonly class="form-control-plaintext" value="{{ $communication->name ?? '' }}">
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
               <div class="form-group row">
-                  <label for="staticEmail" class="col-sm-6 col-form-label font-weight-bold">Kontaktgrund :</label>
+                  <label for="contact_reason" class="col-sm-6 col-form-label font-weight-bold">Kontaktgrund :</label>
                   <div class="col-sm-6">
-                      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{$communication->contact_reason->name}}">
+                      <input type="text" readonly class="form-control-plaintext" value="{{$communication->contact_reason->name}}">
                   </div>
               </div>
               <div class="form-group row">

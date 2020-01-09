@@ -65,9 +65,10 @@ class CompaniesController extends Controller
         $statuses = Status::all();
         $titles = Title::all();
         $professions = Profession::all();
+        $sections = Section::all();
         $states = State::all();
         $cities = City::all();
-        return view ('companies.create',compact('company','branches','statuses','titles','professions','states','cities'));
+        return view ('companies.create',compact('company','branches','statuses','titles','professions','states','cities','sections'));
     }
     /**
      * Store a newly created resource in storage.
@@ -83,6 +84,8 @@ class CompaniesController extends Controller
         $company->cities()->attach($city);
         $profession = Profession::find($request->profession_id);
         $company->professions()->attach($profession);
+        $section = Section::find($request->section_id);
+        $company->sections()->attach($section);
         return redirect('companies/'. $company->id)->with('message','Erfolgreich hinzugefügt');
     }
     /**

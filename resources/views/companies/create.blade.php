@@ -49,28 +49,29 @@
 			var parent = jQuery(this).val();
 			jQuery.ajax({url: "/branches/"+parent, success: function(child){
 				jQuery('#section_id').children().remove();
-				jQuery('#section_id').append('<option selected="true" disabled="disabled" value="">Bitte wählen...</option>');
+				jQuery('#section_id').append('<option disabled="disabled" value="">Bitte wählen...</option>');
 				child.forEach(function(item){
 					jQuery('#section_id').append('<option value="'+item.id+'">'+item.name+'</option>');
 				});
+				jQuery('#section_id').selectpicker('refresh');
 			}});
 		});
 	});
 
-	jQuery( document ).ready(function() {
-		jQuery("#section_id").change(function(){
-			var parent = jQuery(this).val();
-			jQuery.ajax({url: "/sections/"+parent, success: function(child){
-				jQuery('#profession_id').children().remove();
-				jQuery('#profession_id').append('<option  disabled="disabled" value="">Berufe...</option>');
+	// jQuery( document ).ready(function() {
+	// 	jQuery("#section_id").change(function(){
+	// 		var parent = jQuery(this).val();
+	// 		jQuery.ajax({url: "/sections/"+parent, success: function(child){
+	// 			jQuery('#profession_id').children().remove();
+	// 			jQuery('#profession_id').append('<option  disabled="disabled" value="">Berufe...</option>');
 
-				child.forEach(function(item){
-					jQuery('#profession_id').append('<option value="'+item.id+'">'+item.name+'</option>');
-				});
-				jQuery('#profession_id').selectpicker('refresh');
-			}});
-		});
-	});
+	// 			child.forEach(function(item){
+	// 				jQuery('#profession_id').append('<option value="'+item.id+'">'+item.name+'</option>');
+	// 			});
+	// 			jQuery('#profession_id').selectpicker('refresh');
+	// 		}});
+	// 	});
+	// });
 
 
 	jQuery( document ).ready(function() {
@@ -87,6 +88,12 @@
 		});
 	});
 
+</script>
+
+<script>
+	new jBox('Tooltip', {
+  attach: '.fa-asterisk'
+});
 </script>
 
 

@@ -14,6 +14,6 @@ class Branch extends Model
     }
     public function section ()
     {
-        return $this->hasOne(Section::class);
+        return $this->belongsToMany(Section::class);
     }
 }
