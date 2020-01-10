@@ -138,7 +138,9 @@
 												</div>
 												<div class="col-md-6">
 													<div class="col-md-12">
-														kosdfjasdklöjfsdalökfj
+														<div style="width: 100%;">
+															<textarea name="memo" id="memo" cols="30" rows="10" class="form-control" readonly >{{$communication->memo}}</textarea>
+															</div>
 													</div>
 												</div>	
 
@@ -162,7 +164,6 @@
 
 @endsection
 
-{{-- 
-<div style="width: 100%;">
-	<textarea name="memo" id="memo" cols="30" rows="10" class="form-control" readonly >{{$lastcommunication->memo}}</textarea>
-	</div> --}}
+@section('foot')
+		
+@endsection

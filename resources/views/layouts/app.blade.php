@@ -114,7 +114,7 @@
   <script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.0.6/dist/jBox.all.min.js"></script>
 
   <script>
-      $('#memo').summernote({
+      $('#memo_info').summernote({
 	airMode: true,
 
 });

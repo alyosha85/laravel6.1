@@ -270,7 +270,7 @@
 																												<div class="form-group row ">
 																													<label for="memo" class="col-sm-4 col-form-label font-weight-bold">Gesprächnotiz:</label>
 																													<div style="width: 100%;">
-																													<textarea name="memo" id="memo" cols="30" rows="10" class="form-control" readonly >{{$lastcommunication->memo}}</textarea>
+																													<textarea name="memo" id="memo_info" cols="30" rows="10" class="form-control" readonly >{{$lastcommunication->memo}}</textarea>
 																													</div>
 																												</div>
 																											</div>
