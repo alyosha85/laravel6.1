@@ -218,8 +218,7 @@
 										<div class="col-xl-6" id="letter">
 											<div class="panel panel-default">
 												<div class="panel-body">
-													@foreach($company->communications as $communication)
-													@if ($loop->last)
+													
 													<h1 class="mb-0">Letzter Eintrag<small>&nbsp;<i class="fas fa-file-signature"></i></small></h1>
 													<p class="text-muted">Hard conded on 12.12.2020 from {{ $company->user['name'] }}</p>
 
@@ -234,31 +233,31 @@
 																			<div class="card-body">
 																					<form>
 																							<div class="container-fluid ">
-																									<div class="row">
-																											<div class="col-md-6">
+																									<div class="row ">
+																											<div class="col-md-5 pl-0">
 																													<div class="form-group row">
-																															<label for="date" class="col-sm-6 col-form-label font-weight-bold">Datum:</label>
-																															<div class="col-sm-6">
-																																	<input type="text" readonly class="form-control-plaintext" name="date" value= "{{ \Carbon\Carbon::parse($communication->date)->format('d.m.Y')}}">
+																															<label for="date" class="col-sm-4 col-form-label font-weight-bold">Datum:</label>
+																															<div class="col-sm-8 px-0">
+																																	<input type="text" readonly class="form-control-plaintext" name="date" value= "{{ \Carbon\Carbon::parse($lastcommunication->date)->format('d.m.Y')}}">
 																															</div>
 																													</div>
 																													<div class="form-group row">
-																															<label for="contact" class="col-sm-6 col-form-label font-weight-bold">Ansprechpartner:</label>
-																															<div class="col-sm-6">
-																																<input type="text" readonly class="form-control-plaintext" name="contact" value="{{$communication->contact['last_name']}}">
+																															<label for="contact" class="col-sm-4 col-form-label font-weight-bold">AP:</label>
+																															<div class="col-sm-8 px-0">
+																																<input type="text" readonly class="form-control-plaintext" name="contact" value="{{$lastcommunication->contact['last_name']}}">
 																															</div>
 																													</div>
 																													<div class="form-group row">
-																															<label for="participant" class="col-sm-6 col-form-label font-weight-bold">Teilnehmer:</label>
-																															<div class="col-sm-6">
-																																	<input type="text" readonly class="form-control-plaintext" id="participant" value="{{$communication->participant}}">
+																															<label for="participant" class="col-sm-4 col-form-label font-weight-bold">Teilnehmer:</label>
+																															<div class="col-sm-8 px-0">
+																																	<input type="text" readonly class="form-control-plaintext" id="participant" value="{{$lastcommunication->participant}}">
 																															</div>
 																													</div>
-																													<div class="form-group row">
-																															<label for="profession_id" class="col-sm-6 col-form-label font-weight-bold">Tätigkeitsfeld:</label>
-																															<div class="col-sm-6">
+																													<div class="form-group row px-0">
+																															<label for="profession_id" class="col-sm-4 col-form-label font-weight-bold">Tätigkeitsfeld:</label>
+																															<div class="col-sm-8 px-0">
 																																	<ul>
-																																			@foreach($communication->company->professions as $profession)
+																																			@foreach($lastcommunication->company->professions as $profession)
 																																			<li>
 																																			{{$profession->name}}
 																																			@endforeach
@@ -267,10 +266,12 @@
 																															</div>
 																													</div>
 																											</div>
-																											<div class="col-md-6">
-																												<div class="form-group row">
-																													<label for="staticEmail" class="col-sm-4 col-form-label font-weight-bold">Gesprächnotiz:</label>
-																													<textarea name="" id="" cols="30" rows="10" class="form-control" readonly>{{$communication->memo}}</textarea>
+																											<div class="col-md-7">
+																												<div class="form-group row ">
+																													<label for="memo" class="col-sm-4 col-form-label font-weight-bold">Gesprächnotiz:</label>
+																													<div style="width: 100%;">
+																													<textarea name="memo" id="memo" cols="30" rows="10" class="form-control" readonly >{{$lastcommunication->memo}}</textarea>
+																													</div>
 																												</div>
 																											</div>
 																									</div>
@@ -280,8 +281,7 @@
 																	</div>
 															</div>
 													</div>
-													@endif
-													@endforeach
+												
 												</div>
 											</div>
 										</div>
@@ -459,6 +459,8 @@ $(document).ready(function() {
 		});
 		
 } );
+
+
 
 
 </script>

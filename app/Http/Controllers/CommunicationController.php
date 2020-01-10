@@ -9,6 +9,8 @@ use App\ContactReason;
 use App\Contact;
 use App\Company;
 use App\CommunicationContactType;
+use App\CompanyProfession;
+use App\Profession;
 
 
 class CommunicationController extends Controller
@@ -42,6 +44,10 @@ class CommunicationController extends Controller
         $contact_types = ContactType::all();
         $contact_reasons = ContactReason::all();
         $contacts = Contact::where('company_id',$id)->get();
+
+        // $professions = CompanyProfession::where('company_id',$id)->pluck('profession_id')->toArray();
+        // $profession = Profession::where('id',$professions)->get();
+
 
         return view('communication.create',compact('communication','contact_types','contact_reasons','contacts','company_id'));
     }
@@ -106,6 +112,7 @@ class CommunicationController extends Controller
         $communication->date = $request->date;
         $communication->participant = $request->participant;
         $communication->contact_reason_id = $request->contact_reason_id;
+        $communication->save();
 
         
         
@@ -138,7 +145,7 @@ class CommunicationController extends Controller
             'company_id' => 'required',
             'contact_id' => 'required',
             'contact_types'=> '',
-            'contact_reasons' => '',
+            'contact_reason_id' => '',
             'participant' => '',
             ]);
     }

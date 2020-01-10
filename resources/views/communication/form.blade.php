@@ -63,12 +63,38 @@
         <div>{{$errors->first('participant')}}</div>
       </div>
     </div>
-     {{-- line 3 --}}
+    {{-- line 3 --}}
+    {{-- <div class="form-row ">
+      <div class="form-group col-md-6">
+        <div class="form-group">
+          <label for="profession_id">Tätigkeit</label>
+          <select id="profession_id" class="selectpicker  form-control" data-live-search="true" multiple name="profession_id[]">
+            <option disabled="disabled" value=''>Bitte wählen...</option>
+              @foreach($profession as $key => $value)
+              <option @if(isset($communication->company_id))    
+              @foreach ($profession as $professionobject) 
+               @if ($professionobject->id == $value->id) {{'selected'}}  @endif
+              @endforeach
+              @endif
+              value='{{$value->id}}'>{{$value->name}}</option>
+              @endforeach
+          </select>
+        </div>
+        <div>{{$errors->first('profession_id')}}</div>
+      </div> --}}
+      {{-- <div class="form-group col-md-6">
+        <div class="form-group">
+
+        </div>
+        <div>{{$errors->first('')}}</div>
+      </div> --}}
+    </div> 
+     {{-- line 4 --}}
      <div class="form-row ">
       <div class="form-group col-md-12">
         <div class="form-group">
           <label for="memo">Gesprächsnotiz <i class="fas fa-asterisk" style="color:#993955"></i></label>
-          <textarea type="text" cols="120" rows="30" name="memo" class="form-control" value="" autocomplete="nope" required>{{ old('memo') ?? $communication->memo }}
+          <textarea type="text" cols="120" rows="30" name="memo" class="form-control" value="" id="memo" autocomplete="nope" required>{{ old('memo') ?? $communication->memo }}
           </textarea>
         </div>
         <div>{{$errors->first('memo')}}</div>
@@ -77,3 +103,4 @@
   
   
 </fieldset>
+

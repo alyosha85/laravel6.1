@@ -45,5 +45,15 @@ flatpickr('#flatpickr');
 	function goBack() {
 		window.history.back();
 	}
+
+	$(document).ready(function() {
+	$('#memo').summernote({
+		height: 500,									//set editor height
+		minHeight: null,             // set minimum height of editor
+		maxHeight: null,             // set maximum height of editor    
+		lang: 'de-DE'
+	});
+
+});
 </script>
 @endsection

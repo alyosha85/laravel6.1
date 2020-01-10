@@ -26,7 +26,7 @@
     </div>
     <div class="form-group col-md-3">
       <div class="form-group">
-        <label for="status_id">Status <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i> &nbsp;<i class="fas fa-question-circle" style="color:#993955"></i></label>
+        <label for="status_id">Status <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i> &nbsp;<i class="fas fa-question-circle" style="color:#993955" id="myModal"></i></label>
         <select name="status_id" class="form-control">
           <option  selected="true" disabled="disabled" value=''>Bitte wählen...</option>
           @foreach($statuses as $status)
@@ -65,7 +65,7 @@
   <div class="form-group col-md-4">
     <div class="form-group">
       <label for="profession_id">Tätigkeitsfeld <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i> &nbsp;<i class="fas fa-question-circle" style="color:#993955"></i></label>
-        <select id="profession_id" class="selectpicker form-control" multiple name="profession_id[]" required>
+        <select id="profession_id" class="selectpicker  form-control" data-live-search="true" multiple name="profession_id[]" required>
           @foreach($professions as $key => $value)
           <option @if(isset($company->id))    
           @foreach ($company->professions as $professionobject) 

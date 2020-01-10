@@ -29,3 +29,13 @@
 
 @endsection
 
+@section('foot')
+<script>
+	new jBox('Tooltip', {
+	attach: '.fa-asterisk',
+	theme: 'TooltipDark'
+});
+</script>
+		
+@endsection
+

@@ -48,6 +48,35 @@ flatpickr('#flatpickr');
 	function goBack() {
 		window.history.back();
 	}
+
+
+	$(document).ready(function() {
+	$('#memo').summernote({
+		height: 500,									//set editor height
+		minHeight: null,             // set minimum height of editor
+		maxHeight: null,             // set maximum height of editor    
+		lang: 'de-DE',
+		toolbar: [
+            [ 'style', [ 'style' ] ],
+            [ 'font', [ 'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear'] ],
+            [ 'fontname', [ 'fontname' ] ],
+            [ 'fontsize', [ 'fontsize' ] ],
+            [ 'color', [ 'color' ] ],
+            [ 'para', [ 'ol', 'ul', 'paragraph', 'height' ] ],
+            [ 'table', [ 'table' ] ],
+            [ 'insert', [ 'link'] ],
+            [ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview'] ]
+        ]
+	});
+
+});
+
+	new jBox('Tooltip', {
+	attach: '.fa-asterisk',
+	theme: 'TooltipDark'
+});
+
+
 </script>
 
 

@@ -97,7 +97,8 @@ class CompaniesController extends Controller
     public function show(Company $company, Request $request)
     {   
         $request = $request->path ? $request->path : 1;
-        return view('companies.show',compact('company','request'));
+        $lastcommunication = Communication::where('company_id',$company->id)->orderBy('date','desc')->first();
+        return view('companies.show',compact('company','request','lastcommunication'));
     }
     /**
      * Show the form for editing the specified resource.

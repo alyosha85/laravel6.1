@@ -34,23 +34,23 @@
 					<div class="row col-md-12">
 							<div class="col-md-6">
 									<div class="form-group row">
-										<label for="staticEmail" class="col-sm-3 col-form-label font-weight-bold">Telefon:</label>
+										<label for="phone" class="col-sm-3 col-form-label font-weight-bold">Telefon:</label>
 										<div class="col-sm-9">
-											<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ $contact->phone ?? '' }}">
+											<input type="text" readonly class="form-control-plaintext" value="{{ $contact->phone ?? '' }}">
 										</div>
 									</div>
 									<div class="form-group row">
 										<label for="inputPassword" class="col-sm-3 col-form-label font-weight-bold">Email:</label>
 										<div class="col-sm-9">
-											<a class="form-control-plaintext" id="staticEmail" href="mailto:{{$contact->email}}">{{ $contact->email ?? '' }}</a>
+											<a class="form-control-plaintext" href="mailto:{{$contact->email}}">{{ $contact->email ?? '' }}</a>
 										</div>
 									</div>
 							</div>
 							<div class="col-md-5">
 									<div class="form-group row">
-										<label for="staticEmail" class="col-sm-3 col-form-label font-weight-bold">Fax:</label>
+										<label for="fax" class="col-sm-3 col-form-label font-weight-bold">Fax:</label>
 										<div class="col-sm-9">
-											<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ $contact->fax ?? '' }}">
+											<input type="text" readonly class="form-control-plaintext" value="{{ $contact->fax ?? '' }}">
 										</div>
 									</div>
 									<div class="form-group row">
@@ -75,7 +75,7 @@
 					</div>
 					<div class="col-md-6">
 					<div class="form-group row">
-							<label for="staticEmail" class="col-sm-3 col-form-label font-weight-bold" style="color:lightcoral">Anmerkungen:</label>
+							<label for="note" class="col-sm-3 col-form-label font-weight-bold" style="color:lightcoral">Anmerkungen:</label>
 							<div class="col-md-9">
 								<textarea name="note" id="note" cols="30" rows="6" class="form-control" readonly>{{ $contact->note ?? '' }}</textarea>
 							</div>
@@ -91,7 +91,7 @@
 							<div class="bs-example">
 								<div id="accordion" role="tablist" aria-multiselectable="true" class="accordion">
 								@foreach($communications as  $communication)
-									<div class="card">
+									<div class="card col-md-12">
 										<h5 class="card-header" role="tab" id="#heading-{{ $communication->id }}">
 												<a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ $communication->id }}" aria-expanded="false" 								aria-controls="collapse-{{ $communication->id }}" class="d-block collapsed nounderline">
 														<i class="fa fa-chevron-down float-right"></i>                             
@@ -99,31 +99,31 @@
 														</a>
 										</h5>
 										<div id="collapse-{{ $communication->id }}" class="collapsed collapse" role="tabpanel" aria-labelledby="heading-{{ $communication->id }}">
-												<div class="card-body">
-													<div class="row col-md-6">
-														<div class="col-md-6">
-															<div class="form-group row">
-																	<label for="staticEmail" class="col-sm-6 col-form-label font-weight-bold">Teilnehmer :</label>
-																	<div class="col-sm-6">
-																	<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ $communication->participant ?? '' }}">
-																	</div>
-															</div>
-															<div class="form-group row">
-																	<label for="inputPassword" class="col-sm-6 col-form-label font-weight-bold">Branche:</label>
-																	<div class="col-sm-6">
-																		<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ $communication->name ?? '' }}">
-																	</div>
-															</div>
-													</div>
+											<div class="card-body">
+												<div class="row col-md-6">
 													<div class="col-md-6">
 														<div class="form-group row">
-																<label for="staticEmail" class="col-sm-6 col-form-label font-weight-bold">Kontaktgrund :</label>
+																<label for="participant" class="col-sm-6 col-form-label font-weight-bold">Teilnehmer:</label>
 																<div class="col-sm-6">
-																		<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{$communication->contact_reason->name}}">
+																<input type="text" readonly class="form-control-plaintext" value="{{ $communication->participant ?? '' }}">
 																</div>
 														</div>
 														<div class="form-group row">
-															<label for="inputPassword" class="col-sm-6 col-form-label font-weight-bold">Kontaktart:</label>
+																<label for="name" class="col-sm-6 col-form-label font-weight-bold">Branche:</label>
+																<div class="col-sm-6">
+																<input type="text" readonly class="form-control-plaintext" value="{{ $communication->name ?? '' }}">
+																</div>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group row">
+																<label for="contact_reason" class="col-sm-6 col-form-label font-weight-bold">Kontaktgrund:</label>
+																<div class="col-sm-6">
+																<input type="text" readonly class="form-control-plaintext" value="{{$communication->contact_reason->name}}">
+																</div>
+														</div>
+														<div class="form-group row">
+															<label for="contact_type" class="col-sm-6 col-form-label font-weight-bold">Kontaktart:</label>
 																<div class="col-sm-6">
 																	<ul>
 																		@foreach($communication->contact_types as $contact_type)
@@ -136,6 +136,12 @@
 														</div>
 													</div>
 												</div>
+												<div class="col-md-6">
+													<div class="col-md-12">
+														kosdfjasdklöjfsdalökfj
+													</div>
+												</div>	
+
 											</div>
 										</div>
 									</div>
@@ -155,3 +161,8 @@
 
 
 @endsection
+
+{{-- 
+<div style="width: 100%;">
+	<textarea name="memo" id="memo" cols="30" rows="10" class="form-control" readonly >{{$lastcommunication->memo}}</textarea>
+	</div> --}}

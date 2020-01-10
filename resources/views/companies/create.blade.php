@@ -32,6 +32,10 @@
 	</div>
 </div>
 
+<div style="display:none" id="status_note">
+<h3 style="color:darkolivegreen;">Aktiv</h3>
+</div>
+
 @endsection
 
 @section('foot')
@@ -92,8 +96,20 @@
 
 <script>
 	new jBox('Tooltip', {
-  attach: '.fa-asterisk'
+	attach: '.fa-asterisk',
+	theme: 'TooltipDark'
 });
+
+
+
+new jBox('Modal', {
+  width: 300,
+  height: 300,
+	attach: '#myModal',
+	animation: 'pulse',
+	content:$('#status_note') 
+});
+ 
 </script>
 
 
