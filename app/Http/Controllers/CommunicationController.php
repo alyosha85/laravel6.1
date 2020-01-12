@@ -11,7 +11,7 @@ use App\Company;
 use App\CommunicationContactType;
 use App\CompanyProfession;
 use App\Profession;
-
+use Carbon\Carbon;
 
 class CommunicationController extends Controller
 {
@@ -37,19 +37,21 @@ class CommunicationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request,$id)
+    public function create(Request $request,$id,$contact_id='')
     {
         $communication = New Communication();
         $company_id = $request->company_id;
         $contact_types = ContactType::all();
         $contact_reasons = ContactReason::all();
         $contacts = Contact::where('company_id',$id)->get();
+        $company_professions = CompanyProfession::where('company_id',$id)->pluck('profession_id')->toArray();
+        $professions = Profession::wherein('id',$company_professions)->get();
+        $profession_all = Profession::wherenotin('id',$company_professions)->get();
 
-        // $professions = CompanyProfession::where('company_id',$id)->pluck('profession_id')->toArray();
-        // $profession = Profession::where('id',$professions)->get();
 
 
-        return view('communication.create',compact('communication','contact_types','contact_reasons','contacts','company_id'));
+
+        return view('communication.create',compact('communication','contact_types','contact_reasons','contacts','company_id','contact_id','professions','profession_all'));
     }
 
     /**
@@ -60,10 +62,29 @@ class CommunicationController extends Controller
      */
     public function store(Request $request)
     {
+        // $request->date = Carbon::parse($request->date)->format('Y-m-d');      
+        if ($request->profession_id) 
+        $profession_id = array_merge($request->profession_id,$request->profession_all_id); 
+        else 
+        $profession_id = $request->profession_all_id;
 
         $communication = Communication::create($this->validateRequest());
         $contacttype = ContactType::find($request->contact_type_id);
         $communication->contact_types()->attach($contacttype);
+        $profession = Profession::find($profession_id);
+        $communication->professions()->attach($profession);
+
+        $profession = Profession::find($profession_id);
+        $new_professions = [];
+        foreach ($profession_id as $id) {
+            if (!CompanyProfession::where('profession_id',$id)->where('company_id',$request->company_id)->first()) {
+                $company = Company::find($request->company_id);
+                $profession = Profession::find($id);
+                $company->professions()->attach($profession);
+            }
+            
+        }
+
 
 
         return redirect('/companies/'.request('company_id').'/#nav-profile');
@@ -139,6 +160,7 @@ class CommunicationController extends Controller
     }
     private function validateRequest()
     {
+        
         return request()-> validate ([
             'date' => 'required',
             'memo' => 'required',
@@ -147,6 +169,7 @@ class CommunicationController extends Controller
             'contact_types'=> '',
             'contact_reason_id' => '',
             'participant' => '',
+
             ]);
     }
 }

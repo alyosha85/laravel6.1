@@ -67,7 +67,7 @@
 									</a>
 								</div>
 								<div class="form-group row">
-									<a href="/communication/company/create/{{ $contact->company_id }}" class="form-control btn btn-primary float-right mx-2">
+								<a href="/communication/company/create/{{ $contact->company_id }}/contact/{{$contact->id}}" class="form-control btn btn-primary float-right mx-2">
 										<i class="fas fa-tty"></i> Neue Kommunikation
 									</a>
 								</div>
@@ -92,11 +92,11 @@
 								<div id="accordion" role="tablist" aria-multiselectable="true" class="accordion">
 								@foreach($communications as  $communication)
 									<div class="card col-md-12">
-										<h5 class="card-header" role="tab" id="#heading-{{ $communication->id }}">
+										<h5 class="card-header" role="tab" id="#heading-{{ $communication->id }}">										
 												<a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ $communication->id }}" aria-expanded="false" 								aria-controls="collapse-{{ $communication->id }}" class="d-block collapsed nounderline">
-														<i class="fa fa-chevron-down float-right"></i>                             
-															{{ \Carbon\Carbon::parse($communication->date)->format('d.m.Y')}}
-														</a>
+													<i class="fa fa-chevron-down float-right"></i>                             
+														{{ \Carbon\Carbon::parse($communication->date)->format('d.m.y')}}
+													</a>
 										</h5>
 										<div id="collapse-{{ $communication->id }}" class="collapsed collapse" role="tabpanel" aria-labelledby="heading-{{ $communication->id }}">
 											<div class="card-body">
@@ -139,7 +139,8 @@
 												<div class="col-md-6">
 													<div class="col-md-12">
 														<div style="width: 100%;">
-															<textarea name="memo" id="memo" cols="30" rows="10" class="form-control" readonly >{{$communication->memo}}</textarea>
+															{{-- <textarea name="memo" id="memo" cols="30" rows="10" class="form-control" readonly >{{$communication->memo}}</textarea> --}}
+															{!!$communication->memo!!}
 															</div>
 													</div>
 												</div>	

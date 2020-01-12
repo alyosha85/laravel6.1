@@ -79,6 +79,14 @@
 
 
 	jQuery( document ).ready(function() {
+		var stateid = {{$stateid}};
+		jQuery.ajax({url: "/state/"+stateid, success: function(child){
+				child.forEach(function(item){
+					jQuery('#city_id').append('<option value="'+item.id+'">'+item.name+'</option>');
+				});
+				jQuery('#city_id').val({{$cityid}});
+				jQuery('#city_id').selectpicker('refresh');
+			}});
 		jQuery("#state_id").change(function(){
 			var parent = jQuery(this).val();
 			jQuery.ajax({url: "/state/"+parent, success: function(child){

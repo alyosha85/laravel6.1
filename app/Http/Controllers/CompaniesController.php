@@ -60,6 +60,7 @@ class CompaniesController extends Controller
      */
     public function create()
     {   
+
         $company = new Company();
         $branches = Branch::all();
         $statuses = Status::all();
@@ -68,7 +69,11 @@ class CompaniesController extends Controller
         $sections = Section::all();
         $states = State::all();
         $cities = City::all();
-        return view ('companies.create',compact('company','branches','statuses','titles','professions','states','cities','sections'));
+        $stateid = City::where('id', Auth::user()->city_id)->first();
+        $stateid = State::where('id',$stateid->state_id)->first();
+        $stateid = $stateid->id;
+        $cityid = Auth::user()->city_id;
+        return view ('companies.create',compact('company','branches','statuses','titles','professions','states','cities','sections','stateid','cityid'));
     }
     /**
      * Store a newly created resource in storage.
