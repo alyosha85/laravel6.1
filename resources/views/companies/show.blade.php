@@ -257,11 +257,11 @@
 																															<label for="profession_id" class="col-sm-4 col-form-label font-weight-bold">Tätigkeitsfeld:</label>
 																															<div class="col-sm-8 px-0">
 																																	<ul>
-																																			{{-- @foreach($lastcommunication->professions->professions as $profession)
-																																			<li>
-																																			{{$profession->name}}
-																																			@endforeach --}}
+																																		@foreach(@$lastprofessions as $lastprofession)
+																																		<li>
+																																			{{ @$lastprofession }}
 																																		</li>
+																																		@endforeach
 																																	</ul>
 																															</div>
 																													</div>
@@ -269,9 +269,10 @@
 																											<div class="col-md-7">
 																												<div class="form-group row ">
 																													<label for="memo" class="col-sm-4 col-form-label font-weight-bold">Gesprächnotiz:</label>
-																													<div style="width: 100%;">
-																													{{-- <textarea name="memo" id="memo_info" cols="30" rows="10" class="form-control" readonly >{{$lastcommunication->memo}}</textarea> --}}
-																													{!!$lastcommunication->memo!!}
+																													<div style="width: 100%;"> 
+																													<textarea name="memo" id="memo_info" cols="30" rows="10" class="form-control" readonly >
+																														{!!$lastcommunication->memo!!}</textarea> 
+																													{{-- {!! $lastcommunication->memo !!} --}}
 																												</div>
 																												</div>
 																											</div>
@@ -428,10 +429,10 @@
 						</div>	
 					</div>
 				</div>
-
-				</div>
 			</div>
 		</div>
+	</div>
+
 
 
 
@@ -461,7 +462,9 @@ $(document).ready(function() {
 		
 } );
 
-
+$('#memo_info').summernote({
+	airMode: true,
+});
 
 
 </script>
