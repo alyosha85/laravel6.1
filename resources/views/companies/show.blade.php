@@ -466,6 +466,21 @@ $('#memo_info').summernote({
 	airMode: true,
 });
 
+new jBox('Confirm', {
+    content: 'Do you want to video chat with our agent?',
+    cancelButton: 'Nope',
+    confirmButton: 'Sure do!',
+    attributes: {
+      x: 'right',
+      y: 'top'
+    },
+    audio: beep.play(),
+    volume: 80,
+    closeButton: true,
+    autoClose: false,
+  })
+  .open();
+
 
 </script>
 
