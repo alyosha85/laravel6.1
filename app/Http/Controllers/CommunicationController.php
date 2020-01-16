@@ -145,7 +145,7 @@ class CommunicationController extends Controller
             $bridge->save();
         }
         
-        return redirect('companies/'. $communication->company_id)->with('message','Erfolgreich geändert');
+        return redirect('companies/'. $communication->company_id . '?path=3')->with('message','Erfolgreich geändert');
     }
 
     /**
@@ -156,7 +156,8 @@ class CommunicationController extends Controller
      */
     public function destroy(Communication $communication)
     {
-        //
+        $communication->delete();
+        return redirect('companies/'.$communication->company_id.'?path=3')->with('message','Erfolgreich gelöscht');
     }
     private function validateRequest()
     {

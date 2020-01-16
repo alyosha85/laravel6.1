@@ -5,6 +5,11 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
+    @if(session()->has('message'))
+		<div class="alert alert-success text-center " role="alert" >
+			<strong>{{ session()->get('message')}}</strong>
+		</div>
+	  @endif 
       
       <div>
         <p><a href="/companies/create" class="btn btn-outline-primary" >Neue Firma</a>
@@ -66,8 +71,9 @@
                 <a href="/companies/{{ $company->id }}/edit" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-edit"></i></a>
                   @method('DELETE')
                   @csrf
-                <button type="button" onClick="company_delete()" class="btn btn-outline-danger btn-sm border-0"><i class="fas fa-trash"></i></button>
+                <button type="button" onclick="company_delete()" data-confirm="Sind Sie sicher, dass Sie löschen möchten?" class="btn btn-outline-danger btn-sm border-0"><i class="fas fa-trash"></i></button>
                 </form>
+                
               </td>
             </tr>
             @endforeach
@@ -190,17 +196,19 @@ initComplete: function () {
     
     });
 });
+
 </script>   
 
-<script>
-    
+<script>  
+new jBox('Confirm', {
+  confirmButton: 'Ja !', 
+  cancelButton: 'Nein'
+}); 
 		function company_delete(){ 
-			var company = confirm('Sind Sie sicher, dass Sie löschen möchten?');			
-			if(company){			
-                $( "#companydelete" ).submit();
-			}			
-		}		
-	</script>
+          $( "#companydelete" ).submit();	
+          }		
+</script>  
+
     
 @endsection
      

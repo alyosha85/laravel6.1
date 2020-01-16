@@ -7,11 +7,11 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-				{{-- @if(session()->has('message'))
+			 @if(session()->has('message'))
 		<div class="alert alert-success text-center " role="alert" >
 			<strong>{{ session()->get('message')}}</strong>
 		</div>
-	@endif --}}
+		@endif 
 
 				<nav>
 					<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
@@ -340,12 +340,12 @@
 															<td>{{$contact->fax}}</td>
 															<td><span class="badge badge--{{$contact->contact_status->name}}">{{$contact->contact_status->name}}</span></td>
 															<td>
-																<form action="/contact/{{$contact->id}}" method="POST">
+																<form action="/contact/{{$contact->id}}" id="contactdelete" method="POST">
 																<a href="/contact/{{ $contact->id }}" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-eye"></i></a>
 																<a href="/contact/{{ $contact->id }}/edit" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-edit"></i></a>
 																	@method('DELETE')
 																	@csrf
-																<button type="submit" class="btn btn-outline-danger btn-sm border-0"><i class="fas fa-trash"></i></button>
+																<button type="submit" onclick="contact_delete()" data-confirm="Sind Sie sicher, dass Sie löschen möchten?" class="btn btn-outline-danger btn-sm border-0"><i class="fas fa-trash"></i></button>
 																</form>
 															</td>
 														</tr>
@@ -409,12 +409,12 @@
 														<td>{{$communication->contact_reason->name}}</td>
 														<td>{{$communication->participant}}</td>
 														<td>
-															<form action="/communication/{{$communication->id}}" method="POST">
+															<form action="/communication/{{$communication->id}}" id="communicationdelete" method="POST">
 															<a href="/communication/{{ $communication->id }}" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-eye"></i></a>
 															<a href="/communication/{{ $communication->id }}/edit" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-edit"></i></a>
 																@method('DELETE')
 																@csrf
-															<button type="submit" class="btn btn-outline-danger btn-sm border-0"><i class="fas fa-trash"></i></button>
+															<button type="submit" onClick="communication_delete()" class="btn btn-outline-danger btn-sm border-0"><i class="fas fa-trash"></i></button>
 															</form>
 														</td>
 													</tr>
@@ -467,19 +467,19 @@ $('#memo_info').summernote({
 });
 
 new jBox('Confirm', {
-    content: 'Do you want to video chat with our agent?',
-    cancelButton: 'Nope',
-    confirmButton: 'Sure do!',
-    attributes: {
-      x: 'right',
-      y: 'top'
-    },
-    audio: beep.play(),
-    volume: 80,
-    closeButton: true,
-    autoClose: false,
-  })
-  .open();
+  confirmButton: 'Ja !', 
+  cancelButton: 'Nein'
+}); 
+		function contact_delete(){ 
+			$( "#contactdelete" ).submit();		
+		}		
+   
+		function communication_delete(){ 
+			var communication = confirm('Sind Sie sicher, dass Sie löschen möchten?');			
+			if(communication){			
+					$( "#communicationdelete" ).submit();
+			}			
+		}		
 
 
 </script>
