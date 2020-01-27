@@ -82,11 +82,7 @@
       </div>
       <div class="form-group col-md-6" style="" id="profession_id_all">
         <div class="form-group">
-<<<<<<< HEAD
-        <label for="profession_id_all">Tätigkeit</label>
-=======
         <label for="profession_id_all">Tätigkeitsfeld (Alle)</label>
->>>>>>> 4e873d3f2941982e7948e05467cb51ce91ddde17
           <select class="selectpicker  form-control" data-live-search="true" multiple name="profession_all_id[]">
             @foreach($profession_all as $key => $value)
             <option 
