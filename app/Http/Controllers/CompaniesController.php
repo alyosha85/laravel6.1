@@ -106,8 +106,14 @@ class CompaniesController extends Controller
     {   
         $request = $request->path ? $request->path : 1;
         $lastcommunication = Communication::where('company_id',$company->id)->orderBy('date','desc')->first();
+<<<<<<< HEAD
 
         return view('companies.show',compact('company','request','lastcommunication'));
+=======
+        $lastprofessions = $lastcommunication->professions->pluck('name');      
+
+        return view('companies.show',compact('company','request','lastcommunication','lastprofessions'));
+>>>>>>> 4e873d3f2941982e7948e05467cb51ce91ddde17
     }
     /**
      * Show the form for editing the specified resource.
@@ -166,7 +172,7 @@ class CompaniesController extends Controller
     public function destroy(Company $company)
     {
         $company->delete();
-        return redirect('companies');
+        return redirect('companies')->with('message','Erfolgreich gelöscht');
     }
     private function validateRequest()
     {

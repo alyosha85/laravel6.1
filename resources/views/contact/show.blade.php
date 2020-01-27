@@ -93,25 +93,33 @@
 								@foreach($communications as  $communication)
 									<div class="card col-md-12">
 										<h5 class="card-header" role="tab" id="#heading-{{ $communication->id }}">										
-												<a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ $communication->id }}" aria-expanded="false" 								aria-controls="collapse-{{ $communication->id }}" class="d-block collapsed nounderline">
-													<i class="fa fa-chevron-down float-right"></i>                             
-														{{ \Carbon\Carbon::parse($communication->date)->format('d.m.y')}}
-													</a>
+											<a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ $communication->id }}" aria-expanded="false" 								aria-controls="collapse-{{ $communication->id }}" class="d-block collapsed nounderline">
+												<i class="fa fa-chevron-down float-right"></i>                             
+													{{ \Carbon\Carbon::parse($communication->date)->format('d.m.y')}}
+												</a>
 										</h5>
 										<div id="collapse-{{ $communication->id }}" class="collapsed collapse" role="tabpanel" aria-labelledby="heading-{{ $communication->id }}">
 											<div class="card-body">
-												<div class="row col-md-6">
-													<div class="col-md-6">
+												<div class="row col-md-6 px-0 mx-0">
+													<div class="col-md-6 px-0 mx-0">
 														<div class="form-group row">
-																<label for="participant" class="col-sm-6 col-form-label font-weight-bold">Teilnehmer:</label>
-																<div class="col-sm-6">
+																<label for="participant" class="col-sm-6 col-form-label font-weight-bold px-0 mx-0">Teilnehmer:</label>
+																<div class="col-sm-6 px-0 mx-0">
 																<input type="text" readonly class="form-control-plaintext" value="{{ $communication->participant ?? '' }}">
 																</div>
 														</div>
-														<div class="form-group row">
-																<label for="name" class="col-sm-6 col-form-label font-weight-bold">Branche:</label>
-																<div class="col-sm-6">
-																<input type="text" readonly class="form-control-plaintext" value="{{ $communication->name ?? '' }}">
+														<div class="form-group row px-0">
+																<label for="professions" class="col-sm-6 col-form-label font-weight-bold px-0 mx-0">Tätigkeitsfeld:</label>
+																<div class="col-sm-6 px-0 mx-0">
+																	<div class="col-sm-8 px-0 mx-0">
+																		<ul>
+																			@foreach($communication->professions as $profession)
+																			<li>
+																				{{ $profession->name }}
+																			</li>
+																			@endforeach
+																		</ul>
+																</div>
 																</div>
 														</div>
 													</div>

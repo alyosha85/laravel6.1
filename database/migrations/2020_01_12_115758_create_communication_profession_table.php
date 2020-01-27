@@ -31,3 +31,5 @@ class CreateCommunicationprofessionTable extends Migration
         Schema::dropIfExists('communication_professions');
     }
 }
+
+

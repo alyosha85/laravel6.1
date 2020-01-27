@@ -107,7 +107,7 @@ class ContactController extends Controller
     public function update(Request $request, Contact $contact)
     {
         $contact->update($this->validateRequest());
-        return redirect('companies/'. $contact->company_id)->with('message','Erfolgreich geändert');
+        return redirect('companies/'. $contact->company_id .'?path=2')->with('message','Erfolgreich geändert');
     }
 
     /**
@@ -119,7 +119,7 @@ class ContactController extends Controller
     public function destroy(Contact $contact)
     {
         $contact->delete();
-        return redirect()->back();
+        return redirect('companies/'.$contact->company_id .'?path=2')->with('message','Erfolgreich gelöscht');
     }
 
 
