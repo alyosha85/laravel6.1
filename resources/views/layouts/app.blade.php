@@ -46,15 +46,19 @@
                     <ul class="navbar-nav mr-auto">
                         <li>
                              <img src="{{url('/img/logo.png')}}"  width="334" height="32.156">
-                        </li>    
-                        <li> 
-                            <strong><a href="/companies/" class="nav-link">Firmen Liste</a></strong>   
-                        </li>    
+                        </li>       
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        <li class="nav-item">
+                        <a class="nav-link" href="/companies/" class="nav-link">Firmen Liste</a>
+                        </li>
+                        <li class="nav-item">
+                         <a href="#" class="nav-link">|</a>
+                        </li>
+
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Einloggen') }}</a>

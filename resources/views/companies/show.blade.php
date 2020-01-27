@@ -257,10 +257,10 @@
 																															<label for="profession_id" class="col-sm-4 col-form-label font-weight-bold">Tätigkeitsfeld:</label>
 																															<div class="col-sm-8 px-0">
 																																	<ul>
-																																			{{-- @foreach($lastcommunication->professions->professions as $profession)
+																																			@foreach($lastcommunication->professions as $profession)
 																																			<li>
 																																			{{$profession->name}}
-																																			@endforeach --}}
+																																			@endforeach 
 																																		</li>
 																																	</ul>
 																															</div>

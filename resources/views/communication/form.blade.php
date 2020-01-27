@@ -1,6 +1,6 @@
   @csrf
   <fieldset class="border rounded px-2 mb-2">
-    <legend class="w-auto">Communication</legend>
+    <legend class="w-auto">Kommunikation</legend>
     <input class="form-control lead pull-right" type="text" placeholder="Datum angelegt:  Today von Matoyan" readonly>  
     <input type="hidden" name="company_id" value="{{ $company_id ?? '' }} ">
   
@@ -72,11 +72,7 @@
           <select id="profession_id" class="selectpicker  form-control" data-live-search="true" multiple name="profession_id[]">
             <option disabled="disabled" value=''>Bitte wählen...</option>
               @foreach($professions as $key => $value)
-              <option @if(isset($communication->company_id))    
-              @foreach ($profession as $professionobject) 
-               @if ($professionobject->id == $value->id) {{'selected'}}  @endif
-              @endforeach
-              @endif
+              <option {{ @in_array($value->id,$profession_selected) ? 'selected' : '' }} 
               value='{{$value->id}}'>{{$value->name}}</option>
               @endforeach
               <button value="-1">Show All</button>
@@ -87,7 +83,7 @@
       <div class="form-group col-md-6" style="" id="profession_id_all">
         <div class="form-group">
         <label for="profession_id_all">Tätigkeit</label>
-          <select class="selectpicker  form-control" data-live-search="true" multiple name="profession_all_id[]" required>
+          <select class="selectpicker  form-control" data-live-search="true" multiple name="profession_all_id[]">
             @foreach($profession_all as $key => $value)
             <option 
             value='{{$value->id}}'>{{$value->name}}</option>

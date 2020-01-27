@@ -12,9 +12,12 @@ use App\State;
 use App\City;
 use Auth;
 use App\Section;
+use App\CompanySection;
 use App\CityCompany;
 use App\CompanyProfession;
 use App\Communication;
+use App\CommunicationProfession;
+
 
 
 
@@ -103,6 +106,7 @@ class CompaniesController extends Controller
     {   
         $request = $request->path ? $request->path : 1;
         $lastcommunication = Communication::where('company_id',$company->id)->orderBy('date','desc')->first();
+
         return view('companies.show',compact('company','request','lastcommunication'));
     }
     /**
@@ -117,9 +121,15 @@ class CompaniesController extends Controller
         $statuses = Status::all();
         $titles = Title::all();
         $professions = Profession::all();
+        $stateid = City::where('id', Auth::user()->city_id)->first();
+        $stateid = State::where('id',$stateid->state_id)->first();
+        $stateid = $stateid->id;
         $states = State::all();
         $cities = City::all();
-        return view ('companies.edit',compact('company','branches','statuses','titles','professions','states','cities'));
+        $cityid = Auth::user()->city_id;
+        $selected_section = CompanySection::where('company_id',$company->id)->pluck('section_id')->toArray();
+
+        return view ('companies.edit',compact('company','branches','statuses','titles','professions','states','cities','stateid','cityid','selected_section'));
     }
     /**
      * Update the specified resource in storage.
