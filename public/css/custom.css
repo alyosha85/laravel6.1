@@ -167,3 +167,17 @@ nav > .nav.nav-tabs{
     }
     
 
+    .jBox-Confirm-button-submit {
+      border-bottom-right-radius: 4px;
+      background: #661421 !important;
+      color: #fff;
+    }
+
+    .jBox-Confirm-button-cancel {
+      border-bottom-left-radius: 4px;
+      background: #7DD181 !important;
+      color: #fff !important;
+    }
+    .jBox-content {
+      font-size: larger;
+    }

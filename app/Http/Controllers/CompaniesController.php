@@ -12,9 +12,12 @@ use App\State;
 use App\City;
 use Auth;
 use App\Section;
+use App\CompanySection;
 use App\CityCompany;
 use App\CompanyProfession;
 use App\Communication;
+use App\CommunicationProfession;
+
 
 
 
@@ -60,6 +63,7 @@ class CompaniesController extends Controller
      */
     public function create()
     {   
+
         $company = new Company();
         $branches = Branch::all();
         $statuses = Status::all();
@@ -68,7 +72,11 @@ class CompaniesController extends Controller
         $sections = Section::all();
         $states = State::all();
         $cities = City::all();
-        return view ('companies.create',compact('company','branches','statuses','titles','professions','states','cities','sections'));
+        $stateid = City::where('id', Auth::user()->city_id)->first();
+        $stateid = State::where('id',$stateid->state_id)->first();
+        $stateid = $stateid->id;
+        $cityid = Auth::user()->city_id;
+        return view ('companies.create',compact('company','branches','statuses','titles','professions','states','cities','sections','stateid','cityid'));
     }
     /**
      * Store a newly created resource in storage.
@@ -98,7 +106,14 @@ class CompaniesController extends Controller
     {   
         $request = $request->path ? $request->path : 1;
         $lastcommunication = Communication::where('company_id',$company->id)->orderBy('date','desc')->first();
+<<<<<<< HEAD
+
         return view('companies.show',compact('company','request','lastcommunication'));
+=======
+        $lastprofessions = $lastcommunication->professions->pluck('name');      
+
+        return view('companies.show',compact('company','request','lastcommunication','lastprofessions'));
+>>>>>>> 4e873d3f2941982e7948e05467cb51ce91ddde17
     }
     /**
      * Show the form for editing the specified resource.
@@ -112,9 +127,15 @@ class CompaniesController extends Controller
         $statuses = Status::all();
         $titles = Title::all();
         $professions = Profession::all();
+        $stateid = City::where('id', Auth::user()->city_id)->first();
+        $stateid = State::where('id',$stateid->state_id)->first();
+        $stateid = $stateid->id;
         $states = State::all();
         $cities = City::all();
-        return view ('companies.edit',compact('company','branches','statuses','titles','professions','states','cities'));
+        $cityid = Auth::user()->city_id;
+        $selected_section = CompanySection::where('company_id',$company->id)->pluck('section_id')->toArray();
+
+        return view ('companies.edit',compact('company','branches','statuses','titles','professions','states','cities','stateid','cityid','selected_section'));
     }
     /**
      * Update the specified resource in storage.
@@ -151,7 +172,7 @@ class CompaniesController extends Controller
     public function destroy(Company $company)
     {
         $company->delete();
-        return redirect('companies');
+        return redirect('companies')->with('message','Erfolgreich gelöscht');
     }
     private function validateRequest()
     {

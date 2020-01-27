@@ -40,9 +40,11 @@
 
 flatpickr.localize(flatpickr.l10ns.de);
 flatpickr('#flatpickr');
- 
+// ,{ dateFormat: 'd.m.Y'}
  $('#flatpickr').on('focus', ({ currentTarget }) => $(currentTarget).blur());
  $("#flatpickr").prop('readonly', false);
+
+
 
  
 	function goBack() {
@@ -69,12 +71,17 @@ flatpickr('#flatpickr');
         ]
 	});
 
+
 });
+
+
 
 	new jBox('Tooltip', {
 	attach: '.fa-asterisk',
 	theme: 'TooltipDark'
 });
+
+
 
 
 </script>

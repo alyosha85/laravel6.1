@@ -7,11 +7,11 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-				{{-- @if(session()->has('message'))
+			 @if(session()->has('message'))
 		<div class="alert alert-success text-center " role="alert" >
 			<strong>{{ session()->get('message')}}</strong>
 		</div>
-	@endif --}}
+		@endif 
 
 				<nav>
 					<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
@@ -257,11 +257,18 @@
 																															<label for="profession_id" class="col-sm-4 col-form-label font-weight-bold">Tätigkeitsfeld:</label>
 																															<div class="col-sm-8 px-0">
 																																	<ul>
-																																			@foreach($lastcommunication->company->professions as $profession)
+<<<<<<< HEAD
+																																			@foreach($lastcommunication->professions as $profession)
 																																			<li>
 																																			{{$profession->name}}
-																																			@endforeach
+																																			@endforeach 
+=======
+																																		@foreach(@$lastprofessions as $lastprofession)
+																																		<li>
+																																			{{ @$lastprofession }}
+>>>>>>> 4e873d3f2941982e7948e05467cb51ce91ddde17
 																																		</li>
+																																		@endforeach
 																																	</ul>
 																															</div>
 																													</div>
@@ -269,9 +276,11 @@
 																											<div class="col-md-7">
 																												<div class="form-group row ">
 																													<label for="memo" class="col-sm-4 col-form-label font-weight-bold">Gesprächnotiz:</label>
-																													<div style="width: 100%;">
-																													<textarea name="memo" id="memo_info" cols="30" rows="10" class="form-control" readonly >{{$lastcommunication->memo}}</textarea>
-																													</div>
+																													<div style="width: 100%;"> 
+																													<textarea name="memo" id="memo_info" cols="30" rows="10" class="form-control" readonly >
+																														{!!$lastcommunication->memo!!}</textarea> 
+																													{{-- {!! $lastcommunication->memo !!} --}}
+																												</div>
 																												</div>
 																											</div>
 																									</div>
@@ -338,12 +347,12 @@
 															<td>{{$contact->fax}}</td>
 															<td><span class="badge badge--{{$contact->contact_status->name}}">{{$contact->contact_status->name}}</span></td>
 															<td>
-																<form action="/contact/{{$contact->id}}" method="POST">
+																<form action="/contact/{{$contact->id}}" id="contactdelete" method="POST">
 																<a href="/contact/{{ $contact->id }}" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-eye"></i></a>
 																<a href="/contact/{{ $contact->id }}/edit" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-edit"></i></a>
 																	@method('DELETE')
 																	@csrf
-																<button type="submit" class="btn btn-outline-danger btn-sm border-0"><i class="fas fa-trash"></i></button>
+																<button type="submit" onclick="contact_delete()" data-confirm="Sind Sie sicher, dass Sie löschen möchten?" class="btn btn-outline-danger btn-sm border-0"><i class="fas fa-trash"></i></button>
 																</form>
 															</td>
 														</tr>
@@ -407,12 +416,12 @@
 														<td>{{$communication->contact_reason->name}}</td>
 														<td>{{$communication->participant}}</td>
 														<td>
-															<form action="/communication/{{$communication->id}}" method="POST">
+															<form action="/communication/{{$communication->id}}" id="communicationdelete" method="POST">
 															<a href="/communication/{{ $communication->id }}" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-eye"></i></a>
 															<a href="/communication/{{ $communication->id }}/edit" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-edit"></i></a>
 																@method('DELETE')
 																@csrf
-															<button type="submit" class="btn btn-outline-danger btn-sm border-0"><i class="fas fa-trash"></i></button>
+															<button type="submit" onClick="communication_delete()" class="btn btn-outline-danger btn-sm border-0"><i class="fas fa-trash"></i></button>
 															</form>
 														</td>
 													</tr>
@@ -427,10 +436,10 @@
 						</div>	
 					</div>
 				</div>
-
-				</div>
 			</div>
 		</div>
+	</div>
+
 
 
 
@@ -460,7 +469,24 @@ $(document).ready(function() {
 		
 } );
 
+$('#memo_info').summernote({
+	airMode: true,
+});
 
+new jBox('Confirm', {
+  confirmButton: 'Ja !', 
+  cancelButton: 'Nein'
+}); 
+		function contact_delete(){ 
+			$( "#contactdelete" ).submit();		
+		}		
+   
+		function communication_delete(){ 
+			var communication = confirm('Sind Sie sicher, dass Sie löschen möchten?');			
+			if(communication){			
+					$( "#communicationdelete" ).submit();
+			}			
+		}		
 
 
 </script>

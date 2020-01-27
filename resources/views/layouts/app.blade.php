@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+		<link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Custom css-->
     <link href="{{ asset('css/custom.css')}}"rel="stylesheet">
 
@@ -26,7 +26,7 @@
     <link href="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.0.6/dist/jBox.all.min.css" rel="stylesheet">
 
     {{-- datepicker --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> 
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> 
 
  
 </head>
@@ -46,15 +46,19 @@
                     <ul class="navbar-nav mr-auto">
                         <li>
                              <img src="{{url('/img/logo.png')}}"  width="334" height="32.156">
-                        </li>    
-                        <li> 
-                            <strong><a href="/companies/" class="nav-link">Firmen Liste</a></strong>   
-                        </li>    
+                        </li>       
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        <li class="nav-item">
+                        <a class="nav-link" href="/companies/" class="nav-link">Firmen Liste</a>
+                        </li>
+                        <li class="nav-item">
+                         <a href="#" class="nav-link">|</a>
+                        </li>
+
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Einloggen') }}</a>
@@ -113,12 +117,9 @@
   <script src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/af-2.3.4/b-1.6.1/b-colvis-1.6.1/b-flash-1.6.1/b-html5-1.6.1/b-print-1.6.1/cr-1.5.2/r-2.2.3/datatables.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.0.6/dist/jBox.all.min.js"></script>
 
-  <script>
-      $('#memo_info').summernote({
-	airMode: true,
 
-});
-</script>
+
+
   
   @yield('foot')
 

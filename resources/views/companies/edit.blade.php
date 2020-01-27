@@ -49,35 +49,14 @@
 	}
 
 	jQuery( document ).ready(function() {
-		jQuery("#branch_id").change(function(){
-			var parent = jQuery(this).val();
-			jQuery.ajax({url: "/branches/"+parent, success: function(child){
-				jQuery('#section_id').children().remove();
-				jQuery('#section_id').append('<option selected="true" disabled="disabled" value="">Bitte wählen...</option>');
+		var stateid = {{$stateid}};
+		jQuery.ajax({url: "/state/"+stateid, success: function(child){
 				child.forEach(function(item){
-					jQuery('#section_id').append('<option value="'+item.id+'">'+item.name+'</option>');
+					jQuery('#city_id').append('<option value="'+item.id+'">'+item.name+'</option>');
 				});
+				jQuery('#city_id').val({{$cityid}});
+				jQuery('#city_id').selectpicker('refresh');
 			}});
-		});
-	});
-
-	jQuery( document ).ready(function() {
-		jQuery("#section_id").change(function(){
-			var parent = jQuery(this).val();
-			jQuery.ajax({url: "/sections/"+parent, success: function(child){
-				jQuery('#profession_id').children().remove();
-				jQuery('#profession_id').append('<option  disabled="disabled" value="">Berufe...</option>');
-
-				child.forEach(function(item){
-					jQuery('#profession_id').append('<option value="'+item.id+'">'+item.name+'</option>');
-				});
-				jQuery('#profession_id').selectpicker('refresh');
-			}});
-		});
-	});
-
-
-	jQuery( document ).ready(function() {
 		jQuery("#state_id").change(function(){
 			var parent = jQuery(this).val();
 			jQuery.ajax({url: "/state/"+parent, success: function(child){
@@ -90,6 +69,42 @@
 			}});
 		});
 	});
+
+
+
+	jQuery( document ).ready(function() {
+		jQuery("#branch_id").change(function(){
+			var parent = jQuery(this).val();
+			jQuery.ajax({url: "/branches/"+parent, success: function(child){
+				jQuery('#section_id').children().remove();
+				jQuery('#section_id').append('<option disabled="disabled" value="">Bitte wählen...</option>');
+				child.forEach(function(item){
+					jQuery('#section_id').append('<option value="'+item.id+'">'+item.name+'</option>');
+				});
+				jQuery('#section_id').selectpicker('refresh');
+			}});
+		});
+		var selected_section = <?php echo json_encode($selected_section); ?>;
+		jQuery.ajax({url: "/branches/"+ {{ $company->branch_id }}, success: function(child){
+				jQuery('#section_id').children().remove();
+				jQuery('#section_id').append('<option disabled="disabled" value="">Bitte wählen...</option>');
+				child.forEach(function(item){
+					var position = selected_section.indexOf(item.id);
+					if (position >= 0) {
+						var classes = "selected";
+					}
+					else var classes = "";
+					jQuery('#section_id').append('<option '+classes+' value="'+item.id+'">'+item.name+'</option>');
+				});
+				jQuery('#section_id').selectpicker('refresh');
+			}});
+
+	});
+
+
+
+
+
 
 </script>
 

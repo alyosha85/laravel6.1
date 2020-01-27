@@ -25,5 +25,9 @@ class Communication extends Model
     {
         return $this->belongsTo(ContactReason::class);
     }
+    public function professions()
+    {
+        return $this->belongsToMany(Profession::class);
+    }
 
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompanySectionsTable extends Migration
+class CreateCommunicationprofessionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateCompanySectionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('company_section', function (Blueprint $table) {
+        Schema::create('communication_profession', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('company_id');
-            $table->unsignedBigInteger('section_id');
+            $table->unsignedBigInteger('communication_id');
+            $table->unsignedBigInteger('profession_id');
             $table->timestamps();
         });
     }
@@ -28,6 +28,8 @@ class CreateCompanySectionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('company_sections');
+        Schema::dropIfExists('communication_professions');
     }
 }
+
+

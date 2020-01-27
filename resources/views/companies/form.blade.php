@@ -76,7 +76,7 @@
           @endforeach
       </select>
     </div>
-    <div>{{$errors->first('contact_type_id')}}</div>
+    <div>{{$errors->first('profession_id')}}</div>
   </div>
 </div>
 </fieldset>
@@ -91,7 +91,8 @@
       <select name="state_id" class="form-control" id="state_id">
         <option  selected="true" disabled="disabled" value=''>Bitte wählen...</option>
         @foreach($states as $state)
-        <option value="{{ $state->id }}" {{$state->id == $company->state_id ? 'selected' : '' }}>{{ $state->name }}</option>
+        <option value="{{ $state->id }}" @if($state->id == $company->state_id ) {{'selected'}}
+          @elseif ($state->id == @$stateid) {{'selected'}} @endif>{{ $state->name }}</option>
         @endforeach
       </select>
     </div>
@@ -184,3 +185,7 @@
     </div>
   </div>
 </fieldset>
+
+
+    
+

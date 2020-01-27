@@ -12,5 +12,9 @@ class Profession extends Model
     {
         return $this->belongsToMany(Company::class);
     }
+    public function communications()
+    {
+        return $this->belongsToMany(Communication::class);
+    }
 
 }

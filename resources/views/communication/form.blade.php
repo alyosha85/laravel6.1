@@ -1,6 +1,6 @@
   @csrf
   <fieldset class="border rounded px-2 mb-2">
-    <legend class="w-auto">Communication</legend>
+    <legend class="w-auto">Kommunikation</legend>
     <input class="form-control lead pull-right" type="text" placeholder="Datum angelegt:  Today von Matoyan" readonly>  
     <input type="hidden" name="company_id" value="{{ $company_id ?? '' }} ">
   
@@ -49,7 +49,8 @@
           <select name="contact_id" class="form-control" required>
             <option  selected="true" disabled="disabled" value=''>Bitte wählen...</option>
             @foreach($contacts as $contact)
-            <option value="{{ $contact->id }}" {{$contact->id == $communication->contact_id ? 'selected' : '' }}>{{ $contact->last_name }}</option>
+            <option value="{{ $contact->id }}" @if($contact->id == $communication->contact_id) {{'selected'}} 
+              @elseif ($contact->id == @$contact_id) {{'selected'}} @endif>{{ $contact->last_name }}</option>
             @endforeach
           </select>
         </div>
@@ -64,31 +65,40 @@
       </div>
     </div>
     {{-- line 3 --}}
-    {{-- <div class="form-row ">
+    <div class="form-row ">
       <div class="form-group col-md-6">
         <div class="form-group">
-          <label for="profession_id">Tätigkeit</label>
+          <label for="profession_id">Tätigkeitsfeld (Gehört der Firma)</label>
           <select id="profession_id" class="selectpicker  form-control" data-live-search="true" multiple name="profession_id[]">
             <option disabled="disabled" value=''>Bitte wählen...</option>
-              @foreach($profession as $key => $value)
-              <option @if(isset($communication->company_id))    
-              @foreach ($profession as $professionobject) 
-               @if ($professionobject->id == $value->id) {{'selected'}}  @endif
-              @endforeach
-              @endif
+              @foreach($professions as $key => $value)
+              <option {{ @in_array($value->id,$profession_selected) ? 'selected' : '' }} 
               value='{{$value->id}}'>{{$value->name}}</option>
               @endforeach
+              <button value="-1">Show All</button>
           </select>
         </div>
         <div>{{$errors->first('profession_id')}}</div>
-      </div> --}}
-      {{-- <div class="form-group col-md-6">
+      </div>
+      <div class="form-group col-md-6" style="" id="profession_id_all">
         <div class="form-group">
-
+<<<<<<< HEAD
+        <label for="profession_id_all">Tätigkeit</label>
+=======
+        <label for="profession_id_all">Tätigkeitsfeld (Alle)</label>
+>>>>>>> 4e873d3f2941982e7948e05467cb51ce91ddde17
+          <select class="selectpicker  form-control" data-live-search="true" multiple name="profession_all_id[]">
+            @foreach($profession_all as $key => $value)
+            <option 
+            value='{{$value->id}}'>{{$value->name}}</option>
+            @endforeach
+          </select>
         </div>
-        <div>{{$errors->first('')}}</div>
-      </div> --}}
-    </div> 
+      </div>
+    </div>
+    <div>{{$errors->first('profession_id_all')}}</div>
+  </div>
+</div>
      {{-- line 4 --}}
      <div class="form-row ">
       <div class="form-group col-md-12">
