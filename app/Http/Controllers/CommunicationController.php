@@ -12,6 +12,7 @@ use App\CommunicationContactType;
 use App\CompanyProfession;
 use App\Profession;
 use Carbon\Carbon;
+use App\CommunicationProfession;
 
 class CommunicationController extends Controller
 {
@@ -63,10 +64,13 @@ class CommunicationController extends Controller
     public function store(Request $request)
     {
         // $request->date = Carbon::parse($request->date)->format('Y-m-d');      
-        if ($request->profession_id) 
+        if (is_array($request->profession_id) && is_array($request->profession_all_id))
         $profession_id = array_merge($request->profession_id,$request->profession_all_id); 
-        else 
+        elseif(is_array($request->profession_all_id)) 
         $profession_id = $request->profession_all_id;
+        else
+        $profession_id = $request->profession_id;
+
 
         $communication = Communication::create($this->validateRequest());
         $contacttype = ContactType::find($request->contact_type_id);
@@ -82,6 +86,10 @@ class CommunicationController extends Controller
                 $profession = Profession::find($id);
                 $company->professions()->attach($profession);
             }
+            // $communicationprofession = New CommunicationProfession;
+            // $communicationprofession->communication_id = $communication->id;
+            // $communicationprofession->profession_id = $id;
+            // $communicationprofession->save();
             
         }
 
@@ -114,7 +122,11 @@ class CommunicationController extends Controller
         $contact_types = ContactType::all();
         $contact_reasons = ContactReason::all();
         $contacts = Contact::where('company_id',$communication->company_id)->get();
-        return view ('communication.edit',compact('communication','contact_types','contact_reasons','contacts'));
+        $company_professions = CompanyProfession::where('company_id',$communication->company_id)->pluck('profession_id')->toArray();
+        $professions = Profession::wherein('id',$company_professions)->get();
+        $profession_all = Profession::wherenotin('id',$company_professions)->get();
+        $profession_selected =  CommunicationProfession::where('communication_id', $communication->id)->pluck('profession_id')->toArray();
+        return view ('communication.edit',compact('communication','contact_types','contact_reasons','contacts','professions','profession_all','profession_selected'));
     
     }
 
@@ -170,6 +182,8 @@ class CommunicationController extends Controller
             'contact_types'=> '',
             'contact_reason_id' => '',
             'participant' => '',
+            'created_at' => '',
+            'updated_at' => '',
 
             ]);
     }
