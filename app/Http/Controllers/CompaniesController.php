@@ -158,7 +158,7 @@ class CompaniesController extends Controller
     public function destroy(Company $company)
     {
         $company->delete();
-        return redirect('companies')->with('message','Erfolgreich gelöscht');
+        return redirect('/companies')->with('message','Erfolgreich gelöscht');
     }
     private function validateRequest()
     {
