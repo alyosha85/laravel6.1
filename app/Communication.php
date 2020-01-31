@@ -29,5 +29,6 @@ class Communication extends Model
     {
         return $this->belongsToMany(Profession::class);
     }
+    public function 
 
 }

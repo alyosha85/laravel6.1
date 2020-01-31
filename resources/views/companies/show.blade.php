@@ -84,7 +84,7 @@
 																																	<ul>
 																																			@foreach($company->contacts as $contact)
 																																			<li>
-																																				<a href="/contact/{{ $contact->id }}">{{$contact['last_name']}}</a>
+																																				<a href="/contact/{{ $contact->id }}">{{$contact->contact_title->name}}&nbsp;{{$contact['last_name']}}</a>
 																																			</li>
 																																			@endforeach
 																																	</ul>

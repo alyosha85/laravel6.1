@@ -54,6 +54,8 @@ class CompaniesController extends Controller
             $companies = Company::wherein('id',$comp)->get();
         }
 
+        
+
         return view('companies.index',compact('companies','values','standort','bundesland','type'));
     }
     /**
@@ -165,6 +167,7 @@ class CompaniesController extends Controller
      */
     public function destroy(Company $company)
     {
+        return $company;
         $company->delete();
         return redirect('/companies')->with('message','Erfolgreich gelöscht');
     }

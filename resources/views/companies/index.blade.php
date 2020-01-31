@@ -66,7 +66,7 @@
               </td> 
               <td>{{$company->address}}</td>
               <td>
-                <form action="/companies/{{$company->id}}" method="POST" id="companydelete"> 
+              <form action="/companies/{{$company->id}}" method="POST" id="companydelete"> 
                 <a href="/companies/{{ $company->id }}" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-eye"></i></a>
                 <a href="/companies/{{ $company->id }}/edit" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-edit"></i></a>
                   @method('DELETE')
@@ -101,6 +101,7 @@ $('#type').val("{{$type ?? 'city'}}");
 
 var table = $('#myTable').DataTable({
   "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+  "paging": false,
     orderCellsTop: true,
     dom: 'Bfrtip',
     columnDefs : [
@@ -206,6 +207,7 @@ new jBox('Confirm', {
 }); 
 		function company_delete(){ 
           $( "#companydelete" ).submit();	
+          console.log("#companydelete{{$company->id}}");
           }		
 </script>  
 
