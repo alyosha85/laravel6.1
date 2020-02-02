@@ -11,11 +11,11 @@
 |
 */
 
-Route::get('/','CompaniesController@index');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/','CompaniesController@index');
+
 
 
 Route::Resource('/companies','CompaniesController');

@@ -53,7 +53,7 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         <li class="nav-item">
-                        <a class="nav-link" href="/companies/" class="nav-link">Firmen Liste</a>
+                        <a class="nav-link" href="/companies?#bStateSave" class="nav-link">Firmen Liste</a>
                         </li>
                         <li class="nav-item">
                          <a href="#" class="nav-link">|</a>

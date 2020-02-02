@@ -20,6 +20,15 @@
         </select>
       </p>
       </div>
+
+        {{-- <select class ="selectpicker float-right" data-style="btn btn-outline-primary" id="limit" name="limit">
+            <option value="10">10 Entries per page</option>
+            <option value="20">20 Entries per page</option>
+            <option value="30">30 Entries per page</option>
+            <option value="50">50 Entries per page</option>
+        </select> --}}
+        <br>
+
    
       <div class="table-responsive-xl">
         <table class="table" id="myTable">
@@ -66,12 +75,12 @@
               </td> 
               <td>{{$company->address}}</td>
               <td>
-                <form action="/companies/{{$company->id}}" method="POST" id="companydelete"> 
+                <form action="/companies/{{$company->id}}" method="POST" id="companydelete{{$company->id}}"> 
                 <a href="/companies/{{ $company->id }}" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-eye"></i></a>
                 <a href="/companies/{{ $company->id }}/edit" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-edit"></i></a>
                   @method('DELETE')
                   @csrf
-                <button type="button" onclick="company_delete()" data-confirm="Sind Sie sicher, dass Sie löschen möchten?" class="btn btn-outline-danger btn-sm border-0"><i class="fas fa-trash"></i></button>
+                <button type="button" onclick="company_delete({{$company->id}})" data-confirm="Sind Sie sicher, dass Sie löschen möchten?" class="btn btn-outline-danger btn-sm border-0"><i class="fas fa-trash"></i></button>
                 </form>
                 
               </td>
@@ -79,6 +88,13 @@
             @endforeach
           </tbody>
         </table>
+{{-- 
+        <div class="float-left">
+          showing {!! $companies->count() !!} of {!! $companies->total() !!}
+        </div>
+        <div class="float-right">
+          {!! $companies->links() !!}
+        </div> --}}
       </div>
 
     </div>
@@ -94,6 +110,29 @@
 //datatable   
 $(document).ready(function() {
 
+  $(document).on('click', '.pagination li a', function (e) {
+    e.preventDefault();
+    if ($(this).attr('href')) {
+        var queryString = '';
+        var allQueries = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        if(allQueries[0].split('=').length >1){
+            for (var i = 0; i < allQueries.length; i++) {
+                var hash = allQueries[i].split('=');
+                if (hash[0] !== 'page') {
+                    queryString += '&' + hash[0] + '=' + hash[1];
+                }
+            }
+        }
+        window.location.replace($(this).attr('href') + queryString);
+    }
+});
+
+$('#limit').on('change',function(){
+  location.href='/companies?limit='+$(this).val();
+});
+  $('#limit').val("{{$companies->count() ?? 10}}");
+
+
 $('#type').on('change',function(){
   location.href='/companies?type='+$(this).val();
 });
@@ -102,6 +141,9 @@ $('#type').val("{{$type ?? 'city'}}");
 var table = $('#myTable').DataTable({
   "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
     orderCellsTop: true,
+    bStateSave: false,
+    // paging: false,
+    // bInfo: false,
     dom: 'Bfrtip',
     columnDefs : [
    { targets : [3],
@@ -204,8 +246,8 @@ new jBox('Confirm', {
   confirmButton: 'Ja !', 
   cancelButton: 'Nein'
 }); 
-		function company_delete(){ 
-          $( "#companydelete" ).submit();	
+		function company_delete(id){ 
+          $( "#companydelete"+id ).submit();	
           }		
 </script>  
 

@@ -42,17 +42,26 @@ class CompaniesController extends Controller
         $bundesland = State::find($standort->state_id);
         
         $type = $request->input('type');
+        //pagination limit
+        $limit = $request->input('limit') ? $request->input('limit') : 20;
+
+
         if($type === 'state') {
             $state = City::find(Auth::user()->city_id);
-            $companies = Company::where('state_id',$state->state_id)->get();
+            $companies = Company::where('state_id',$state->state_id);
         }
         elseif ($type === 'all') {
-            $companies = Company::all();
+            $companies = Company::select('*');
         }
         else {
             $comp = CityCompany::where('city_id',Auth::user()->city_id)->pluck('company_id')->toArray();
-            $companies = Company::wherein('id',$comp)->get();
+            $companies = Company::wherein('id',$comp);
         }
+
+
+        // $companies = $companies->orderby('created_at','DESC')->Paginate($limit);
+        $companies = $companies->orderby('created_at','DESC')->limit(100)->get();
+        
 
         return view('companies.index',compact('companies','values','standort','bundesland','type'));
     }
@@ -165,6 +174,7 @@ class CompaniesController extends Controller
      */
     public function destroy(Company $company)
     {
+        return $company;
         $company->delete();
         return redirect('companies')->with('message','Erfolgreich gelöscht');
     }
