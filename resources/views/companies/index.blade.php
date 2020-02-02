@@ -140,7 +140,6 @@ $('#type').val("{{$type ?? 'city'}}");
 
 var table = $('#myTable').DataTable({
   "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-  "paging": false,
     orderCellsTop: true,
     bStateSave: false,
     // paging: false,

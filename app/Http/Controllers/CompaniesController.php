@@ -61,7 +61,7 @@ class CompaniesController extends Controller
 
 
         // $companies = $companies->orderby('created_at','DESC')->Paginate($limit);
-        $companies = $companies->orderby('created_at','DESC')->limit(100)->get();
+        $companies = $companies->orderby('created_at','DESC')->get();
 
         
 
