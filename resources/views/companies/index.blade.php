@@ -140,6 +140,7 @@ $('#type').val("{{$type ?? 'city'}}");
 
 var table = $('#myTable').DataTable({
   "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+  "paging": false,
     orderCellsTop: true,
     bStateSave: false,
     // paging: false,
@@ -246,8 +247,14 @@ new jBox('Confirm', {
   confirmButton: 'Ja !', 
   cancelButton: 'Nein'
 }); 
+<<<<<<< HEAD
 		function company_delete(id){ 
           $( "#companydelete"+id ).submit();	
+=======
+		function company_delete(){ 
+          $( "#companydelete" ).submit();	
+          console.log("#companydelete{{$company->id}}");
+>>>>>>> 4bdfec7171bcbec5de7ed45d9394da69b799a7e0
           }		
 </script>  
 

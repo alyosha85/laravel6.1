@@ -38,7 +38,17 @@
               <div class="form-group row">
                 <label for="inputPassword" class="col-sm-3 col-form-label font-weight-bold">Tätigkeitsfeld:</label>
                 <div class="col-sm-9">
-                  <input type="text" readonly class="form-control-plaintext" value="{{ $communication->name ?? '' }}">
+
+                  <div class="col-sm-8">
+                    <ul>
+                        @foreach($communication->professions as $profession)
+                        <li>
+                        {{$profession->name}}
+                        @endforeach
+                      </li>
+                    </ul>
+                </div>
+
                 </div>
               </div>
             </div>

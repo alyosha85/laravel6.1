@@ -59,8 +59,10 @@ class CompaniesController extends Controller
         }
 
 
+
         // $companies = $companies->orderby('created_at','DESC')->Paginate($limit);
         $companies = $companies->orderby('created_at','DESC')->limit(100)->get();
+
         
 
         return view('companies.index',compact('companies','values','standort','bundesland','type'));
@@ -176,7 +178,7 @@ class CompaniesController extends Controller
     {
         return $company;
         $company->delete();
-        return redirect('companies')->with('message','Erfolgreich gelöscht');
+        return redirect('/companies')->with('message','Erfolgreich gelöscht');
     }
     private function validateRequest()
     {
