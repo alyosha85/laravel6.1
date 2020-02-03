@@ -110,22 +110,22 @@
 //datatable   
 $(document).ready(function() {
 
-  $(document).on('click', '.pagination li a', function (e) {
-    e.preventDefault();
-    if ($(this).attr('href')) {
-        var queryString = '';
-        var allQueries = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-        if(allQueries[0].split('=').length >1){
-            for (var i = 0; i < allQueries.length; i++) {
-                var hash = allQueries[i].split('=');
-                if (hash[0] !== 'page') {
-                    queryString += '&' + hash[0] + '=' + hash[1];
-                }
-            }
-        }
-        window.location.replace($(this).attr('href') + queryString);
-    }
-});
+//   $(document).on('click', '.pagination li a', function (e) {
+//     e.preventDefault();
+//     if ($(this).attr('href')) {
+//         var queryString = '';
+//         var allQueries = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+//         if(allQueries[0].split('=').length >1){
+//             for (var i = 0; i < allQueries.length; i++) {
+//                 var hash = allQueries[i].split('=');
+//                 if (hash[0] !== 'page') {
+//                     queryString += '&' + hash[0] + '=' + hash[1];
+//                 }
+//             }
+//         }
+//         window.location.replace($(this).attr('href') + queryString);
+//     }
+// });
 
 $('#limit').on('change',function(){
   location.href='/companies?limit='+$(this).val();
@@ -246,14 +246,9 @@ new jBox('Confirm', {
   confirmButton: 'Ja !', 
   cancelButton: 'Nein'
 }); 
-<<<<<<< HEAD
 		function company_delete(id){ 
           $( "#companydelete"+id ).submit();	
-=======
-		function company_delete(){ 
-          $( "#companydelete" ).submit();	
-          console.log("#companydelete{{$company->id}}");
->>>>>>> 4bdfec7171bcbec5de7ed45d9394da69b799a7e0
+
           }		
 </script>  
 
