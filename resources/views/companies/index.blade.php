@@ -248,7 +248,6 @@ new jBox('Confirm', {
 }); 
 		function company_delete(id){ 
           $( "#companydelete"+id ).submit();	
-
           }		
 </script>  
 

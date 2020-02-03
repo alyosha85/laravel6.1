@@ -62,12 +62,13 @@
                     {{$contact_type->name}}
                     @endforeach
                   </li>
-                </ul>                </div>
+                </ul>                
               </div>
+            </div>
               <div class="form-group row">
                 <label for="contact_reason" class="col-sm-3 col-form-label font-weight-bold">Kontaktgrund:</label>
                 <div class="col-sm-9">
-                  <input type="text" readonly class="form-control-plaintext"{{$communication->contact_reason->name}}>
+                  <input type="text" readonly class="form-control-plaintext" value="{{$communication->contact_reason->name}}">
                 </div>
               </div>
             </div>
@@ -83,6 +84,17 @@
                 </a> --}}
               </div>
             </div>
+
+            <div class="row col-md-12">
+              <div class="form-group row">
+                <label for="participant" class="col-sm-3 col-form-label font-weight-bold">Gesprächsnotiz:</label>
+                <div class="col-sm-9">
+                  <textarea name="memo" id="memo_info" cols="100" rows="10" class="form-control-plaintext" readonly >{!!$communication->memo!!}
+                  </textarea> 
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </fieldset>
