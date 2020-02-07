@@ -37,7 +37,7 @@
 </div>
 
 <div style="display:none" id="branche_note_text">
-	<p class="MsoNormal" style="text-align: center;"><span style="font-style: italic; font-weight: 700; text-decoration-line: underline;">Beschreibt das Fachgebiet des Unternehmens</span></p><p class="MsoNormal" style="text-align: center;">Der name des Unternehmens sollte daher zur Branche passen</p><p class="MsoNormal" style="text-align: center; font-size: 14.4px;"><br></p><p style="line-height: 1;"><br></p><p class="MsoNormal"></p>
+	<p class="MsoNormal" style="text-align: center;"><span style="font-style: italic; font-weight: 700; text-decoration-line: underline;">Beschreibt das Fachgebiet des Unternehmens</span></p><p class="MsoNormal" style="text-align: center;">Der Name des Unternehmens sollte daher zur Branche passen</p><p class="MsoNormal" style="text-align: center; font-size: 14.4px;"><br></p><p style="line-height: 1;"><br></p><p class="MsoNormal"></p>
 </div>  
 
 <div style="display:none" id="section_note_text">
