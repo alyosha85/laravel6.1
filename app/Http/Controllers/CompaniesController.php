@@ -37,13 +37,18 @@ class CompaniesController extends Controller
     public function index(Request $request)
     {
         
-        $values = Profession::all('name');  
+        $profession_values = Profession::all(); 
+        $branch_values = Branch::all();
+        $section_values = Section::all(); 
         $standort = City::find(Auth::user()->city_id);
         $bundesland = State::find($standort->state_id);
         
         $type = $request->input('type');
+        $branch_id = $request->input('branch_id');
+        $profession_id = $request->input('profession_id');
+        $section_id = $request->input('section_id');
         //pagination limit
-        $limit = $request->input('limit') ? $request->input('limit') : 20;
+        $limit = $request->input('limit') ? $request->input('limit') : 10;
 
 
         if($type === 'state') {
@@ -58,14 +63,26 @@ class CompaniesController extends Controller
             $companies = Company::wherein('id',$comp);
         }
 
+        if ( $branch_id ){
+        $companies = $companies->where('branch_id',$branch_id);
+        $section_values = Section::where('branch_id',$branch_id)->get(); 
+        }
+        
+        if ( $profession_id )
+        $companies = $companies->whereHas("professions", function($q) use ($profession_id){
+                                          $q->where("profession_id","=",$profession_id);
+                                          });  
+        if ( $section_id )                                     
+        $companies = $companies->whereHas("sections", function($q) use ($section_id){
+                                          $q->where("section_id","=",$section_id);
+                                          });                                        
 
-
-        // $companies = $companies->orderby('created_at','DESC')->Paginate($limit);
-        $companies = $companies->orderby('created_at','DESC')->get();
+        $companies = $companies->orderby('created_at','DESC')->Paginate($limit);
+        //$companies = $companies->orderby('created_at','DESC')->get();
 
         
 
-        return view('companies.index',compact('companies','values','standort','bundesland','type'));
+        return view('companies.index',compact('companies','profession_values','standort','bundesland','type','branch_values','branch_id','profession_id','section_id','section_values'));
     }
     /**
      * Show the form for creating a new resource.

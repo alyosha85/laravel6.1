@@ -20,13 +20,15 @@
         </select>
       </p>
       </div>
-
-        {{-- <select class ="selectpicker float-right" data-style="btn btn-outline-primary" id="limit" name="limit">
-            <option value="10">10 Entries per page</option>
-            <option value="20">20 Entries per page</option>
-            <option value="30">30 Entries per page</option>
-            <option value="50">50 Entries per page</option>
-        </select> --}}
+      <div class="float-right">
+         <button class="btn btn-outline-primary" id="filter_reset">Filter Zurücksetzen</button> 
+        <select class ="selectpicker " data-style="btn btn-outline-primary" id="limit" name="limit">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="50">50</option>
+        </select> 
+      </div>
         <br>
 
    
@@ -36,6 +38,7 @@
             <tr>
               <th>Firma</th>
               <th>Branche</th>
+              <th>Berufe</th>
               <th>Tätigkeit</th>
               <th>Status</th>
               <th>Telefon</th>
@@ -46,9 +49,10 @@
             </tr>
             <tr>
               <th></th>
-              <th>Branche</th>
-              <th>Tätigkeit</th>
-              <th>Status</th>
+              <th id="branch_id">Branche</th>
+              <th id="section_id">Berufe</th>
+              <th id="profession_id">Tätigkeit</th>
+              <th id="status_id">Status</th>
               <th></th>
               <th></th>
               <th></th>
@@ -60,6 +64,11 @@
             <tr>
               <td>{{$company->name}}</td>
               <td>{{$company->branch->name}}</td>
+              <td>
+                @foreach ($company->sections as $section)
+                {{$section->name}}, &nbsp;
+                @endforeach
+              </td>
               <td>
                 @foreach ($company->professions as $profession)
                 {{$profession->name}}, &nbsp;
@@ -88,13 +97,13 @@
             @endforeach
           </tbody>
         </table>
-{{-- 
+
         <div class="float-left">
           showing {!! $companies->count() !!} of {!! $companies->total() !!}
         </div>
         <div class="float-right">
           {!! $companies->links() !!}
-        </div> --}}
+        </div>
       </div>
 
     </div>
@@ -109,6 +118,13 @@
 <script>
 //datatable   
 $(document).ready(function() {
+
+  $(document).on('click', '#filter_reset', function (e) {
+    sessionStorage.setItem("url","/");
+    location.href = "/";
+  });
+
+  sessionStorage.setItem("url",location.href);
 
   $(document).on('click', '.pagination li a', function (e) {
     e.preventDefault();
@@ -127,8 +143,36 @@ $(document).ready(function() {
     }
 });
 
+// serverside filters
+$(document).on('change', '#branch_id select', function (e) {
+    e.preventDefault();
+    var href = new URL(location.href);
+    href.searchParams.set('branch_id', $(this).val());
+    location.href = href.toString();
+
+    // const url = location.href;
+    // const position = url.indexOf('?');
+    // location.href = position < 0 ? location.href + '?branch_id='+$(this).val() : (location.href).replace(/(branch_id=).*?(&)/,'$1' + $(this).val() + '$2');
+});
+
+$(document).on('change', '#profession_id select', function (e) {
+    e.preventDefault();
+    var href = new URL(location.href);
+    href.searchParams.set('profession_id', $(this).val());
+    location.href = href.toString();
+});
+
+$(document).on('change', '#section_id select', function (e) {
+    e.preventDefault();
+    var href = new URL(location.href);
+    href.searchParams.set('section_id', $(this).val());
+    location.href = href.toString();
+});
+
 $('#limit').on('change',function(){
-  location.href='/companies?limit='+$(this).val();
+  var href = new URL(location.href);
+    href.searchParams.set('limit', $(this).val());
+    location.href = href.toString();
 });
   $('#limit').val("{{$companies->count() ?? 10}}");
 
@@ -141,12 +185,11 @@ $('#type').val("{{$type ?? 'city'}}");
 var table = $('#myTable').DataTable({
   "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
     orderCellsTop: true,
-    bStateSave: false,
-    // paging: false,
-    // bInfo: false,
+    paging: false,
+    bInfo: false,
     dom: 'Bfrtip',
     columnDefs : [
-   { targets : [3],
+   { targets : [4],
      render : function(data, type, row) {
         return '<span class="badge badge--'+data+'">'+data+'</span>'
      }     
@@ -204,6 +247,20 @@ colReorder: true,
 //drop down select
 initComplete: function () {
 
+  this.api().columns(3).every( function () {                    
+      var column = this;                    
+      var select = $('<select><option value=""></option></select>')                        
+      .appendTo( $("#myTable thead tr:eq(1) th").eq(column.index()).empty() )                        
+      .on( 'change', function () {                            
+        var val = $.fn.dataTable.util.escapeRegex($(this).val());                            
+        column.search( val ? val : '', true, false ).draw();                        
+        } );                        
+        @foreach($profession_values as $value)                            
+        select.append( '<option @if($value->id == $profession_id) {{"selected"}} @endif value="{{$value->id}}">{{$value->name}}</option>' );                        
+        @endforeach                
+        } ); 
+
+
   this.api().columns(2).every( function () {                    
       var column = this;                    
       var select = $('<select><option value=""></option></select>')                        
@@ -212,13 +269,26 @@ initComplete: function () {
         var val = $.fn.dataTable.util.escapeRegex($(this).val());                            
         column.search( val ? val : '', true, false ).draw();                        
         } );                        
-        @foreach($values as $value)                            
-        select.append( '<option value="{{$value->name}}">{{$value->name}}</option>' );                        
+        @foreach($section_values as $value)                            
+        select.append( '<option @if($value->id == $section_id) {{"selected"}} @endif value="{{$value->id}}">{{$value->name}}</option>' );                        
+        @endforeach                
+        } ); 
+
+  this.api().columns(1).every( function () {                    
+      var column = this;                    
+      var select = $('<select><option value=""></option></select>')                        
+      .appendTo( $("#myTable thead tr:eq(1) th").eq(column.index()).empty() )                        
+      .on( 'change', function () {                            
+        var val = $.fn.dataTable.util.escapeRegex($(this).val());                            
+        column.search( val ? val : '', true, false ).draw();                        
+        } );                        
+        @foreach($branch_values as $value)                            
+        select.append( '<option @if($value->id == $branch_id) {{"selected"}} @endif value="{{$value->id}}">{{$value->name}}</option>' );                        
         @endforeach                
         } ); 
 
 
-        this.api().columns([1,3]).every( function () {
+        this.api().columns([4]).every( function () {
             var column = this;
             var select = $('<select><option value=""></option></select>')
                 .appendTo( $("#myTable thead tr:eq(1) th").eq(column.index()).empty() )
@@ -237,6 +307,9 @@ initComplete: function () {
   } //initComplete function  
     
     });
+
+
+
 });
 
 </script>   
@@ -246,14 +319,11 @@ new jBox('Confirm', {
   confirmButton: 'Ja !', 
   cancelButton: 'Nein'
 }); 
-<<<<<<< HEAD
+
 		function company_delete(id){ 
           $( "#companydelete"+id ).submit();	
-=======
-		function company_delete(){ 
-          $( "#companydelete" ).submit();	
-          console.log("#companydelete{{$company->id}}");
->>>>>>> 4bdfec7171bcbec5de7ed45d9394da69b799a7e0
+
+
           }		
 </script>  
 

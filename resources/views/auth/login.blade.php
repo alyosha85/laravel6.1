@@ -71,3 +71,9 @@
     </div>
 </div>
 @endsection
+
+@section('foot')
+<script>
+      sessionStorage.setItem("url","/");
+</script>    
+@endsection

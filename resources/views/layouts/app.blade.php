@@ -53,7 +53,7 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         <li class="nav-item">
-                        <a class="nav-link" href="/companies?#bStateSave" class="nav-link">Firmen Liste</a>
+                        <a class="nav-link" href="" id="backToHome" class="nav-link">Firmen Liste</a>
                         </li>
                         <li class="nav-item">
                          <a href="#" class="nav-link">|</a>
@@ -122,6 +122,11 @@
 
   
   @yield('foot')
+
+
+  <script>
+  $("#backToHome").attr("href", sessionStorage.getItem("url") );
+  </script>
 
 </body>
 </html>
