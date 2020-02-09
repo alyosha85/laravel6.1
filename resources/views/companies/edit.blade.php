@@ -21,9 +21,9 @@
           <button type="submit" class="btn btn-primary float-right">
           <i class="far fa-save"></i> Änderungen speichern
 					</button>
-					<button onclick="goBack()" class="btn btn-danger float-right mx-2">
+						<a href="/companies/{{$company->id}}" class="btn btn-danger float-right mx-2">
 						<i class="fas fa-ban"></i> Stornieren
-					</button>
+					</a>
 				</form>
 				</div>
 			</div>
@@ -36,17 +36,13 @@
 
 
 @endsection
-
+ 
 
 @section('foot')
 		
 
 
 <script>
-
-	function goBack() {
-		window.history.back();
-	}
 
 	jQuery( document ).ready(function() {
 		var stateid = {{$stateid}};
