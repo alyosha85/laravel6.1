@@ -340,12 +340,12 @@
 															<td>{{$contact->fax}}</td>
 															<td><span class="badge badge--{{$contact->contact_status->name}}">{{$contact->contact_status->name}}</span></td>
 															<td>
-																<form action="/contact/{{$contact->id}}" id="contactdelete" method="POST">
+																<form action="/contact/{{$contact->id}}" id="contactdelete{{$contact->id}}" method="POST">
 																<a href="/contact/{{ $contact->id }}" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-eye"></i></a>
 																<a href="/contact/{{ $contact->id }}/edit" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-edit"></i></a>
 																	@method('DELETE')
 																	@csrf
-																<button type="submit" onclick="contact_delete()" data-confirm="Sind Sie sicher, dass Sie löschen möchten?" class="btn btn-outline-danger btn-sm border-0"><i class="fas fa-trash"></i></button>
+																<button type="submit" onclick="contact_delete({{$contact->id}})" data-confirm="Sind Sie sicher, dass Sie löschen möchten?" class="btn btn-outline-danger btn-sm border-0"><i class="fas fa-trash"></i></button>
 																</form>
 															</td>
 														</tr>
@@ -409,12 +409,12 @@
 														<td>{{$communication->contact_reason->name}}</td>
 														<td>{{$communication->participant}}</td>
 														<td>
-															<form action="/communication/{{$communication->id}}" id="communicationdelete" method="POST">
+															<form action="/communication/{{$communication->id}}" id="communicationdelete{{$communication->id}}" method="POST">
 															<a href="/communication/{{ $communication->id }}" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-eye"></i></a>
 															<a href="/communication/{{ $communication->id }}/edit" class="btn btn-outline-primary btn-sm border-0"><i class="fas fa-edit"></i></a>
 																@method('DELETE')
 																@csrf
-															<button type="submit" onClick="communication_delete()" class="btn btn-outline-danger btn-sm border-0"><i class="fas fa-trash"></i></button>
+																<button type="submit" onclick="communication_delete({{$communication->id}})" data-confirm="Sind Sie sicher, dass Sie löschen möchten?" class="btn btn-outline-danger btn-sm border-0"><i class="fas fa-trash"></i></button>
 															</form>
 														</td>
 													</tr>
@@ -470,17 +470,12 @@ new jBox('Confirm', {
   confirmButton: 'Ja !', 
   cancelButton: 'Nein'
 }); 
-		function contact_delete(){ 
-			$( "#contactdelete" ).submit();		
+		function contact_delete(id){ 
+			$( "#contactdelete"+id ).submit();		
 		}		
-   
-		function communication_delete(){ 
-			var communication = confirm('Sind Sie sicher, dass Sie löschen möchten?');			
-			if(communication){			
-					$( "#communicationdelete" ).submit();
-			}			
-		}		
-
+		function communication_delete(id){ 
+			$( "#communicationdelete"+id ).submit();		
+		}			
 
 </script>
 

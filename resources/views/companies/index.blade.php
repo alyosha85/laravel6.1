@@ -143,6 +143,7 @@ $(document).ready(function() {
     }
 });
 
+
 // serverside filters
 $(document).on('change', '#branch_id select', function (e) {
     e.preventDefault();
@@ -322,9 +323,9 @@ new jBox('Confirm', {
 
 		function company_delete(id){ 
           $( "#companydelete"+id ).submit();	
+    }
 
 
-          }		
 </script>  
 
     

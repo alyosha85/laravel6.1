@@ -32,9 +32,24 @@
 	</div>
 </div>
 
-<div style="display:none" id="status_note">
+<div style="display:none" id="status_note_text">
 <h3 style="color:darkolivegreen;">Aktiv</h3>
 </div>
+
+<div style="display:none" id="branche_note_text">
+	<p class="MsoNormal" style="text-align: center;"><span style="font-style: italic; font-weight: 700; text-decoration-line: underline;">Beschreibt das Fachgebiet des Unternehmens</span></p><p class="MsoNormal" style="text-align: center;">Der Name des Unternehmens sollte daher zur Branche passen</p><p class="MsoNormal" style="text-align: center; font-size: 14.4px;"><br></p><p style="line-height: 1;"><br></p><p class="MsoNormal"></p>
+</div>  
+
+<div style="display:none" id="section_note_text">
+	<p class="MsoNormal" style="text-align: center;"><span style="font-style: italic; font-weight: 700; text-decoration-line: underline;">Die Beschreibt aus welchen Berufen das Unternehmen besteht</span></p><p class="MsoNormal" style="text-align: center; font-size: 14.4px;"><span style="font-size: 14.4px; background-color: rgb(255, 255, 0); font-weight: bold;">Hinweis</span><span style="font-size: 14.4px;">: Es können mehrere Tätigkeiten ausgewält werden</span><br></p><p class="MsoNormal" style="text-align: center; font-size: 14.4px;"><br></p><p style="line-height: 1;"><br></p><p class="MsoNormal"></p>
+</div>  
+
+<div style="display:none" id="profession_note_text">
+	<p class="MsoNormal" style="text-align: center;"><span style="font-style: italic; font-weight: 700; text-decoration-line: underline;">Die Tätigkeit basiert auf den Praktikumsangeboten des Unternehmens</span></p><p class="MsoNormal" style="text-align: center; font-size: 14.4px;"><span style="font-size: 14.4px; background-color: rgb(255, 255, 0); font-weight: bold;">Hinweis</span><span style="font-size: 14.4px;">: Es können mehrere Tätigkeiten ausgewält werden</span><br></p><p class="MsoNormal" style="text-align: center; font-size: 14.4px;"><span style="font-size: 18px; font-weight: bold;"><span style="background-color: rgb(255, 255, 0);">Tätigkeit:</span>&nbsp;beschreibt<span style="color: rgb(255, 0, 0);">&nbsp;</span><span style="background-color: rgb(255, 255, 0);">nicht das Unternehmen</span>!!!</span></p><p class="MsoNormal" style="text-align: center; line-height: 1;"><span style="font-style: italic;">Bsp: In einem Krankenhaus wird ein koch oder / und Putzkraft angeboten !</span></p><p style="line-height: 1;"><br></p><p class="MsoNormal"><br></p>
+</div>
+
+
+
 
 @endsection
 
@@ -113,11 +128,35 @@
 new jBox('Modal', {
   width: 300,
   height: 300,
-	attach: '#myModal',
+	attach: '#status_note',
 	animation: 'pulse',
-	content:$('#status_note') 
+	content:$('#status_note_text') 
 });
- 
+
+new jBox('Modal', {
+  width: 400,
+  height: 250,
+	attach: '#branche_note',
+	animation: 'pulse',
+	content:$('#branche_note_text') 
+});
+
+new jBox('Modal', {
+  width: 400,
+  height: 250,
+	attach: '#section_note',
+	animation: 'pulse',
+	content:$('#section_note_text') 
+});
+
+new jBox('Modal', {
+  width: 600,
+  height: 320,
+	attach: '#profession_note',
+	animation: 'pulse',
+	content:$('#profession_note_text') 
+});
+
 </script>
 
 
