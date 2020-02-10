@@ -22,7 +22,7 @@
       </div>
       <div class="float-right">
          <button class="btn btn-outline-primary" id="filter_reset">Filter Zurücksetzen</button> 
-        <select class ="selectpicker " data-style="btn btn-outline-primary" id="limit" name="limit">
+          <select class ="selectpicker " data-style="btn btn-outline-primary" data-width='auto' id="limit" name="limit">
             <option value="10">10</option>
             <option value="20">20</option>
             <option value="30">30</option>
@@ -99,7 +99,7 @@
         </table>
 
         <div class="float-left">
-          showing {!! $companies->count() !!} of {!! $companies->total() !!}
+          {!! $companies->count() !!} von {!! $companies->total() !!} Einträgen
         </div>
         <div class="float-right">
           {!! $companies->links() !!}
