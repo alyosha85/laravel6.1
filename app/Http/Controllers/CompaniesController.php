@@ -42,7 +42,8 @@ class CompaniesController extends Controller
         $section_values = Section::all(); 
         $standort = City::find(Auth::user()->city_id);
         $bundesland = State::find($standort->state_id);
-        
+
+        $q = $request->input('q');
         $type = $request->input('type');
         $branch_id = $request->input('branch_id');
         $profession_id = $request->input('profession_id');
@@ -75,14 +76,22 @@ class CompaniesController extends Controller
         if ( $section_id )                                     
         $companies = $companies->whereHas("sections", function($q) use ($section_id){
                                           $q->where("section_id","=",$section_id);
-                                          });                                        
+                                          });    
+                                          
+        if ($q) 
+        $companies = $companies->where('name','like','%'.$q.'%')->orWhere('email','like','%'.$q.'%')->orwhereHas("status", function($where) use ($q){
+            $where->where("name","=",$q);
+            });                              
 
         $companies = $companies->orderby('created_at','DESC')->Paginate($limit);
         //$companies = $companies->orderby('created_at','DESC')->get();
 
         
 
-        return view('companies.index',compact('companies','profession_values','standort','bundesland','type','branch_values','branch_id','profession_id','section_id','section_values'));
+        return view('companies.index',compact('companies','profession_values',
+                                            'standort','bundesland','type','branch_values',
+                                            'branch_id','profession_id','section_id',
+                                            'section_values','q'));
     }
     /**
      * Show the form for creating a new resource.

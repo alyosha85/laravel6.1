@@ -48,7 +48,7 @@
               <th></th>
             </tr>
             <tr>
-              <th></th>
+              <th><input class="" id="search_by_name"></th>
               <th id="branch_id">Branche</th>
               <th id="section_id">Berufe</th>
               <th id="profession_id">Tätigkeit</th>
@@ -144,6 +144,8 @@ $(document).ready(function() {
 });
 
 
+
+
 // serverside filters
 $(document).on('change', '#branch_id select', function (e) {
     e.preventDefault();
@@ -162,6 +164,16 @@ $(document).on('change', '#profession_id select', function (e) {
     href.searchParams.set('profession_id', $(this).val());
     location.href = href.toString();
 });
+
+$(document).on('change', '#search_by_name', function (e) {
+    var href = new URL(location.href);
+    href.searchParams.set('q', $(this).val());
+    href.searchParams.set('page', '1');
+    location.href = href.toString();
+});
+$('#search_by_name').val("{{$q}}");
+
+
 
 $(document).on('change', '#section_id select', function (e) {
     e.preventDefault();
@@ -188,6 +200,7 @@ var table = $('#myTable').DataTable({
     orderCellsTop: true,
     paging: false,
     bInfo: false,
+    "searching": false,
     dom: 'Bfrtip',
     columnDefs : [
    { targets : [4],
@@ -308,9 +321,6 @@ initComplete: function () {
   } //initComplete function  
     
     });
-
-
-
 });
 
 </script>   
