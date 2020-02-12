@@ -13,7 +13,7 @@
       
       <div>
         <p><a href="/companies/create" class="btn btn-outline-primary" >Neue Firma</a>
-        <select  class ="selectpicker" data-style="btn btn-outline-primary" name="type" id="type">
+        <select  class="selectpicker" data-style="btn btn-outline-primary" name="type" id="type">
           <option value="city">Standort</option>
           <option value="state">Land</option>
           <option value="all">Bundesweit</option>
@@ -41,21 +41,15 @@
               <th>Berufe</th>
               <th>Tätigkeit</th>
               <th>Status</th>
-              <th>Telefon</th>
-              <th>E-mail</th>
-              <th>Standort</th>
               <th>Anschrift</th>
               <th></th>
             </tr>
             <tr>
-              <th><input class="" id="search_by_name"></th>
+              <th><input class="form-control" id="search_by_name"></th>
               <th id="branch_id">Branche</th>
               <th id="section_id">Berufe</th>
               <th id="profession_id">Tätigkeit</th>
               <th id="status_id">Status</th>
-              <th></th>
-              <th></th>
-              <th></th>
               <th></th>
               <th></th>
           </thead>
@@ -75,13 +69,6 @@
                 @endforeach
               </td>
               <td class="text-center">{{$company->status->name}}</td>
-              <td>{{$company->phone}}</td>
-              <td>{{$company->email}}</td>
-              <td>
-                @foreach ($company->cities as $city)
-                  {{$city->name}}, &nbsp;
-                @endforeach 
-              </td> 
               <td>{{$company->address}}</td>
               <td>
                 <form action="/companies/{{$company->id}}" method="POST" id="companydelete{{$company->id}}"> 
@@ -147,6 +134,7 @@ $(document).ready(function() {
 
 
 // serverside filters
+// Branch Filter
 $(document).on('change', '#branch_id select', function (e) {
     e.preventDefault();
     var href = new URL(location.href);
@@ -157,14 +145,20 @@ $(document).on('change', '#branch_id select', function (e) {
     // const position = url.indexOf('?');
     // location.href = position < 0 ? location.href + '?branch_id='+$(this).val() : (location.href).replace(/(branch_id=).*?(&)/,'$1' + $(this).val() + '$2');
 });
-
+$(document).on('change', '#status_id select', function (e) {
+    e.preventDefault();
+    var href = new URL(location.href);
+    href.searchParams.set('status_id', $(this).val());
+    location.href = href.toString();
+});
+// Tätigkeit Filter
 $(document).on('change', '#profession_id select', function (e) {
     e.preventDefault();
     var href = new URL(location.href);
     href.searchParams.set('profession_id', $(this).val());
     location.href = href.toString();
 });
-
+// Firma input Filter
 $(document).on('change', '#search_by_name', function (e) {
     var href = new URL(location.href);
     href.searchParams.set('q', $(this).val());
@@ -173,8 +167,7 @@ $(document).on('change', '#search_by_name', function (e) {
 });
 $('#search_by_name').val("{{$q}}");
 
-
-
+// Beruf Filter
 $(document).on('change', '#section_id select', function (e) {
     e.preventDefault();
     var href = new URL(location.href);
@@ -210,31 +203,29 @@ var table = $('#myTable').DataTable({
    }
 ],
     buttons: [
-                {
-
-                // print in landscape script
-                extend: "print", text:'Drucken',
-                customize: function(win)
+              {
+              // print in landscape script
+              extend: "print", text:'Drucken',
+              customize: function(win)
+                  {
+                    var last = null;
+                    var current = null;
+                    var bod = [];
+                    var css = '@page { size: landscape; }',
+                        head = win.document.head || win.document.getElementsByTagName('head')[0],
+                        style = win.document.createElement('style');
+                    style.type = 'text/css';
+                    style.media = 'print';
+                    if (style.styleSheet)
                     {
-                        var last = null;
-                        var current = null;
-                        var bod = [];
-                        var css = '@page { size: landscape; }',
-                            head = win.document.head || win.document.getElementsByTagName('head')[0],
-                            style = win.document.createElement('style');
-                        style.type = 'text/css';
-                        style.media = 'print';
-                        if (style.styleSheet)
-                        {
-                            style.styleSheet.cssText = css;
-                        }
-                        else
-                        {
-                            style.appendChild(win.document.createTextNode(css));
-                        }
-                        head.appendChild(style);
+                        style.styleSheet.cssText = css;
                     }
-            
+                    else
+                    {
+                        style.appendChild(win.document.createTextNode(css));
+                    }
+                    head.appendChild(style);
+                  }
                 },
                 //select col visibility
                 {
@@ -260,10 +251,10 @@ colReorder: true,
             
 //drop down select
 initComplete: function () {
-
+  //Tätigkeit filling init 
   this.api().columns(3).every( function () {                    
       var column = this;                    
-      var select = $('<select><option value=""></option></select>')                        
+      var select = $('<select class="form-control"><option value=""></option></select>')                        
       .appendTo( $("#myTable thead tr:eq(1) th").eq(column.index()).empty() )                        
       .on( 'change', function () {                            
         var val = $.fn.dataTable.util.escapeRegex($(this).val());                            
@@ -273,11 +264,10 @@ initComplete: function () {
         select.append( '<option @if($value->id == $profession_id) {{"selected"}} @endif value="{{$value->id}}">{{$value->name}}</option>' );                        
         @endforeach                
         } ); 
-
-
+    //Berufe filling init 
   this.api().columns(2).every( function () {                    
       var column = this;                    
-      var select = $('<select><option value=""></option></select>')                        
+      var select = $('<select class="form-control"><option value=""></option></select>')                        
       .appendTo( $("#myTable thead tr:eq(1) th").eq(column.index()).empty() )                        
       .on( 'change', function () {                            
         var val = $.fn.dataTable.util.escapeRegex($(this).val());                            
@@ -287,10 +277,10 @@ initComplete: function () {
         select.append( '<option @if($value->id == $section_id) {{"selected"}} @endif value="{{$value->id}}">{{$value->name}}</option>' );                        
         @endforeach                
         } ); 
-
+    //Branche filling init 
   this.api().columns(1).every( function () {                    
       var column = this;                    
-      var select = $('<select><option value=""></option></select>')                        
+      var select = $('<select class="form-control"><option value=""></option></select>')                        
       .appendTo( $("#myTable thead tr:eq(1) th").eq(column.index()).empty() )                        
       .on( 'change', function () {                            
         var val = $.fn.dataTable.util.escapeRegex($(this).val());                            
@@ -300,42 +290,50 @@ initComplete: function () {
         select.append( '<option @if($value->id == $branch_id) {{"selected"}} @endif value="{{$value->id}}">{{$value->name}}</option>' );                        
         @endforeach                
         } ); 
+    //Branche filling init 
+  this.api().columns(4).every( function () {                    
+      var column = this;                    
+      var select = $('<select class="form-control"><option value=""></option></select>')                        
+      .appendTo( $("#myTable thead tr:eq(1) th").eq(column.index()).empty() )                        
+      .on( 'change', function () {                            
+        var val = $.fn.dataTable.util.escapeRegex($(this).val());                            
+        column.search( val ? val : '', true, false ).draw();                        
+        } );                        
+        @foreach($status_values as $value)                            
+        select.append( '<option @if($value->id == $status_id) {{"selected"}} @endif value="{{$value->id}}">{{$value->name}}</option>' );                        
+        @endforeach                
+        } ); 
+        column.data().unique().sort().each( function ( d, j ) {
+          select.append( '<option value="'+d+'">'+d+'</option>' );
 
-
-        this.api().columns([4]).every( function () {
-            var column = this;
-            var select = $('<select><option value=""></option></select>')
-                .appendTo( $("#myTable thead tr:eq(1) th").eq(column.index()).empty() )
-                .on( 'change', function () {
-                    var val = $.fn.dataTable.util.escapeRegex(
-                        $(this).val()
-                    );
-                    column
-                        .search( val ? '^'+val+'$' : '', true, false )
-                        .draw();
-                } );
-            column.data().unique().sort().each( function ( d, j ) {
-                select.append( '<option value="'+d+'">'+d+'</option>' );
+    //Status filling init 
+  // this.api().columns([4]).every( function () {
+  //     var column = this;
+  //     var select = $('<select class="form-control"><option value=""></option></select>')
+  //         .appendTo( $("#myTable thead tr:eq(1) th").eq(column.index()).empty() )
+  //         .on( 'change', function () {
+  //             var val = $.fn.dataTable.util.escapeRegex(
+  //                 $(this).val()
+  //             );
+  //             column
+  //                 .search( val ? '^'+val+'$' : '', true, false )
+  //                 .draw();
+  //         } );
+      column.data().unique().sort().each( function ( d, j ) {
+          select.append( '<option value="'+d+'">'+d+'</option>' );
             } );
         } );
-  } //initComplete function  
-    
-    });
-});
+  }     //initComplete function   
+    }); //datatable close
+});     //document ready close 
 
-</script>   
-
-<script>  
 new jBox('Confirm', {
   confirmButton: 'Ja !', 
   cancelButton: 'Nein'
 }); 
-
 		function company_delete(id){ 
           $( "#companydelete"+id ).submit();	
     }
-
-
 </script>  
 
     

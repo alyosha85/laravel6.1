@@ -36,22 +36,25 @@ class CompaniesController extends Controller
     
     public function index(Request $request)
     {
-        
-        $profession_values = Profession::all(); 
+        // send filter values 
+        $profession_values = Profession::all();             
         $branch_values = Branch::all();
         $section_values = Section::all(); 
+        $status_values = Status::all();
         $standort = City::find(Auth::user()->city_id);
         $bundesland = State::find($standort->state_id);
-
-        $q = $request->input('q');
-        $type = $request->input('type');
-        $branch_id = $request->input('branch_id');
-        $profession_id = $request->input('profession_id');
-        $section_id = $request->input('section_id');
+        //**********************************************************//
+        $q = $request->input('q');                          // input search companies filter
+        $type = $request->input('type');                    // city, state, county select
+        $branch_id = $request->input('branch_id');          // branch dropdown filter
+        $profession_id = $request->input('profession_id');  // profession dropdown filter
+        $section_id = $request->input('section_id');        // section dropdown filter
+        $status_id = $request->input('status_id');          //status dropdown filter
+        //**********************************************************//
         //pagination limit
         $limit = $request->input('limit') ? $request->input('limit') : 10;
 
-
+        // city, state & county condition set
         if($type === 'state') {
             $state = City::find(Auth::user()->city_id);
             $companies = Company::where('state_id',$state->state_id);
@@ -63,20 +66,25 @@ class CompaniesController extends Controller
             $comp = CityCompany::where('city_id',Auth::user()->city_id)->pluck('company_id')->toArray();
             $companies = Company::wherein('id',$comp);
         }
+        //**********************************************************//
 
+        //filters query
         if ( $branch_id ){
-        $companies = $companies->where('branch_id',$branch_id);
-        $section_values = Section::where('branch_id',$branch_id)->get(); 
+        $companies = $companies->where('branch_id',$branch_id);             //branch query
+        $section_values = Section::where('branch_id',$branch_id)->get();    //with dependant section
         }
         
         if ( $profession_id )
-        $companies = $companies->whereHas("professions", function($q) use ($profession_id){
+        $companies = $companies->whereHas("professions", function($q) use ($profession_id){     //profession query
                                           $q->where("profession_id","=",$profession_id);
                                           });  
         if ( $section_id )                                     
-        $companies = $companies->whereHas("sections", function($q) use ($section_id){
+        $companies = $companies->whereHas("sections", function($q) use ($section_id){           //section query
                                           $q->where("section_id","=",$section_id);
-                                          });    
+                                          }); 
+                                            
+        if ( $status_id )                                     
+				$companies = $companies->where('status_id',$status_id);  
                                           
         if ($q) 
         $companies = $companies->where('name','like','%'.$q.'%')->orWhere('email','like','%'.$q.'%')->orwhereHas("status", function($where) use ($q){
@@ -88,10 +96,19 @@ class CompaniesController extends Controller
 
         
 
-        return view('companies.index',compact('companies','profession_values',
-                                            'standort','bundesland','type','branch_values',
-                                            'branch_id','profession_id','section_id',
-                                            'section_values','q'));
+        return view('companies.index',compact('companies',
+                                            	'profession_values',
+																							'section_values',
+																							'branch_values',
+																							'status_values',
+																							'type',
+																							'standort',
+																							'bundesland',
+																							'branch_id',
+																							'profession_id',
+																							'section_id',
+																							'status_id',
+																							'q'));
     }
     /**
      * Show the form for creating a new resource.
