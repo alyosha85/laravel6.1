@@ -303,8 +303,6 @@ initComplete: function () {
         select.append( '<option @if($value->id == $status_id) {{"selected"}} @endif value="{{$value->id}}">{{$value->name}}</option>' );                        
         @endforeach                
         } ); 
-        column.data().unique().sort().each( function ( d, j ) {
-          select.append( '<option value="'+d+'">'+d+'</option>' );
 
     //Status filling init 
   // this.api().columns([4]).every( function () {
@@ -319,12 +317,8 @@ initComplete: function () {
   //                 .search( val ? '^'+val+'$' : '', true, false )
   //                 .draw();
   //         } );
-      column.data().unique().sort().each( function ( d, j ) {
-          select.append( '<option value="'+d+'">'+d+'</option>' );
-            } );
-        } );
-  }     //initComplete function   
-    }); //datatable close
+}     //initComplete function   
+}); //datatable close
 });     //document ready close 
 
 new jBox('Confirm', {
