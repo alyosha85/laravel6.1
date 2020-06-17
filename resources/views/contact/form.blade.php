@@ -2,13 +2,12 @@
 <input type="hidden" name="company_id" value="{{ $company_id ?? '' }} "> 
 <fieldset class="border rounded px-2 mb-2">
   <legend class="w-auto">Ansprechpartner</legend>
- <input class="form-control lead pull-right" type="text" placeholder="Datum angelegt:  Today von Matoyan" readonly> 
 
   <div class="form-row ">
      <div class="form-group col-md-2">
       <div class="form-group">
         <label for="contact_title_id">Anrede <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i></label>									
-        <select name="contact_title_id" class="form-control">
+        <select name="contact_title_id" class="form-control" required>
           <option  selected="true" disabled="disabled" value=''>Bitte wählen...</option>
           @foreach($contact_titles as $title)
           <option value="{{ $title->id }}" {{ $title->id == $contact->contact_title_id ? 'selected' : '' }} >{{ $title->name }}</option>

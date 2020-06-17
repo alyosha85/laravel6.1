@@ -1,8 +1,7 @@
 
 @csrf
 <fieldset class="border rounded px-2 mb-2">
-  <legend class="w-auto">Firma</legend>
-  <input class="form-control lead pull-right" type="text" placeholder="Datum angelegt:  Heute von Erfurt" readonly>   
+  <legend class="w-auto">Firma</legend>  
 
   <div class="form-row ">
     <div class="form-group col-md-6">

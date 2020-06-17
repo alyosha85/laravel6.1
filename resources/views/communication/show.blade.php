@@ -195,6 +195,12 @@
 @endsection
 
 @section('foot')
+<script>
+$('#memo_info').summernote({
+	airMode: true,
+});
+
+</script>
     
 @endsection
 

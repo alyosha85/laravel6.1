@@ -30,7 +30,9 @@
 	</div>
 </div>
 
-
+<div style="display:none" id="profession_all_text">
+	<p class="MsoNormal" style="text-align: center;"><span style="font-weight: 600;">Der hier ausgewählte Tätigkeiten wird automatisch zur Tätigkeitsliste dieses Unternehmens hinzugefügt</span></p>
+</div>  
 
 @endsection
 
@@ -40,18 +42,14 @@
 
 flatpickr.localize(flatpickr.l10ns.de);
 flatpickr('#flatpickr');
-// ,{ dateFormat: 'd.m.Y'}
  $('#flatpickr').on('focus', ({ currentTarget }) => $(currentTarget).blur());
  $("#flatpickr").prop('readonly', false);
 
 
 
- 
 	function goBack() {
 		window.history.back();
 	}
-
-
 	$(document).ready(function() {
 	$('#memo').summernote({
 		height: 500,									//set editor height
@@ -70,19 +68,26 @@ flatpickr('#flatpickr');
             [ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview'] ]
         ]
 	});
-
-
 });
 
+// new jBox('Modal', {
+//   width: 300,
+//   height: 160,
+// 	attach: '#profession_all',
+// 	animation: 'pulse',
+// 	content:$('#profession_all_text') 
+// });
 
 
-	new jBox('Tooltip', {
+$('#profession_all').jBox('Mouse', {
+    theme: 'TooltipDark',
+    content: $('#profession_all_text')
+  });
+  
+new jBox('Tooltip', {
 	attach: '.fa-asterisk',
 	theme: 'TooltipDark'
 });
-
-
-
 
 </script>
 

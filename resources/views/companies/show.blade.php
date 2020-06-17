@@ -30,8 +30,7 @@
 													<h1 class="mb-0">{{$company->name}}<small><span class="badge pull-right">{{$company->title->name}}</span></small>
 														<a href="/companies/{{ $company->id }}/edit" class="btn btn-outline-primary border-0"><i class="fas fa-edit"></i></a>
 													</h1>
-													<p class="text-muted">created on 12.12.2020 from {{ $company->user['name']}}</p>
-													<div id="accordion" role="tablist" aria-multiselectable="true">
+													<div id="accordion" role="tablist" aria-multiselectable="true" class="mt-4">
 															<div class="card">
 																	<h5 class="card-header" role="tab" id="headingOne">
 																			<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="d-block nounderline">
@@ -47,49 +46,61 @@
 																									<div class="row">
 																											<div class="col-md-6">
 																													<div class="form-group row">
-																															<label for="branch" class="col-sm-4 col-form-label font-weight-bold">Branche:</label>
-																															<div class="col-sm-8">
+																															<label for="branch" class="col-sm-3 col-form-label font-weight-bold">Branche</label>
+																															<div class="col-sm-9">
 																																	<input type="text" readonly class="form-control-plaintext" name="branch" value="{{$company->branch['name']}}">
 																															</div>
 																													</div>
 																													<div class="form-group row">
-																															<label for="inputPassword" class="col-sm-4 col-form-label font-weight-bold">Berufe:</label>
-																															<div class="col-sm-8">
-																																	<ul>
-																																			@foreach($company->sections as $section)
-																																			<li>
+																															<label for="section" class="col-sm-3 col-form-label font-weight-bold">Berufe</label>
+																															<div class="col-sm-9 form-control-plaintext">
+																																	<ul style="list-style-type:none;">
+																																		@foreach($company->sections as $section)
+																																		<li>
 																																			{{$section->name}}
-																																			@endforeach
 																																		</li>
+																																		@endforeach
 																																	</ul>
 																															</div>
 																													</div>
 																													<div class="form-group row">
-																															<label for="inputPassword" class="col-sm-4 col-form-label font-weight-bold">Tätigkeitsfeld:</label>
-																															<div class="col-sm-8">
+																															<label for="inputPassword" class="col-sm-3 col-form-label font-weight-bold">Tätigkeitsfeld</label>
+																															<div class="col-sm-9 form-control-plaintext">
 																																	<ul>
-																																			@foreach($company->professions as $profession)
-																																			<li>
+																																		@foreach($company->professions as $profession)
+																																		<li>
 																																			{{$profession->name}}
-																																			@endforeach
 																																		</li>
+																																		@endforeach
 																																	</ul>
 																															</div>
 																													</div>
 																											</div>
 																											<div class="col-md-6">
 																													<div class="form-group row">
-																															<label for="inputPassword" class="col-sm-5 col-form-label font-weight-bold">Ansprechpartner:</label>
-																															<div class="col-sm-7">
-																																	<ul>
-																																			@foreach($company->contacts as $contact)
+																															<label for="inputPassword" class="col-sm-4 col-form-label font-weight-bold">Ansprechpartner</label>
+																															<div class="col-sm-8 form-control-plaintext">
+																																	<ul style="list-style-type:none;">
+																																		@foreach($company->contacts as $contact)
 																																			<li>
-																																				<a href="/contact/{{ $contact->id }}">{{$contact->contact_title->name}}&nbsp;{{$contact['last_name']}}</a>
+																																				<a href="/contact/{{ $contact->id }}">{{$contact->contact_title->name ?? ''}}&nbsp;{{$contact['last_name']}}</a>
 																																			</li>
-																																			@endforeach
+																																		@endforeach
 																																	</ul>
 																															</div>
 																													</div>
+																													{{-- <div class="form-group row">
+																														<label for="inputPassword" class="col-sm-4 col-form-label font-weight-bold"></label>
+																														<div class="col-lg-8 form-control-plaintext">
+																														</div>
+																													</div> --}}
+																													<div class="form-group row">
+																															<label for="inputPassword" class="col-sm-3 col-form-label font-weight-bold">Anmerkungen</label>
+																															<div class="col-sm-9 form-control-plaintext">
+																																<textarea name="description" id="description" cols="30" rows="8" class="form-control" readonly>	{{ $company->description ?? '' }}</textarea>
+																															</div>
+																													</div>
+																													
 																											</div>
 																									</div>
 																							</div>
@@ -110,13 +121,13 @@
 																									<div class="row">
 																											<div class="col-md-6">
 																													<div class="form-group row">
-																															<label for="address" class="col-sm-3 col-form-label font-weight-bold">Straße:</label>
+																															<label for="address" class="col-sm-3 col-form-label font-weight-bold">Straße</label>
 																															<div class="col-sm-9">
 																																	<input type="text" readonly class="form-control-plaintext" name="address" value="{{ $company->address ?? '' }}">
 																															</div>
 																													</div>
 																													<div class="form-group row">
-																															<label for="address2" class="col-sm-3 col-form-label font-weight-bold">Ort:</label>
+																															<label for="address2" class="col-sm-3 col-form-label font-weight-bold">Ort</label>
 																															<div class="col-sm-9">
 																																	<input type="text" readonly class="form-control-plaintext" name="address2" value="{{ $company->address2 ?? '' }}">
 																															</div>
@@ -124,18 +135,18 @@
 																											</div>
 																											<div class="col-md-6">
 																													<div class="form-group row">
-																															<label for="zipcode" class="col-sm-4 col-form-label font-weight-bold">Postleitzahl:</label>
-																															<div class="col-sm-8">
+																															<label for="zipcode" class="col-sm-3 col-form-label font-weight-bold">Postleitzahl</label>
+																															<div class="col-sm-9">
 																																	<input type="text" readonly class="form-control-plaintext" name="zipcode" value="{{ $company->zipcode ?? '' }}">
 																															</div>
 																													</div>
 																													<div class="form-group row">
-																															<label for="inputPassword" class="col-sm-3 col-form-label font-weight-bold">Standort:</label>
+																															<label for="inputPassword" class="col-sm-3 col-form-label font-weight-bold">Standort</label>
 																															<div class="col-sm-9">
-																																	<ul>
-																																			@foreach($company->cities as $key => $item)
-																																					<li> {{ $item->name }}</li>
-																																			@endforeach
+																															<ul class="form-control-plaintext" style="list-style-type:none;">
+																																	@foreach($company->cities as $key => $item)
+																																			<li> {{ $item->name }}</li>
+																																	@endforeach
 																															</ul>
 																															</div>
 																													</div>
@@ -159,13 +170,13 @@
 																									<div class="row">
 																											<div class="col-md-6">
 																													<div class="form-group row">
-																															<label for="phone" class="col-sm-3 col-form-label font-weight-bold">Telefon:</label>
+																															<label for="phone" class="col-sm-3 col-form-label font-weight-bold">Telefon</label>
 																															<div class="col-sm-9">
 																																	<input type="text" readonly class="form-control-plaintext" name="phone" value="{{ $company->phone ?? '' }}">
 																															</div>
 																													</div>
 																													<div class="form-group row">
-																															<label for="fax" class="col-sm-3 col-form-label font-weight-bold">Fax:</label>
+																															<label for="fax" class="col-sm-3 col-form-label font-weight-bold">Fax</label>
 																															<div class="col-sm-9">
 																																	<input type="text" readonly class="form-control-plaintext" name="fax" value="{{ $company->fax ?? '' }}">
 																															</div>
@@ -173,19 +184,18 @@
 																											</div>
 																											<div class="col-md-6">
 																													<div class="form-group row">
-																															<label for="email" class="col-sm-3 col-form-label font-weight-bold">Email:</label>
+																															<label for="email" class="col-sm-3 col-form-label font-weight-bold">Email</label>
 																															<div class="col-sm-9">
 																																	<a class="form-control-plaintext" name="email" href="mailto:{{$company->email}}">{{ $company->email ?? '' }}</a>
 																															</div>
 																													</div>
 																												 
 																													<div class="form-group row">
-																															<label for="website" class="col-sm-3 col-form-label font-weight-bold">Website:</label>
+																															<label for="website" class="col-sm-3 col-form-label font-weight-bold">Website</label>
 																															<div class="col-sm-9">
 																																	<a target="_blank" class="form-control-plaintext" id="website" href="http://{{$company->website}}">{{ $company->website ?? '' }}</a>
 																															</div>
 																													</div>
-																												 
 																											</div>
 																									</div>
 																							</div>
@@ -194,17 +204,16 @@
 																	</div>
 															</div>
 															<div class="card">
-																	<h5 class="card-header" role="tab" id="headingFour">
-																			<a class="collapsed d-block nounderline" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-																					<i class="fa fa-chevron-down float-right"></i> Anmerkungen &nbsp;<i class="fas fa-clipboard"></i>
-																			</a>
-																	</h5>
-																	<div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour">
-																			<div class="card-body">
-																				<textarea name="description" id="description" cols="30" rows="6" class="form-control" readonly>	{{ $company->description ?? '' }}</textarea>
-																						
-																			</div>
-																	</div>
+																<h5 class="card-header" role="tab" id="headingFour">
+																		<a class="collapsed d-block nounderline" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+																				<i class="fa fa-chevron-down float-right"></i> Anmerkungen &nbsp;<i class="fas fa-clipboard"></i>
+																		</a>
+																</h5>
+																<div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour">
+																		<div class="card-body">
+																			<textarea name="description" id="description" cols="30" rows="6" class="form-control" readonly>	{{ $company->description ?? '' }}</textarea>		
+																		</div>
+																</div>
 															</div>
 													</div>
 												</div>
@@ -212,21 +221,19 @@
 										</div>
 										@if(count($company->communications) < 1)
 											<div class="alert alert-primary text-center col-lg-6">
-													<strong>Es gibt noch keine Kommunikation mit dieser Firma</strong>  
-									</div>                                    
+												<strong>Es gibt noch keine Kommunikation mit dieser Firma</strong>  
+										</div>                                    
 										@else
 										<div class="col-xl-6" id="letter">
 											<div class="panel panel-default">
 												<div class="panel-body">
 													
 													<h1 class="mb-0">Letzter Eintrag<small>&nbsp;<i class="fas fa-file-signature"></i></small></h1>
-													<p class="text-muted">Hard conded on 12.12.2020 from {{ $company->user['name'] }}</p>
-
-													<div id="accordion" role="tablist" aria-multiselectable="true" class="col-sm-12">
+													<div id="accordion" role="tablist" aria-multiselectable="true" class="col-sm-12 mt-4" >
 															<div class="card">
 																	<h5 class="card-header" role="tab" id="headingFive">
 																			<a data-toggle="collapseFive" data-parent="#accordion"  aria-expanded="true" aria-controls="collapseFive" class="d-block nounderline">
-																				</i> Teilnehmer &nbsp;<i class="fas fa-file-signature"></i>
+																				</i> Einzelheiten &nbsp;<i class="fas fa-file-signature"></i>
 																			</a>
 																	</h5>
 																	<div id="collapseFive" class="collapse show" role="tabpanel" aria-labelledby="headingFive">
@@ -236,29 +243,29 @@
 																									<div class="row ">
 																											<div class="col-md-5 pl-0">
 																													<div class="form-group row">
-																															<label for="date" class="col-sm-4 col-form-label font-weight-bold">Datum:</label>
-																															<div class="col-sm-8 px-0">
+																															<label for="date" class="col-sm-4 col-form-label font-weight-bold">Datum</label>
+																															<div class="col-sm-8">
 																																	<input type="text" readonly class="form-control-plaintext" name="date" value= "{{ \Carbon\Carbon::parse($lastcommunication->date)->format('d.m.Y')}}">
 																															</div>
 																													</div>
 																													<div class="form-group row">
-																															<label for="contact" class="col-sm-4 col-form-label font-weight-bold">AP:</label>
-																															<div class="col-sm-8 px-0">
+																															<label for="contact" class="col-sm-4 col-form-label font-weight-bold">AP</label>
+																															<div class="col-sm-8">
 																																<input type="text" readonly class="form-control-plaintext" name="contact" value="{{$lastcommunication->contact['last_name']}}">
 																															</div>
 																													</div>
 																													<div class="form-group row">
-																															<label for="participant" class="col-sm-4 col-form-label font-weight-bold">Teilnehmer:</label>
-																															<div class="col-sm-8 px-0">
+																															<label for="participant" class="col-sm-4 col-form-label font-weight-bold">Teilnehmer</label>
+																															<div class="col-sm-8">
 																																	<input type="text" readonly class="form-control-plaintext" id="participant" value="{{$lastcommunication->participant}}">
 																															</div>
 																													</div>
-																													<div class="form-group row px-0">
-																															<label for="profession_id" class="col-sm-4 col-form-label font-weight-bold">Tätigkeitsfeld:</label>
-																															<div class="col-sm-8 px-0">
+																													<div class="form-group row">
+																															<label for="profession_id" class="col-sm-4 col-form-label font-weight-bold">Tätigkeitsfeld</label>
+																															<div class="col-sm-8 form-control-plaintext">
 																																	<ul>
-																																			@foreach($lastcommunication->professions as $profession)
-																																			<li>
+																																		@foreach($lastcommunication->professions as $profession)
+																																		<li>
 																																			{{$profession->name}}
 																																		</li>
 																																		@endforeach
@@ -268,7 +275,7 @@
 																											</div>
 																											<div class="col-md-7">
 																												<div class="form-group row ">
-																													<label for="memo" class="col-sm-4 col-form-label font-weight-bold">Gesprächnotiz:</label>
+																													<label for="memo" class="col-sm-4 col-form-label font-weight-bold">Gesprächnotiz</label>
 																													<div style="width: 100%;"> 
 																													<textarea name="memo" id="memo_info" cols="30" rows="10" class="form-control" readonly >
 																														{!!$lastcommunication->memo!!}</textarea> 
@@ -283,7 +290,6 @@
 																	</div>
 															</div>
 													</div>
-												
 												</div>
 											</div>
 										</div>
@@ -332,7 +338,7 @@
 													<tbody>
 														@foreach($company->contacts as $contact)
 														<tr>
-															<td>{{$contact->contact_title->name}}</td>
+															<td>{{$contact->contact_title->name ?? ''}}</td>
 															<td>{{$contact->first_name}}</td>
 															<td>{{$contact->last_name}}</td>
 															<td><a href="mailto:{{$contact->email}}">{{$contact->email}}</a></td>

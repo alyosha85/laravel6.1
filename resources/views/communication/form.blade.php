@@ -1,14 +1,13 @@
   @csrf
   <fieldset class="border rounded px-2 mb-2">
     <legend class="w-auto">Kommunikation</legend>
-    <input class="form-control lead pull-right" type="text" placeholder="Datum angelegt:  Today von Matoyan" readonly>  
     <input type="hidden" name="company_id" value="{{ $company_id ?? '' }} ">
   
     <div class="form-row ">
       <div class="form-group col-md-6">
         <div class="form-group">
           <label for="date">Datum <i class="fas fa-asterisk" style="color:#993955" title="Pflichtfelder"></i></label>
-          <input name="date" class="form-control {{ $errors->has('date') ? ' has-error' : '' }}" type="text" placeholder="Wählen Sie ein Datum" id="flatpickr"  required='required' value="{{ old('date') ?? $communication->date }}">
+          <input name="date" class="form-control {{ $errors->has('date') ? ' has-error' : '' }}" type="text" placeholder="Wählen Sie ein Datum" id="flatpickr"  data-default-date="today" data-alt-input=true data-alt-format="F j, Y" required='required' value="{{ old('date') ?? $communication->date }}">
         </div>
         <div>{{$errors->first('date')}}</div>
       </div>
@@ -82,11 +81,12 @@
       </div>
       <div class="form-group col-md-6" style="" id="profession_id_all">
         <div class="form-group">
-        <label for="profession_id_all">Tätigkeitsfeld (Alle)</label>
+        <label for="profession_id_all" id="profession_all">Tätigkeitsfeld (Alle) <i class="fas fa-question-circle help" style="color:#993955" ></i></label>
           <select class="selectpicker  form-control" data-live-search="true" multiple name="profession_all_id[]">
             @foreach($profession_all as $key => $value)
             <option 
-            value='{{$value->id}}'>{{$value->name}}</option>
+            value='{{$value->id}}'>{{$value->name}}
+            </option>
             @endforeach
           </select>
         </div>
